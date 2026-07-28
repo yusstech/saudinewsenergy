@@ -4,7 +4,6 @@ import { Link } from '@/i18n/navigation';
 import type { Locale } from '@/i18n/config';
 import { baseMetadata } from '@/lib/seo';
 import { resolveEdition } from '@/lib/edition';
-import { SITE } from '@/lib/site';
 import {
   getStoriesByEdition,
   getLiveStories,
@@ -92,9 +91,6 @@ export default async function HomePage({
     latestRail: stories.length >= 3,
     sectors: sectorsWithStories.length >= 2,
     picks: stories.length >= 4,
-    // Below this, the front page cannot carry itself on volume, so it says what the
-    // publication is instead. It disappears the moment there is a fourth story.
-    editorialNote: stories.length < 4,
   };
 
   const picks = enough.picks ? getMostRead(locale, 5) : [];
@@ -153,27 +149,6 @@ export default async function HomePage({
         <RecordBand story={lead} locale={locale} />
       </div>
 
-      {/* ======================================================= what we cover */}
-      {enough.editorialNote && (
-        <section className="page mt-[var(--space-section)]">
-          <div className="mx-auto max-w-[46rem] border-y border-rule py-[var(--space-block)] text-center">
-            <span className="label text-accent">{t('noteTitle')}</span>
-            <p className="mt-3 font-display text-[1.375rem] leading-snug text-strong">
-              {SITE.promise[locale]}
-            </p>
-            <p className="mt-4 text-meta leading-relaxed text-muted">
-              {t('noteBody')}
-            </p>
-            <Link
-              href="/standards"
-              className="mt-4 inline-block text-meta font-semibold text-accent hover:underline underline-offset-4"
-            >
-              {t('noteLink')}
-            </Link>
-          </div>
-        </section>
-      )}
-
       {/* ============================================================= sectors */}
       {enough.sectors && (
         <Section
@@ -214,7 +189,7 @@ export default async function HomePage({
       >
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {PROJECTS.slice(0, 3).map((p) => (
-            <ProjectCard key={p.slug} project={p} locale={locale} />
+            <ProjectCard key={p.slug} project={p} locale={locale} variant="teaser" />
           ))}
         </div>
       </Section>

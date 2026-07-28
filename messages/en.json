@@ -101,10 +101,7 @@
     "viewAll": "View all",
     "whyItMatters": "Why this matters to Saudi energy",
     "recordTitle": "The record behind this story",
-    "picksTitle": "Editor's picks",
-    "noteTitle": "What this desk covers",
-    "noteBody": "Saudi Energy News reports on the Kingdom’s energy system — power and utilities, oil and gas, renewables, hydrogen, carbon management, projects and policy. Every quantitative claim on this site names the source it came from, and where figures are read from project documentation rather than a public filing, the article says so and names who supplied the documents.",
-    "noteLink": "Read our editorial standards"
+    "picksTitle": "Editor's picks"
   },
   "article": {
     "publishedAt": "Published",
@@ -194,7 +191,8 @@
       "duration": "Duration",
       "structures": "Structures",
       "source": "Source"
-    }
+    },
+    "fullRecord": "Full record"
   },
   "company": {
     "title": "{company}",
