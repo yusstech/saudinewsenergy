@@ -20,10 +20,12 @@ export async function generateMetadata({
  *
  * Written as commitments a reader can hold us to, not as a compliance page.
  * Every claim here has a corresponding mechanism in the codebase — the sourcing
- * rule is enforced by the content schema, the sample-data rule by the market
- * types, the imagery rule by the `isIllustrative` flag on every media asset.
- * A standards page that describes intentions rather than mechanisms is a
- * standards page nobody has to keep.
+ * rule is enforced by the content schema, the imagery rule by the
+ * `isIllustrative` flag on every media asset, the translation rule by
+ * `translationSchema`, whose `machine-assisted` status the article template
+ * renders whether or not anyone remembers to mention it. A standards page that
+ * describes intentions rather than mechanisms is a standards page nobody has to
+ * keep.
  */
 export default async function StandardsPage({
   params,
@@ -68,11 +70,11 @@ export default async function StandardsPage({
 
             <h2>Market data</h2>
             <p>
-              Market values on this site are currently sample data used to build
-              and test the interface, and are labelled as such everywhere they
-              appear. When licensed data replaces them, every value will carry
-              its unit, its timestamp and its delay. We will never present
-              delayed data as live.
+              We publish none. Prices, benchmarks and indices are absent from
+              this site rather than approximated, because a figure that looks
+              like a reference price is one a reader may act on. If we license a
+              feed, every value will carry its unit, its timestamp and its
+              delay, and we will never present delayed data as live.
             </p>
 
             <h2>Images</h2>
@@ -98,9 +100,11 @@ export default async function StandardsPage({
             <p>
               Arabic and English are equal products. We prefer original
               reporting in both languages. A translated story says so, names the
-              language it came from and links to the original. Machine-assisted
-              translations are reviewed by an editor before publication and
-              labelled.
+              language it came from and links to the original. A
+              machine-assisted translation is labelled as one on the page until
+              an editor has read it against the original; only then is it
+              relabelled as edited. The label describes the review the story has
+              actually had, not the review we intend it to have.
             </p>
 
             <h2>Corrections</h2>
@@ -111,12 +115,13 @@ export default async function StandardsPage({
               the same way.
             </p>
 
-            <h2>Prototype content</h2>
+            <h2>Placeholder content</h2>
             <p>
-              This site is currently a front-end prototype. Some stories are
-              placeholder content written to populate the interface. They are
-              labelled on every card and on the page itself, and excluded from
-              search-engine indexing.
+              We publish none. The interface was built against placeholder
+              stories, and they were deleted rather than left in place once the
+              reporting began. Should we ever need them again, the mechanism
+              that labels them on every card and on the page, and keeps them out
+              of search-engine indexing, is still in force.
             </p>
           </>
         ) : (
@@ -144,10 +149,11 @@ export default async function StandardsPage({
 
             <h2>بيانات السوق</h2>
             <p>
-              القيم السوقية في هذا الموقع بيانات تجريبية تُستخدم لبناء الواجهة
-              واختبارها، وهي موسومة بذلك أينما ظهرت. وعند استبدالها ببيانات
-              مرخّصة، ستحمل كل قيمة وحدتها وتوقيتها ومدة تأخيرها. ولن نعرض
-              بيانات متأخرة على أنها مباشرة.
+              لا ننشر منها شيئاً. فالأسعار والمؤشرات المرجعية غائبة عن هذا
+              الموقع بدل أن تكون تقديرية، لأن الرقم الذي يبدو سعراً مرجعياً قد
+              يبني عليه القارئ قراراً. وإن رخّصنا تغذية بيانات، فستحمل كل قيمة
+              وحدتها وتوقيتها ومدة تأخيرها، ولن نعرض بيانات متأخرة على أنها
+              مباشرة.
             </p>
 
             <h2>الصور</h2>
@@ -169,8 +175,10 @@ export default async function StandardsPage({
             <p>
               العربية والإنجليزية منتجان متكافئان. ونفضّل التغطية الأصلية
               باللغتين. والمادة المترجمة تذكر ذلك، وتسمّي اللغة التي تُرجمت عنها،
-              وتربط بالنص الأصلي. والترجمات الآلية يراجعها محرر قبل النشر وتُوسم
-              بذلك.
+              وتربط بالنص الأصلي. والترجمة الآلية تبقى موسومة بذلك في الصفحة حتى
+              يقرأها محرر مقابل النص الأصلي، وعندها فقط يتغير وسمها إلى مُحرَّرة.
+              فالوسم يصف المراجعة التي مرّت بها المادة فعلاً، لا المراجعة التي
+              ننوي أن تمرّ بها.
             </p>
 
             <h2>التصحيحات</h2>
@@ -182,9 +190,10 @@ export default async function StandardsPage({
 
             <h2>المحتوى التجريبي</h2>
             <p>
-              هذا الموقع حالياً نموذج أولي للواجهة. وبعض المواد محتوى تجريبي
-              كُتب لملء الواجهة، وهو موسوم على كل بطاقة وفي الصفحة نفسها،
-              ومستبعد من فهرسة محركات البحث.
+              لا ننشر منه شيئاً. فقد بُنيت الواجهة على مواد تجريبية، وحُذفت عند
+              بدء التغطية الفعلية بدل أن تُترك في مكانها. وإن احتجنا إليها
+              مجدداً، فآلية وسمها على كل بطاقة وفي الصفحة نفسها، واستبعادها من
+              فهرسة محركات البحث، ما تزال قائمة.
             </p>
           </>
         )}

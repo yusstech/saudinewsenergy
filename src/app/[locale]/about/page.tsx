@@ -61,10 +61,13 @@ export default async function AboutPage({
             </p>
             <h2>Current status</h2>
             <p>
-              This site is a front-end prototype. The interface, content model
-              and editorial machinery are real; some of the stories and all of
-              the market values are sample content, labelled wherever they
-              appear.
+              We are publishing. Everything on this site is reporting: one
+              story so far, on the Al Jouf 380 kV transmission line, sourced from
+              the project documentation and available in both languages. The
+              placeholder stories the interface was built against have been
+              deleted rather than left in place, and the site carries no market
+              data. It is a small publication that says only what it can source,
+              which is the version worth growing.
             </p>
           </>
         ) : (
@@ -93,9 +96,12 @@ export default async function AboutPage({
             </p>
             <h2>الوضع الحالي</h2>
             <p>
-              هذا الموقع نموذج أولي للواجهة. الواجهة ونموذج المحتوى والأدوات
-              التحريرية حقيقية؛ أما بعض المواد وجميع القيم السوقية فمحتوى تجريبي
-              موسوم أينما ظهر.
+              نحن ننشر. وكل ما في هذا الموقع تغطية صحفية: مادة واحدة حتى الآن،
+              عن خط نقل الجوف جهد 380 كيلوفولت، مصدرها وثائق المشروع، ومتاحة
+              باللغتين. أما المواد التجريبية التي بُنيت عليها الواجهة فقد حُذفت
+              بدل أن تُترك في مكانها، ولا يحمل الموقع أي بيانات سوقية. إنها منصة
+              صغيرة لا تقول إلا ما تستطيع إسناده، وهذه هي النسخة الجديرة
+              بالنمو.
             </p>
           </>
         )}

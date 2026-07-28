@@ -142,6 +142,21 @@ export function formatCurrency(
  * apart across a redesign — and it is also what makes the figure safely
  * quotable by an answer engine lifting it out of the page.
  */
+/**
+ * Unit words, translated. Unit *symbols* are not.
+ *
+ * `km`, `MW` and `GW` are SI symbols — international, written in Latin script in
+ * Arabic technical and industry usage, and left alone here for the same reason
+ * the numerals are. `towers` is not a symbol, it is an English noun, and leaving
+ * it untranslated put "279 towers" in the middle of an otherwise Arabic page.
+ *
+ * A unit absent from this map falls through unchanged, so adding a symbol needs
+ * no entry and adding a word needs one line.
+ */
+const UNIT_WORDS: Record<string, { en: string; ar: string }> = {
+  towers: { en: 'towers', ar: 'برجاً' },
+};
+
 export function formatMeasure(
   value: number,
   unit: string,
@@ -152,7 +167,7 @@ export function formatMeasure(
     maximumFractionDigits: 2,
     ...options,
   });
-  return `${n} ${unit}`;
+  return `${n} ${UNIT_WORDS[unit]?.[locale] ?? unit}`;
 }
 
 /** A signed change, for market moves. Sign is always explicit. */

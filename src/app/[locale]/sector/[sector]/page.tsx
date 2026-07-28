@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { LOCALES, type Locale } from '@/i18n/config';
-import { baseMetadata } from '@/lib/seo';
+import { baseMetadata, coverageRobots } from '@/lib/seo';
 import { getStoriesBySector } from '@/lib/content';
 import { SECTORS, SECTOR_MAP } from '@content/taxonomy';
 import { sectorSchema } from '@content/schema';
@@ -37,6 +37,7 @@ export async function generateMetadata({
     ...baseMetadata(locale, `/sector/${sector}`),
     title: entry?.label[locale],
     description: entry?.blurb[locale],
+    robots: coverageRobots(getStoriesBySector(locale, parsed.data).length > 0),
   };
 }
 

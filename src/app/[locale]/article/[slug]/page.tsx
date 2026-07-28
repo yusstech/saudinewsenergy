@@ -108,7 +108,11 @@ export default async function ArticlePage({
 
           <FaqBlock items={story.faq} />
 
-          <Sources sources={story.sources} sourcingNote={story.sourcingNote} />
+          <Sources
+            sources={story.sources}
+            sourcingNote={story.sourcingNote}
+            locale={locale}
+          />
 
           <Corrections corrections={story.corrections} locale={locale} />
 

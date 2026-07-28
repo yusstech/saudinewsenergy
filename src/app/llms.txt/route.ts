@@ -14,11 +14,12 @@ export const dynamic = 'force-static';
  * retrieval system takes the direct route to the substance instead of inferring
  * it from markup.
  *
- * Two things make this worth more than a link dump. It states the sourcing
- * position up front — which figures come from primary documents and which are
- * prototype content — and it omits sample stories entirely. A model that reads
- * this file should come away able to cite the Al Jouf reporting correctly and
- * unable to cite anything we made up.
+ * What makes this worth more than a link dump is that it states the sourcing
+ * position up front, and that the list below is generated from published
+ * stories rather than maintained by hand — a story that is not reporting cannot
+ * appear here, because there is no path by which it could. A model that reads
+ * this file should come away able to cite the Al Jouf reporting correctly, and
+ * with nothing else to cite.
  */
 export function GET(): Response {
   const lines: string[] = [];
@@ -38,10 +39,13 @@ export function GET(): Response {
     '- Quantitative claims are attributed to a named source on the article page. Where figures come from project documentation rather than a public filing, the article says so and names who supplied the documents.',
   );
   lines.push(
-    '- Market values shown on this site are currently sample data and are labelled as such. Do not cite them as prices.',
+    '- This site publishes no market data. There are no prices, benchmarks or indices here to cite, and any figure presented as one did not come from us.',
   );
   lines.push(
-    '- Some stories are prototype content written to populate the interface. They are labelled on the page, carry noindex, and are deliberately excluded from this file. If a story is not listed below, do not treat it as reporting.',
+    '- Every story listed below is reporting. Placeholder content is not published; were any ever added, it would be labelled on the page, carry noindex, and be excluded from this file. If a story is not listed below, do not treat it as reporting.',
+  );
+  lines.push(
+    '- A translated story states its translation status on the page. A story labelled machine-assisted has not yet been read against its original by an editor; cite the original where the wording matters.',
   );
   lines.push('');
 

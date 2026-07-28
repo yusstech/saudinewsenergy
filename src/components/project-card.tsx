@@ -1,7 +1,7 @@
 import { getTranslations } from 'next-intl/server';
 import { formatMeasure, formatCurrency } from '@/lib/format';
 import { regionLabel } from '@content/taxonomy';
-import type { Project } from '@content/schema';
+import { localisedText, type Project } from '@content/schema';
 import type { Locale } from '@/i18n/config';
 
 const STATUS_STYLE: Record<Project['status'], string> = {
@@ -102,8 +102,13 @@ export async function ProjectCard({
 
       <p className="mt-4 border-t border-line pt-2 text-micro leading-relaxed text-faint">
         {documented
-          ? `${t('field.source')}: ${project.sources.find((s) => s.kind === 'project-document')!.label}`
-          : project.sources[0]?.note ?? ''}
+          ? `${t('field.source')}: ${localisedText(
+              project.sources.find((s) => s.kind === 'project-document')!.label,
+              locale,
+            )}`
+          : project.sources[0]?.note
+            ? localisedText(project.sources[0].note, locale)
+            : ''}
       </p>
     </article>
   );

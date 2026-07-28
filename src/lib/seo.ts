@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 import { LOCALES, LOCALE_TAG, type Locale } from '@/i18n/config';
 import { abs, siteUrl, SITE, siteName } from './site';
 import { hasTranslation } from './content';
-import type { Story, Project, SourceRef } from '@content/schema';
+import { localisedText, type Story, type Project, type SourceRef } from '@content/schema';
 
 /**
  * Canonicals, hreflang and structured data.
@@ -23,12 +23,31 @@ import type { Story, Project, SourceRef } from '@content/schema';
  * canonicalise to the article's own language and the ranking signals
  * consolidate on one URL instead of splitting in two.
  *
- * When a translation *is* published — the Arabic Al Jouf piece, once it lands —
- * the pair becomes a genuine alternate and this file starts declaring it. That
- * is why `articleAlternates` asks `hasTranslation` rather than assuming.
+ * The Arabic Al Jouf piece is published under the same slug as the English, so
+ * that pair is a genuine alternate and this file declares it. Nothing was
+ * configured to make that happen: `articleAlternates` asks `hasTranslation`
+ * rather than assuming, so publishing the translation is what turned the bare
+ * canonical into an hreflang pair.
  */
 
 /* ------------------------------------------------------------- canonicals -- */
+
+/**
+ * `noindex, follow` for a listing page with nothing on it.
+ *
+ * The taxonomy describes what this publication intends to cover, which is
+ * necessarily wider than what it has published. A desk page reading "nothing
+ * here yet" is a real page for a reader who navigated to it and thin content
+ * for a crawler that indexed it, and those want different answers: keep it
+ * reachable and crawlable, keep it out of the index until it has coverage.
+ *
+ * `follow` is the load-bearing half. `noindex, nofollow` would strand the links
+ * out of the page as well, which is the opposite of what an empty listing page
+ * is for.
+ */
+export function coverageRobots(hasCoverage: boolean): Metadata['robots'] {
+  return hasCoverage ? undefined : { index: false, follow: true };
+}
 
 /** Self-canonical plus every locale as an alternate. For listing pages. */
 export function listingAlternates(
@@ -420,9 +439,10 @@ export function jsonLdScript(data: unknown): string {
   return JSON.stringify(data).replace(/</g, '\\u003c');
 }
 
-export function sourceLine(source: SourceRef): string {
-  const parts = [source.label];
-  if (source.publisher && !source.label.includes(source.publisher)) {
+export function sourceLine(source: SourceRef, locale: Locale): string {
+  const label = localisedText(source.label, locale);
+  const parts = [label];
+  if (source.publisher && !label.includes(source.publisher)) {
     parts.push(source.publisher);
   }
   return parts.join(' — ');

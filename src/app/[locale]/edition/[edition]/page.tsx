@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { LOCALES, EDITIONS, isEdition, type Locale } from '@/i18n/config';
-import { baseMetadata } from '@/lib/seo';
+import { baseMetadata, coverageRobots } from '@/lib/seo';
 import { getStoriesByEdition } from '@/lib/content';
 import { EDITION_LABEL } from '@content/taxonomy';
 import { StoryCard } from '@/components/story-card';
@@ -33,6 +33,7 @@ export async function generateMetadata({
   return {
     ...baseMetadata(locale, `/edition/${edition}`),
     title: EDITION_LABEL[edition][locale],
+    robots: coverageRobots(getStoriesByEdition(locale, edition).length > 0),
   };
 }
 

@@ -12,40 +12,30 @@ export async function SiteFooter({ locale }: { locale: Locale }) {
 
   return (
     <footer className="mt-[var(--space-section)] border-t border-rule bg-surface-sunken">
-      {/* ------------------------------------------------------ newsletters */}
+      {/*
+        The newsletter block, minus the newsletter.
+
+        This was four named briefings and an email field. None of the four exists, and the form
+        had no action and no handler — submitting it reloaded the page and dropped the address.
+        Collecting a reader's email for a mailing list nobody runs is the same fault as printing
+        a price nobody licensed, and it is worse in one respect: the reader gives something up.
+
+        What is left is the true version. The desk has a working address, so that is what is
+        offered, as a `mailto:` that actually goes somewhere. It becomes a subscribe form again
+        when there is something to subscribe to.
+      */}
       <section className="border-b border-line">
         <div className="page py-[var(--space-block)]">
           <h2 className="font-display text-subhead text-strong">{t('newsletters')}</h2>
-          <p className="mt-1 text-meta text-muted">{t('newsletterIntro')}</p>
-
-          <ul className="mt-4 grid gap-2 sm:grid-cols-2 lg:grid-cols-4">
-            {(['daily', 'weekly', 'markets', 'transition'] as const).map((k) => (
-              <li
-                key={k}
-                className="border border-line bg-surface px-3 py-2.5 text-meta font-medium"
-              >
-                {t(k)}
-              </li>
-            ))}
-          </ul>
-
-          <form className="mt-4 flex max-w-md gap-2">
-            <label htmlFor="newsletter-email" className="sr-only">
-              {t('emailPlaceholder')}
-            </label>
-            <input
-              id="newsletter-email"
-              type="email"
-              placeholder={t('emailPlaceholder')}
-              className="min-w-0 flex-1 border border-line-strong bg-surface px-3 py-2 text-meta"
-            />
-            <button
-              type="submit"
-              className="bg-masthead px-4 py-2 text-meta font-semibold text-masthead-fg hover:bg-ink-800"
-            >
-              {t('subscribe')}
-            </button>
-          </form>
+          <p className="mt-1 max-w-prose text-meta leading-relaxed text-muted">
+            {t('newsletterIntro')}
+          </p>
+          <a
+            href={`mailto:${SITE.contact}`}
+            className="mt-3 inline-block text-meta font-semibold text-accent hover:underline underline-offset-4"
+          >
+            {SITE.contact}
+          </a>
         </div>
       </section>
 

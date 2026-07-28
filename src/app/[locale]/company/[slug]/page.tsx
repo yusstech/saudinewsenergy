@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { LOCALES, type Locale } from '@/i18n/config';
-import { baseMetadata, jsonLdScript } from '@/lib/seo';
+import { baseMetadata, coverageRobots, jsonLdScript } from '@/lib/seo';
 import { abs } from '@/lib/site';
 import { COMPANIES, getCompany } from '@content/companies';
 import { PROJECTS } from '@content/projects';
@@ -39,6 +39,7 @@ export async function generateMetadata({
     ...baseMetadata(locale, `/company/${slug}`),
     title: company.name[locale],
     description: company.summary[locale],
+    robots: coverageRobots(getStoriesByCompany(locale, slug).length > 0),
   };
 }
 

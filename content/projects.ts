@@ -21,24 +21,36 @@ import { projectSchema, type Project } from './schema';
  * optional for exactly that reason.
  */
 
+// Records are shared by both locales, so their prose is written twice. Document
+// reference numbers are identifiers rather than prose and stay as issued.
 const ALJOUF_DOCS = [
   {
     id: 'moe-loa-2021',
-    label:
-      'Ministry of Energy letter of award, ref MOE/LOA/2021/0801, 1 August 2021',
+    label: {
+      en: 'Ministry of Energy letter of award, ref MOE/LOA/2021/0801, 1 August 2021',
+      ar: 'خطاب ترسية من وزارة الطاقة، المرجع MOE/LOA/2021/0801، بتاريخ 1 أغسطس 2021',
+    },
     kind: 'project-document' as const,
     publisher: 'Ministry of Energy, Kingdom of Saudi Arabia',
     date: '2021-08-01',
-    note: 'Project documentation provided by Samaya Group Company Ltd. Not independently published by the ministry.',
+    note: {
+      en: 'Project documentation provided by Samaya Group Company Ltd. Not independently published by the ministry.',
+      ar: 'وثائق مشروع مقدَّمة من شركة مجموعة سمايا المحدودة. لم تنشرها الوزارة بصورة مستقلة.',
+    },
   },
   {
     id: 'moe-completion-2023',
-    label:
-      'Ministry of Energy project completion confirmation, ref MOE/TRANSMISSION/2023/0930, 30 September 2023, with appendix 1 (scope of work and bill of quantities)',
+    label: {
+      en: 'Ministry of Energy project completion confirmation, ref MOE/TRANSMISSION/2023/0930, 30 September 2023, with appendix 1 (scope of work and bill of quantities)',
+      ar: 'تأكيد إنجاز مشروع من وزارة الطاقة، المرجع MOE/TRANSMISSION/2023/0930، بتاريخ 30 سبتمبر 2023، مع الملحق 1 (نطاق العمل وجدول الكميات)',
+    },
     kind: 'project-document' as const,
     publisher: 'Ministry of Energy, Kingdom of Saudi Arabia',
     date: '2023-09-30',
-    note: 'Project documentation provided by Samaya Group Company Ltd. Quantities cited in coverage are read from the attached bill of quantities.',
+    note: {
+      en: 'Project documentation provided by Samaya Group Company Ltd. Quantities cited in coverage are read from the attached bill of quantities.',
+      ar: 'وثائق مشروع مقدَّمة من شركة مجموعة سمايا المحدودة. والكميات الواردة في التغطية مقروءة من جدول الكميات المرفق.',
+    },
   },
 ];
 
@@ -89,9 +101,15 @@ const raw: Project[] = [
     sources: [
       {
         id: 'public-announced',
-        label: 'Publicly announced project figures',
+        label: {
+          en: 'Publicly announced project figures',
+          ar: 'أرقام المشروع المعلنة علناً',
+        },
         kind: 'publication',
-        note: 'Headline capacity as publicly announced. Not verified against project documentation.',
+        note: {
+          en: 'Headline capacity as publicly announced. Not verified against project documentation.',
+          ar: 'السعة المعلنة كما أُعلنت علناً. غير متحقَّق منها مقابل وثائق المشروع.',
+        },
       },
     ],
   },
@@ -111,9 +129,15 @@ const raw: Project[] = [
     sources: [
       {
         id: 'public-announced',
-        label: 'Publicly announced project figures',
+        label: {
+          en: 'Publicly announced project figures',
+          ar: 'أرقام المشروع المعلنة علناً',
+        },
         kind: 'publication',
-        note: 'Headline capacity as publicly announced. Not verified against project documentation.',
+        note: {
+          en: 'Headline capacity as publicly announced. Not verified against project documentation.',
+          ar: 'السعة المعلنة كما أُعلنت علناً. غير متحقَّق منها مقابل وثائق المشروع.',
+        },
       },
     ],
   },
@@ -133,9 +157,15 @@ const raw: Project[] = [
     sources: [
       {
         id: 'public-announced',
-        label: 'Publicly announced project figures',
+        label: {
+          en: 'Publicly announced project figures',
+          ar: 'أرقام المشروع المعلنة علناً',
+        },
         kind: 'publication',
-        note: 'Headline capacity as publicly announced. Not verified against project documentation.',
+        note: {
+          en: 'Headline capacity as publicly announced. Not verified against project documentation.',
+          ar: 'السعة المعلنة كما أُعلنت علناً. غير متحقَّق منها مقابل وثائق المشروع.',
+        },
       },
     ],
   },
@@ -158,9 +188,15 @@ const raw: Project[] = [
     sources: [
       {
         id: 'public-announced',
-        label: 'Publicly announced project figures',
+        label: {
+          en: 'Publicly announced project figures',
+          ar: 'أرقام المشروع المعلنة علناً',
+        },
         kind: 'publication',
-        note: 'Headline figures as publicly announced. Not verified against project documentation.',
+        note: {
+          en: 'Headline figures as publicly announced. Not verified against project documentation.',
+          ar: 'الأرقام الرئيسية كما أُعلنت علناً. غير متحقَّق منها مقابل وثائق المشروع.',
+        },
       },
     ],
   },

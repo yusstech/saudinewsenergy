@@ -2,12 +2,13 @@ import { getTranslations } from 'next-intl/server';
 import { Link } from '@/i18n/navigation';
 import { formatDate, formatMeasure, formatCurrency } from '@/lib/format';
 import { regionLabel } from '@content/taxonomy';
-import type {
-  Story,
-  ContextPanel as ContextPanelType,
-  SourceRef,
-  Correction,
-  Translation,
+import {
+  localisedText,
+  type Story,
+  type ContextPanel as ContextPanelType,
+  type SourceRef,
+  type Correction,
+  type Translation,
 } from '@content/schema';
 import type { Locale } from '@/i18n/config';
 
@@ -147,7 +148,7 @@ export async function ContextPanel({
         <div className="border-t border-line px-5 py-3">
           <p className="text-micro leading-relaxed text-faint">
             {tp('field.source')}:{' '}
-            {cited.map((s) => s.label).join('; ')}
+            {cited.map((s) => localisedText(s.label, locale)).join('; ')}
           </p>
         </div>
       )}
@@ -196,9 +197,11 @@ export async function FaqBlock({ items }: { items: Story['faq'] }) {
 export async function Sources({
   sources,
   sourcingNote,
+  locale,
 }: {
   sources: SourceRef[];
   sourcingNote?: string;
+  locale: Locale;
 }) {
   if (!sources.length && !sourcingNote) return null;
   const t = await getTranslations('article');
@@ -221,14 +224,16 @@ export async function Sources({
                     rel="noopener"
                     target="_blank"
                   >
-                    {s.label}
+                    {localisedText(s.label, locale)}
                   </a>
                 ) : (
-                  s.label
+                  localisedText(s.label, locale)
                 )}
               </p>
               {s.note && (
-                <p className="mt-0.5 text-xs text-muted">{s.note}</p>
+                <p className="mt-0.5 text-xs text-muted">
+                  {localisedText(s.note, locale)}
+                </p>
               )}
             </li>
           ))}
@@ -295,6 +300,12 @@ export async function Corrections({
  * from and links to the source text. Silence here would let a reader assume
  * every Arabic story was written in Arabic, which is exactly the assumption
  * that makes a quotation unreliable after a round trip.
+ *
+ * `machine-assisted` says the editor's read has not happened yet, rather than
+ * that it has. The status is a description of the review a story has had, so it
+ * changes when the review does — an editor reading the Arabic Al Jouf piece
+ * against the English is what promotes it to `human-translated`, and until then
+ * a reader quoting from it knows to check the original.
  */
 export async function TranslationStatus({
   translation,

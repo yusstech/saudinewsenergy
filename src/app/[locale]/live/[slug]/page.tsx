@@ -145,7 +145,11 @@ export default async function LiveArticlePage({
             <div className="prose-article text-[0.9375rem]">
               <ArticleBody source={story.body} images={story.images} />
             </div>
-            <Sources sources={story.sources} sourcingNote={story.sourcingNote} />
+            <Sources
+              sources={story.sources}
+              sourcingNote={story.sourcingNote}
+              locale={locale}
+            />
             <Corrections corrections={story.corrections} locale={locale} />
           </aside>
         </div>

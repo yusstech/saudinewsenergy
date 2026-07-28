@@ -28,7 +28,7 @@ content/
   en/articles/*.mdx  English stories
   ar/articles/*.mdx  Arabic stories
 src/
-  app/[locale]/      13 MVP page types
+  app/[locale]/      12 page types
   components/        newsroom UI
   lib/               content loading, SEO, search, formatting
 public/media/        diagrams, licensed photography, LICENSES.md
@@ -36,7 +36,8 @@ public/media/        diagrams, licensed photography, LICENSES.md
 
 **Page types:** home · edition · latest · sector · article · live article ·
 projects · company · search · saved · standards / corrections / about / contact,
-in both locales.
+in both locales. The live-article route currently generates nothing — there is no
+live coverage running — and returns the day there is.
 
 ---
 
@@ -67,19 +68,26 @@ These are editorial commitments with mechanisms behind them, not conventions.
 only ways a quantity reaches the page. A figure quoted onward without its unit is
 how a 110 km fibre run becomes a 110 mile one.
 
-**Sample data says so, everywhere.** `isSampleContent` on stories drives
-labelling the templates cannot omit, plus `noindex` and exclusion from
-`llms.txt`.
+**Nothing on the site is invented.** Not the numbers, not the stories, not the
+mailing list. Three rounds of removal got here, and each one replaced a labelled
+falsehood with an absence:
 
-**The site carries no market data at all.** It used to: a rail on every page, a
-`/markets` table and a Brent tile on the dashboard, each fed by invented numbers
-and each carefully labelled "sample". The labelling was not the point. This
-audience prices and procures against figures like those, and a placed number that
-looks like a reference price is a liability however it is captioned — so the
-numbers are gone rather than annotated. `marketIndicatorSchema` stays in
-`content/schema.ts`, unused, as the contract a licensed feed would have to
-satisfy; its `isSample` and `delayMinutes` fields have no defaults, so disclosure
-stays mandatory the day one is wired up.
+- **Market data** was a rail on every page, a `/markets` table and a Brent tile,
+  all fed by a fixed sample set and all captioned "sample". This audience prices
+  and procures against figures like those, and a placed number that reads as a
+  reference price is a liability however it is captioned.
+- **Six of the seven stories** were placeholder copy written to fill the layout.
+  They were plausible energy journalism that nobody reported, and a `SAMPLE` chip
+  on the card is a weaker defence than not publishing them.
+- **The newsletter signup** offered four briefings that do not exist and posted
+  the address nowhere. That one is worse than the others: the reader gives
+  something up.
+
+The mechanisms outlive the content they policed. `isSampleContent` still drives
+labelling, `noindex` and exclusion from `llms.txt` for anything ever marked;
+`marketIndicatorSchema` stays in `content/schema.ts`, unused, as the contract a
+licensed feed must satisfy, with `isSample` and `delayMinutes` still carrying no
+defaults.
 
 **An image is captioned with what it actually shows.** `isIllustrative` forces
 an explicit label and `depicts` states the truth. No photograph may be captioned
@@ -106,7 +114,8 @@ where a story carries extractable Q&A. `mentions` is derived from the editorial
 links in the body, so the markup cannot drift from what the page says.
 
 **`/llms.txt`** — a plain-text index for answer engines, carrying the sourcing
-position and excluding prototype content entirely. Answer-engine crawlers are
+position. It is generated from published stories rather than maintained by hand,
+so placeholder content has no path by which it could appear. Answer-engine crawlers are
 allowed in `robots.ts` deliberately: a specialist publication's reason to exist
 is being the thing people cite, and the citation carries the masthead into rooms
 the page view never reaches.
@@ -118,7 +127,7 @@ round trip and nothing that can be unavailable.
 
 ## Design system
 
-Warm sandstone canvas, charcoal reserved for the masthead band and the Saudi Energy Dashboard,
+Warm sandstone canvas, charcoal reserved for the masthead band and the record band,
 copper for rules and data. Status colour is reserved: red = Breaking, amber = Developing,
 teal = Live, copper = Market Move, never decorative.
 
@@ -213,7 +222,17 @@ from the build output, in which case this is a `next start` artifact only.
 
 ## Current status
 
-A front-end prototype. The interface, content model and editorial machinery are
-real. The Al Jouf story is reported from primary documentation; the remaining
-stories are sample content, labelled wherever they appear. No market data is
-published.
+Publishing, at the smallest honest size. One story — the Al Jouf 380 kV line,
+reported from the project documentation — in English and Arabic. The Arabic is a
+machine-assisted translation and says so on the page; an editor reading it against
+the English is what promotes it to `human-translated`, and that has not happened
+yet.
+
+Everything else that was on the site has been removed rather than labelled. See
+"Nothing on the site is invented" above for what went and why.
+
+**The front page is gated, not hard-coded for one story.** Each module requires
+the material that makes it worth printing — the Latest rail needs three stories,
+the sector grid needs two desks with two each, Editor's picks needs four — so the
+page fills back in on its own as coverage lands. The thresholds are named in one
+place, in `enough` in `src/app/[locale]/page.tsx`.

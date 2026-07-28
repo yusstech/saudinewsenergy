@@ -90,8 +90,6 @@
     "leadTitle": "Top story",
     "liveDeskTitle": "Live Energy Desk",
     "liveDeskEmpty": "No live coverage running right now.",
-    "dashboardTitle": "Saudi Energy Dashboard",
-    "dashboardSubtitle": "Today across the Kingdom's energy system",
     "sectorsTitle": "Sectors",
     "projectsTitle": "Projects across the Kingdom",
     "companiesTitle": "Companies & institutions",
@@ -99,10 +97,14 @@
     "globalTitle": "GCC & global context",
     "analysisTitle": "Analysis & explainers",
     "mediaTitle": "Watch, listen & data",
-    "mostReadTitle": "Most read",
     "recommendedTitle": "Recommended for you",
     "viewAll": "View all",
-    "whyItMatters": "Why this matters to Saudi energy"
+    "whyItMatters": "Why this matters to Saudi energy",
+    "recordTitle": "The record behind this story",
+    "picksTitle": "Editor's picks",
+    "noteTitle": "What this desk covers",
+    "noteBody": "Saudi Energy News reports on the Kingdom’s energy system — power and utilities, oil and gas, renewables, hydrogen, carbon management, projects and policy. Every quantitative claim on this site names the source it came from, and where figures are read from project documentation rather than a public filing, the article says so and names who supplied the documents.",
+    "noteLink": "Read our editorial standards"
   },
   "article": {
     "publishedAt": "Published",
@@ -121,7 +123,7 @@
     "translation": "Translation",
     "translatedFrom": "Translated from {language}",
     "readOriginal": "Read the original",
-    "machineTranslated": "Machine translated, reviewed by an editor",
+    "machineTranslated": "Machine-assisted translation, not yet reviewed by an editor",
     "originalReporting": "Original reporting",
     "relatedProjects": "Related project",
     "relatedCompanies": "Organisations in this story",
@@ -246,19 +248,13 @@
   },
   "footer": {
     "newsletters": "Newsletters",
-    "newsletterIntro": "Briefings from the Saudi energy desk.",
-    "daily": "Saudi Energy Daily",
-    "weekly": "Weekly Project Monitor",
-    "markets": "Oil & Markets Brief",
-    "transition": "Energy Transition Saudi",
-    "subscribe": "Subscribe",
-    "emailPlaceholder": "Your email",
+    "newsletterIntro": "Email briefings from the Saudi energy desk are not open yet — there is no list to join, so we are not asking for your address. Until then, the newsroom reads everything sent to it.",
     "sections": "Sections",
     "editorial": "Editorial",
     "editions": "Editions",
     "languages": "Languages",
     "rights": "© {year} Saudi Energy News. All rights reserved.",
-    "prototypeNotice": "Front-end prototype. Stories shown here are sample content except where a source is cited. The site carries no market data."
+    "prototypeNotice": "Every story here is reported and sourced. This site publishes no market data."
   },
   "common": {
     "loading": "Loading…",

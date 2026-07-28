@@ -156,6 +156,35 @@ export const moneySchema = z.object({
 export type Money = z.infer<typeof moneySchema>;
 
 /**
+ * Text that may be written once or written twice.
+ *
+ * An article is a single-language file, so a source label inside one is already
+ * in that article's language and a plain string is the honest shape. A project
+ * or company record is *shared* by both locales, and there a plain string means
+ * whichever language it happens to be written in shows up under the other one's
+ * chrome — which is how "Ministry of Energy letter of award, ref
+ * MOE/LOA/2021/0801" came to sit in the middle of the Arabic front page.
+ *
+ * So both shapes are legal, and `localisedText` below resolves either one. The
+ * union is deliberately not an object-only schema: forcing every article to
+ * supply a translation it does not need would be a worse contract than the
+ * problem it fixes.
+ */
+export const localisedTextSchema = z.union([
+  z.string().min(1),
+  z.object({ en: z.string().min(1), ar: z.string().min(1) }),
+]);
+export type LocalisedText = z.infer<typeof localisedTextSchema>;
+
+/** Resolve either shape for display. A plain string is returned as written. */
+export function localisedText(
+  value: LocalisedText,
+  locale: ContentLocale,
+): string {
+  return typeof value === 'string' ? value : value[locale];
+}
+
+/**
  * Where a fact came from.
  *
  * `kind` matters editorially: a figure read off a contract document is not the
@@ -164,7 +193,7 @@ export type Money = z.infer<typeof moneySchema>;
  */
 export const sourceRefSchema = z.object({
   id: z.string().min(1),
-  label: z.string().min(1),
+  label: localisedTextSchema,
   kind: z.enum([
     'project-document',
     'official-statement',
@@ -182,7 +211,7 @@ export const sourceRefSchema = z.object({
    * A plain-language caveat shown to readers. This is where a document's
    * provenance limits get stated rather than quietly ignored.
    */
-  note: z.string().optional(),
+  note: localisedTextSchema.optional(),
 });
 export type SourceRef = z.infer<typeof sourceRefSchema>;
 
