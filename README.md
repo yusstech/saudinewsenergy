@@ -25,7 +25,6 @@ content/
   taxonomy.ts        desks, regions, editions
   projects.ts        project records (Al Jouf from primary documentation)
   companies.ts       entity records
-  markets.ts         sample market indicators
   en/articles/*.mdx  English stories
   ar/articles/*.mdx  Arabic stories
 src/
@@ -36,8 +35,8 @@ public/media/        diagrams, licensed photography, LICENSES.md
 ```
 
 **Page types:** home · edition · latest · sector · article · live article ·
-markets · projects · company · search · saved · standards / corrections / about
-/ contact, in both locales.
+projects · company · search · saved · standards / corrections / about / contact,
+in both locales.
 
 ---
 
@@ -68,10 +67,19 @@ These are editorial commitments with mechanisms behind them, not conventions.
 only ways a quantity reaches the page. A figure quoted onward without its unit is
 how a 110 km fibre run becomes a 110 mile one.
 
-**Sample data says so, everywhere.** `isSample` on market indicators and
-`isSampleContent` on stories drive labelling the templates cannot omit, plus
-`noindex` and exclusion from `llms.txt`. The audience prices and procures against
-figures like these; an unlabelled invented Brent print, once, is enough.
+**Sample data says so, everywhere.** `isSampleContent` on stories drives
+labelling the templates cannot omit, plus `noindex` and exclusion from
+`llms.txt`.
+
+**The site carries no market data at all.** It used to: a rail on every page, a
+`/markets` table and a Brent tile on the dashboard, each fed by invented numbers
+and each carefully labelled "sample". The labelling was not the point. This
+audience prices and procures against figures like those, and a placed number that
+looks like a reference price is a liability however it is captioned — so the
+numbers are gone rather than annotated. `marketIndicatorSchema` stays in
+`content/schema.ts`, unused, as the contract a licensed feed would have to
+satisfy; its `isSample` and `delayMinutes` fields have no defaults, so disclosure
+stays mandatory the day one is wired up.
 
 **An image is captioned with what it actually shows.** `isIllustrative` forces
 an explicit label and `depicts` states the truth. No photograph may be captioned
@@ -126,10 +134,9 @@ preference about applications, not about the newspaper they just opened, and a n
 answers by turning black reads as a terminal. Dark is available from the masthead toggle,
 stored in `localStorage` and replayed by an inline script before first paint.
 
-**Chrome is two bands** — masthead, then a sticky nav — with a static market rail and a
-*conditional* breaking alert below. It was six stacked bands and two competing marquees; a
-reader now meets ~155px before the first headline instead of ~290px, and nothing moves except
-one live-status dot.
+**Chrome is two bands** — masthead, then a sticky nav — with a *conditional* breaking alert
+below. It was six stacked bands and two competing marquees; a reader now meets ~155px before
+the first headline instead of ~290px, and nothing moves except one live-status dot.
 
 ### Two Tailwind v4 traps this codebase hit
 
@@ -208,4 +215,5 @@ from the build output, in which case this is a `next start` artifact only.
 
 A front-end prototype. The interface, content model and editorial machinery are
 real. The Al Jouf story is reported from primary documentation; the remaining
-stories and all market values are sample content, labelled wherever they appear.
+stories are sample content, labelled wherever they appear. No market data is
+published.

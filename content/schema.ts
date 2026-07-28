@@ -427,11 +427,18 @@ export type Company = z.infer<typeof companySchema>;
 /**
  * A market indicator.
  *
- * `isSample` and `delayMinutes` have no defaults that could hide them. A
- * prototype rendering invented prices as though they were live is the single
- * fastest way for a new publication to lose professional readers, so the type
- * system makes the disclosure mandatory rather than trusting a template to
- * remember it.
+ * RESERVED, AND CURRENTLY UNUSED. Nothing on the site renders market data: the
+ * rail, the `/markets` page and the dashboard's price tile were removed along
+ * with the invented numbers that fed them, because a prototype rendering made-up
+ * prices as though they were reference data is the single fastest way for a new
+ * publication to lose professional readers. Labelling them "sample" was not
+ * enough — the numbers themselves were the problem.
+ *
+ * The contract is kept because it is the part worth keeping. When a licensed
+ * feed exists, this is what it has to satisfy, and the two disclosure fields are
+ * the reason: `isSample` and `delayMinutes` have no defaults that could hide
+ * them, so the type system makes the disclosure mandatory rather than trusting a
+ * template to remember it.
  */
 export const marketIndicatorSchema = z.object({
   id: slugSchema,

@@ -12,11 +12,9 @@ import { resolveEdition } from '@/lib/edition';
 import { SiteHeader } from '@/components/site-header';
 import { SiteFooter } from '@/components/site-footer';
 import { MobileBottomNav } from '@/components/mobile-menu';
-import { MarketStrip } from '@/components/market-strip';
 import { BreakingRibbon } from '@/components/breaking-ribbon';
 import { EditionSuggestion } from '@/components/edition-suggestion';
 import { getAlertStories } from '@/lib/content';
-import { MARKET_INDICATORS } from '@content/markets';
 import '../globals.css';
 
 export function generateStaticParams() {
@@ -111,15 +109,12 @@ export default async function LocaleLayout({
             Band order, and why.
 
             The masthead comes first because it identifies the publication — nothing should
-            precede it. The alert sits directly beneath it only when there is genuinely
+            precede it. The alert sits directly beneath it, and only when there is genuinely
             breaking news, so when it appears it reads as an interruption rather than as
-            furniture. The market rail comes last of the three because it is reference data:
-            useful to have near the top, never more important than the masthead or a real
-            alert. That is three thin bands where there were six.
+            furniture. Two bands, where the first build had six.
           */}
           <SiteHeader locale={typed} edition={edition} />
           <BreakingRibbon items={alerts} locale={typed} />
-          <MarketStrip indicators={MARKET_INDICATORS} locale={typed} />
           <EditionSuggestion />
 
           <main id="main" className="flex-1">

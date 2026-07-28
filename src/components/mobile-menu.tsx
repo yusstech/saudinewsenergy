@@ -95,11 +95,6 @@ export function MobileMenu() {
                 </li>
               ))}
               <li className="pt-3">
-                <Link href="/markets" className="block rounded-sm py-2.5 text-base font-semibold">
-                  {t('markets')}
-                </Link>
-              </li>
-              <li>
                 <Link href="/projects" className="block rounded-sm py-2.5 text-base font-semibold">
                   {t('projects')}
                 </Link>
@@ -135,7 +130,7 @@ export function MobileBottomNav() {
   const items = [
     { href: '/', label: t('home'), icon: HomeIcon },
     { href: '/latest', label: t('latest'), icon: LatestIcon },
-    { href: '/markets', label: t('markets'), icon: MarketsIcon },
+    { href: '/projects', label: t('projects'), icon: ProjectsIcon },
     { href: '/saved', label: t('saved'), icon: SavedIcon },
     { href: '/search', label: t('search'), icon: SearchIcon },
   ] as const;
@@ -179,10 +174,12 @@ function LatestIcon() {
     </svg>
   );
 }
-function MarketsIcon() {
+// A map pin, not the old trend line: this slot points at the project tracker, which is
+// a map of built things, not a price series.
+function ProjectsIcon() {
   return (
     <svg viewBox="0 0 20 20" className={icon} fill="currentColor" aria-hidden="true">
-      <path d="M3 15.5 7.5 11l3 3L17 7.5V11h1.5V5H12.5v1.5H16l-5.5 5.5-3-3L2 14.4l1 1.1Z" />
+      <path d="M10 1.5a5.5 5.5 0 0 0-5.5 5.5c0 4 5.5 11 5.5 11s5.5-7 5.5-11A5.5 5.5 0 0 0 10 1.5Zm0 7.6A2.1 2.1 0 1 1 10 4.9a2.1 2.1 0 0 1 0 4.2Z" />
     </svg>
   );
 }

@@ -30,7 +30,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const listingPaths = [
     { path: '', priority: 1.0, frequency: 'hourly' as const },
     { path: '/latest', priority: 0.9, frequency: 'hourly' as const },
-    { path: '/markets', priority: 0.7, frequency: 'hourly' as const },
     { path: '/projects', priority: 0.7, frequency: 'daily' as const },
     { path: '/search', priority: 0.4, frequency: 'monthly' as const },
     { path: '/standards', priority: 0.4, frequency: 'yearly' as const },

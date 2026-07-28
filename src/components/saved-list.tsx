@@ -27,7 +27,7 @@ export function SavedList({
   locale: Locale;
 }) {
   const t = useTranslations('saved');
-  const tm = useTranslations('market');
+  const tm = useTranslations('common');
   const { slugs, remove } = useSavedStories();
   const [ready, setReady] = useState(false);
 

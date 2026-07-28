@@ -11,7 +11,6 @@
     "oilGas": "Oil & Gas",
     "power": "Power",
     "renewables": "Renewables",
-    "markets": "Markets",
     "more": "More",
     "projects": "Projects",
     "hydrogen": "Hydrogen",
@@ -104,20 +103,6 @@
     "recommendedTitle": "Recommended for you",
     "viewAll": "View all",
     "whyItMatters": "Why this matters to Saudi energy"
-  },
-  "market": {
-    "stripLabel": "Energy market indicators",
-    "sampleData": "Sample data",
-    "sampleDataNotice": "All market values on this prototype are sample data, not live prices.",
-    "delayed": "Delayed {minutes} min",
-    "asOf": "As of {time} Riyadh",
-    "unit": "Unit",
-    "change": "Change",
-    "overviewTitle": "Market overview",
-    "overviewIntro": "Benchmark prices, energy equities and currency references relevant to Saudi energy.",
-    "up": "up",
-    "down": "down",
-    "flat": "unchanged"
   },
   "article": {
     "publishedAt": "Published",
@@ -273,7 +258,7 @@
     "editions": "Editions",
     "languages": "Languages",
     "rights": "© {year} Saudi Energy News. All rights reserved.",
-    "prototypeNotice": "Front-end prototype. Stories and market data shown here are sample content except where a source is cited."
+    "prototypeNotice": "Front-end prototype. Stories shown here are sample content except where a source is cited. The site carries no market data."
   },
   "common": {
     "loading": "Loading…",
@@ -288,6 +273,7 @@
     "empty": "Nothing here yet",
     "readMore": "Read more",
     "dismiss": "Dismiss",
-    "more": "More"
+    "more": "More",
+    "sampleData": "Sample data"
   }
 }

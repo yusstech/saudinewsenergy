@@ -1,7 +1,6 @@
 import { getTranslations } from 'next-intl/server';
 import { Link } from '@/i18n/navigation';
-import { formatNumber, formatMeasure, formatCurrency, formatDate } from '@/lib/format';
-import { MARKET_INDICATORS } from '@content/markets';
+import { formatMeasure, formatCurrency, formatDate } from '@/lib/format';
 import { PROJECTS } from '@content/projects';
 import { getStoriesBySector } from '@/lib/content';
 import { storyHref } from './story-card';
@@ -22,10 +21,8 @@ import type { Locale } from '@/i18n/config';
  */
 export async function SaudiDashboard({ locale }: { locale: Locale }) {
   const t = await getTranslations('home');
-  const tm = await getTranslations('market');
   const tp = await getTranslations('projects');
 
-  const brent = MARKET_INDICATORS.find((m) => m.id === 'brent');
   const featuredProject = PROJECTS[0];
   const policyStory =
     getStoriesBySector(locale, 'policy')[0] ?? getStoriesBySector(locale, 'power')[0];
@@ -46,26 +43,10 @@ export async function SaudiDashboard({ locale }: { locale: Locale }) {
           </div>
         </div>
 
-        <div className="grid gap-x-8 gap-y-6 sm:grid-cols-2 lg:grid-cols-4">
-          {brent && (
-            <Tile
-              label={brent.label[locale]}
-              badge={brent.isSample ? tm('sampleData') : undefined}
-              href="/markets"
-              foot={tm('delayed', { minutes: brent.delayMinutes })}
-            >
-              <p className="numeric text-[2rem] font-semibold leading-none">
-                {formatNumber(brent.value, locale, {
-                  minimumFractionDigits: 2,
-                  maximumFractionDigits: 2,
-                })}
-                <span className="ms-1.5 text-micro font-normal text-masthead-muted">
-                  {brent.unit}
-                </span>
-              </p>
-            </Tile>
-          )}
-
+        {/* Three tiles, not four. The fourth was a benchmark crude price we do not have a
+            licensed feed for — a placed number, however carefully labelled. A dashboard that
+            is one column narrower is a smaller claim, and a true one. */}
+        <div className="grid gap-x-8 gap-y-6 sm:grid-cols-2 lg:grid-cols-3">
           {featuredProject && (
             <Tile
               label={tp('title')}
@@ -125,27 +106,18 @@ export async function SaudiDashboard({ locale }: { locale: Locale }) {
 
 function Tile({
   label,
-  badge,
   href,
   foot,
   children,
 }: {
   label: string;
-  badge?: string;
   href: string;
   foot?: string;
   children: React.ReactNode;
 }) {
   return (
     <Link href={href} className="group block">
-      <div className="mb-2 flex items-center gap-2">
-        <span className="label text-masthead-muted">{label}</span>
-        {badge && (
-          <span className="label rounded-[2px] px-1 py-px text-copper-300 ring-1 ring-inset ring-white/20">
-            {badge}
-          </span>
-        )}
-      </div>
+      <span className="label mb-2 block text-masthead-muted">{label}</span>
       <div className="group-hover:text-copper-300">{children}</div>
       {foot && (
         <p className="numeric mt-1.5 text-micro text-masthead-muted">{foot}</p>
