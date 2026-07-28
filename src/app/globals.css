@@ -1,0 +1,303 @@
+@import 'tailwindcss';
+
+/*
+ * Saudi Energy News — design tokens
+ *
+ * Art direction: Saudi institutional authority meets a modern energy
+ * intelligence desk. Two rules govern colour here, and both are editorial
+ * rather than aesthetic:
+ *
+ * 1. **Status colour is reserved.** Red means Breaking, amber means
+ *    Developing, teal means Live, copper means a market move. These are never
+ *    used decoratively, because a reader who sees red on a routine story stops
+ *    trusting red on a real one.
+ *
+ * 2. **Green is a brand accent, not a subject.** Renewables and transition
+ *    stories get the same neutral treatment as oil and gas. Colouring every
+ *    climate story green is editorial judgement smuggled in as styling.
+ */
+
+@theme {
+  /* -- surfaces: warm sandstone light, deep charcoal dark ------------------ */
+  --color-sand-50: #faf8f4;
+  --color-sand-100: #f3efe7;
+  --color-sand-200: #e7e0d3;
+  --color-sand-300: #d4cab6;
+  --color-sand-400: #b3a68c;
+
+  --color-ink-400: #6b7280;
+  --color-ink-500: #4b5563;
+  --color-ink-600: #374151;
+  --color-ink-700: #252b36;
+  --color-ink-800: #191d26;
+  --color-ink-900: #10131a;
+  --color-ink-950: #0a0c11;
+
+  /* -- brand: restrained Saudi green -------------------------------------- */
+  --color-brand-400: #3aa06a;
+  --color-brand-500: #1f7a4c;
+  --color-brand-600: #17603c;
+  --color-brand-700: #114a2e;
+
+  /* -- data emphasis: copper / desert gold --------------------------------- */
+  --color-copper-300: #e0a878;
+  --color-copper-400: #c9814a;
+  --color-copper-500: #a86435;
+
+  /* -- reserved status colours -------------------------------------------- */
+  --color-breaking: #c8322b;
+  --color-breaking-soft: #f6e3e1;
+  --color-developing: #b7791f;
+  --color-developing-soft: #f8eeda;
+  --color-live: #0f8a91;
+  --color-live-soft: #dcf0f1;
+  --color-market: #a86435;
+  --color-market-soft: #f5e7da;
+
+  /* -- semantic surfaces (remapped under dark) ---------------------------- */
+  --color-canvas: var(--color-sand-50);
+  --color-surface: #ffffff;
+  --color-surface-sunken: var(--color-sand-100);
+  --color-line: var(--color-sand-200);
+  --color-line-strong: var(--color-sand-300);
+  --color-body: var(--color-ink-800);
+  --color-muted: var(--color-ink-500);
+  --color-faint: var(--color-ink-400);
+
+  /* -- type --------------------------------------------------------------- */
+  --font-sans:
+    var(--font-inter), ui-sans-serif, system-ui, -apple-system, 'Segoe UI',
+    sans-serif;
+  --font-arabic:
+    var(--font-ibm-arabic), 'IBM Plex Sans Arabic', 'Noto Sans Arabic',
+    'Geeza Pro', sans-serif;
+  --font-serif: 'Iowan Old Style', 'Palatino Linotype', Georgia, serif;
+  --font-mono: ui-monospace, 'SF Mono', 'JetBrains Mono', monospace;
+
+  /* Tabular data must line up in both directions. */
+  --font-numeric: var(--font-mono);
+
+  --spacing-gutter: 1.25rem;
+  --radius-card: 0.25rem;
+  --shadow-card: 0 1px 2px rgb(16 19 26 / 0.06), 0 1px 8px rgb(16 19 26 / 0.04);
+}
+
+@media (prefers-color-scheme: dark) {
+  @theme {
+    --color-canvas: var(--color-ink-950);
+    --color-surface: var(--color-ink-900);
+    --color-surface-sunken: var(--color-ink-800);
+    --color-line: var(--color-ink-700);
+    --color-line-strong: var(--color-ink-600);
+    --color-body: var(--color-sand-100);
+    --color-muted: #9aa3b2;
+    --color-faint: #7b8493;
+    --color-breaking-soft: #3a1614;
+    --color-developing-soft: #33260f;
+    --color-live-soft: #0d2f31;
+    --color-market-soft: #33210f;
+  }
+}
+
+/* ---------------------------------------------------------------- base ---- */
+
+:root {
+  color-scheme: light dark;
+}
+
+html {
+  background: var(--color-canvas);
+  color: var(--color-body);
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-sans);
+  min-height: 100dvh;
+  /* Reader-controlled text size on articles scales from here. */
+  font-size: var(--reader-font-size, 1rem);
+}
+
+/*
+ * Arabic is a first-class product, not a translation layer, so it gets its own
+ * family and a slightly larger optical size — Arabic letterforms read smaller
+ * than Latin at the same nominal size, and matching the number rather than the
+ * appearance is how bilingual sites end up with a cramped Arabic edition.
+ */
+[lang='ar'],
+[lang='ar-SA'] {
+  font-family: var(--font-arabic);
+  font-size: 1.05em;
+  line-height: 1.85;
+}
+
+/*
+ * Direction is handled with logical properties everywhere in this codebase —
+ * `margin-inline-start`, not `margin-left`. The few things that genuinely have
+ * a physical direction (a chevron that must point *forward*) are mirrored
+ * explicitly below rather than special-cased at each call site.
+ */
+[dir='rtl'] .mirror-in-rtl {
+  transform: scaleX(-1);
+}
+
+/* Latin numerals in Arabic copy still need LTR runs to render correctly. */
+.numeric {
+  font-family: var(--font-numeric);
+  font-variant-numeric: tabular-nums;
+  direction: ltr;
+  unicode-bidi: isolate;
+}
+
+:where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
+  outline: 2px solid var(--color-brand-500);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+::selection {
+  background: var(--color-brand-500);
+  color: #fff;
+}
+
+/* Wide content scrolls inside its own box; the page never scrolls sideways. */
+.scroll-x {
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scrollbar-width: thin;
+}
+
+/* --------------------------------------------------------------- motion --- */
+
+/*
+ * "Controlled urgency" means motion signals liveness, never demands attention.
+ * Both the ribbon and the market strip pause on hover *and* keyboard focus —
+ * a keyboard reader must be able to stop a moving element to read it, which is
+ * the whole reason WCAG 2.2.2 exists.
+ */
+@keyframes marquee-inline {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee-track {
+  animation: marquee-inline var(--marquee-duration, 90s) linear infinite;
+  will-change: transform;
+}
+
+[dir='rtl'] .marquee-track {
+  animation-direction: reverse;
+}
+
+.marquee:hover .marquee-track,
+.marquee:focus-within .marquee-track,
+.marquee[data-paused='true'] .marquee-track {
+  animation-play-state: paused;
+}
+
+@keyframes live-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}
+
+.live-dot {
+  animation: live-pulse 2.4s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  /* Stopping the animation must not hide the content it was carrying. */
+  .marquee-track {
+    animation: none !important;
+    transform: none !important;
+  }
+}
+
+/* -------------------------------------------------------------- article --- */
+
+.prose-article {
+  font-size: 1.0625rem;
+  line-height: 1.75;
+  max-width: 68ch;
+}
+
+.prose-article > * + * {
+  margin-block-start: 1.15em;
+}
+
+.prose-article h2 {
+  font-size: 1.375rem;
+  font-weight: 650;
+  line-height: 1.3;
+  margin-block-start: 2em;
+  letter-spacing: -0.01em;
+}
+
+.prose-article h3 {
+  font-size: 1.125rem;
+  font-weight: 650;
+  margin-block-start: 1.6em;
+}
+
+.prose-article a {
+  color: var(--color-brand-500);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  text-decoration-thickness: 1px;
+}
+
+.prose-article ul,
+.prose-article ol {
+  padding-inline-start: 1.4em;
+}
+
+.prose-article li + li {
+  margin-block-start: 0.4em;
+}
+
+.prose-article ul {
+  list-style: disc;
+}
+
+.prose-article ol {
+  list-style: decimal;
+}
+
+.prose-article blockquote {
+  border-inline-start: 3px solid var(--color-copper-400);
+  padding-inline-start: 1em;
+  font-size: 1.1em;
+  color: var(--color-muted);
+}
+
+/* Reader text-size control, set on <html> by the article toolbar. */
+html[data-reader-size='large'] .prose-article {
+  font-size: 1.1875rem;
+}
+
+html[data-reader-size='xlarge'] .prose-article {
+  font-size: 1.3125rem;
+}
+
+@media print {
+  .no-print {
+    display: none !important;
+  }
+}

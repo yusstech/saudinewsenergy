@@ -1,0 +1,103 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540" role="img" aria-labelledby="t d">
+  <title id="t">Optical ground wire position on a 380 kV double-circuit tower</title>
+  <desc id="d">A lattice transmission tower carrying two circuits of three phase conductors on crossarms, with an optical ground wire at the shield wire position above them at the peak of the structure.</desc>
+
+  <style>
+    .bg   { fill: #faf8f4; }
+    .steel{ stroke: #4b5563; stroke-width: 2.2; fill: none; stroke-linecap: round; }
+    .lat  { stroke: #9aa3b2; stroke-width: 1.1; fill: none; }
+    .cond { stroke: #374151; stroke-width: 3.4; fill: none; stroke-linecap: round; }
+    .opgw { stroke: #a86435; stroke-width: 3.8; fill: none; stroke-linecap: round; }
+    .ins  { stroke: #6b7280; stroke-width: 1.6; fill: none; }
+    .lbl  { font: 500 15px/1.3 ui-sans-serif, system-ui, sans-serif; fill: #374151; }
+    .lbl-em { font: 700 16px/1.3 ui-sans-serif, system-ui, sans-serif; fill: #a86435; }
+    .lbl-sm { font: 400 12.5px/1.3 ui-sans-serif, system-ui, sans-serif; fill: #6b7280; }
+    .lead { stroke: #b3a68c; stroke-width: 1.2; stroke-dasharray: 4 3; fill: none; }
+    .ground { stroke: #b3a68c; stroke-width: 2; fill: none; }
+    .dot { fill: #a86435; }
+    @media (prefers-color-scheme: dark) {
+      .bg   { fill: #10131a; }
+      .steel{ stroke: #9aa3b2; }
+      .lat  { stroke: #4b5563; }
+      .cond { stroke: #cbd2dc; }
+      .opgw { stroke: #e0a878; }
+      .ins  { stroke: #7b8493; }
+      .lbl  { fill: #e7e0d3; }
+      .lbl-em { fill: #e0a878; }
+      .lbl-sm { fill: #9aa3b2; }
+      .lead { stroke: #4b5563; }
+      .ground { stroke: #4b5563; }
+      .dot { fill: #e0a878; }
+    }
+  </style>
+
+  <rect class="bg" width="960" height="540"/>
+
+  <!-- ground -->
+  <path class="ground" d="M120 486h720"/>
+
+  <!-- tower body: two legs tapering to the mast -->
+  <g transform="translate(480 0)">
+    <path class="steel" d="M-78 486 L-26 214 M78 486 L26 214"/>
+    <path class="steel" d="M-26 214 L-20 96 M26 214 L20 96"/>
+    <path class="steel" d="M-20 96 L0 52 M20 96 L0 52"/>
+
+    <!-- lattice bracing -->
+    <g class="lat">
+      <path d="M-70 442 L70 442 M-62 398 L62 398 M-54 354 L54 354 M-46 310 L46 310 M-38 266 L38 266 M-26 214 L26 214 M-23 155 L23 155"/>
+      <path d="M-70 442 L-54 354 M70 442 L54 354 M-54 354 L-38 266 M54 354 L38 266 M-38 266 L-26 214 M38 266 L26 214"/>
+      <path d="M-70 442 L54 354 M70 442 L-54 354 M-54 354 L38 266 M54 354 L-38 266"/>
+      <path d="M-26 214 L23 155 M26 214 L-23 155 M-23 155 L20 96 M23 155 L-20 96"/>
+    </g>
+
+    <!-- crossarms: three levels, both circuits -->
+    <path class="steel" d="M-186 190 L186 190 M-160 138 L160 138 M-134 88 L134 88"/>
+    <g class="lat">
+      <path d="M-186 190 L-24 205 M186 190 L24 205 M-160 138 L-22 152 M160 138 L22 152 M-134 88 L-19 100 M134 88 L19 100"/>
+    </g>
+
+    <!-- insulator strings + phase conductors, circuit A (left) and B (right) -->
+    <g>
+      <path class="ins" d="M-176 190 v26 M-150 138 v26 M-124 88 v26"/>
+      <path class="ins" d="M176 190 v26 M150 138 v26 M124 88 v26"/>
+      <circle cx="-176" cy="220" r="4" fill="#374151"/>
+      <circle cx="-150" cy="168" r="4" fill="#374151"/>
+      <circle cx="-124" cy="118" r="4" fill="#374151"/>
+      <circle cx="176" cy="220" r="4" fill="#374151"/>
+      <circle cx="150" cy="168" r="4" fill="#374151"/>
+      <circle cx="124" cy="118" r="4" fill="#374151"/>
+    </g>
+
+    <!-- conductors sagging away to next towers -->
+    <path class="cond" d="M-460 196 Q-318 250 -176 220"/>
+    <path class="cond" d="M-460 144 Q-318 198 -150 168"/>
+    <path class="cond" d="M-460 94  Q-318 148 -124 118"/>
+    <path class="cond" d="M460 196 Q318 250 176 220"/>
+    <path class="cond" d="M460 144 Q318 198 150 168"/>
+    <path class="cond" d="M460 94  Q318 148 124 118"/>
+
+    <!-- OPGW at the peak, above everything -->
+    <path class="opgw" d="M-460 38 Q-230 74 0 52 Q230 74 460 38"/>
+    <circle class="dot" cx="0" cy="52" r="5"/>
+  </g>
+
+  <!-- annotations -->
+  <path class="lead" d="M486 46 L700 30"/>
+  <text class="lbl-em" x="706" y="27">Optical ground wire (OPGW)</text>
+  <text class="lbl-sm" x="706" y="46">Shield-wire position — earthing, lightning</text>
+  <text class="lbl-sm" x="706" y="62">protection, and optical fibres at the core</text>
+
+  <path class="lead" d="M660 122 L760 108"/>
+  <text class="lbl" x="766" y="112">Phase conductors</text>
+  <text class="lbl-sm" x="766" y="130">Two circuits, six conductors</text>
+
+  <path class="lead" d="M300 224 L214 262"/>
+  <text class="lbl" x="52" y="266">Insulator strings</text>
+
+  <path class="lead" d="M420 400 L338 418"/>
+  <text class="lbl" x="52" y="422">279 steel towers</text>
+  <text class="lbl-sm" x="52" y="440">across the Al Jouf route</text>
+
+  <text class="lbl-sm" x="120" y="512">Schematic. Not to scale.</text>
+  <text class="lbl-sm" x="840" y="512" text-anchor="end">Saudi Energy News</text>
+</svg>

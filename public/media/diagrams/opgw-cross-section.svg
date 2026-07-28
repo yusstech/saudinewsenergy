@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 460" width="960" height="460" role="img" aria-labelledby="t d">
+  <title id="t">Cross-section of an optical ground wire cable</title>
+  <desc id="d">A circular cross-section showing an outer layer of aluminium-clad steel wires, an aluminium tube beneath it, and optical fibres held in a gel-filled core.</desc>
+
+  <style>
+    .bg    { fill: #faf8f4; }
+    .steelw{ fill: #d4cab6; stroke: #b3a68c; stroke-width: 1.4; }
+    .tube  { fill: #e7e0d3; stroke: #b3a68c; stroke-width: 1.8; }
+    .gel   { fill: #f3efe7; stroke: #c9814a; stroke-width: 1.6; }
+    .fibre { fill: #a86435; }
+    .fibre-alt { fill: #1f7a4c; }
+    .lbl   { font: 500 15px/1.3 ui-sans-serif, system-ui, sans-serif; fill: #374151; }
+    .lbl-sm{ font: 400 12.5px/1.3 ui-sans-serif, system-ui, sans-serif; fill: #6b7280; }
+    .lead  { stroke: #b3a68c; stroke-width: 1.2; stroke-dasharray: 4 3; fill: none; }
+    .role  { font: 700 12px/1.3 ui-sans-serif, system-ui, sans-serif; letter-spacing: .08em; }
+    .role-e{ fill: #4b5563; }
+    .role-o{ fill: #a86435; }
+    @media (prefers-color-scheme: dark) {
+      .bg    { fill: #10131a; }
+      .steelw{ fill: #374151; stroke: #4b5563; }
+      .tube  { fill: #252b36; stroke: #4b5563; }
+      .gel   { fill: #191d26; stroke: #c9814a; }
+      .fibre { fill: #e0a878; }
+      .fibre-alt { fill: #3aa06a; }
+      .lbl   { fill: #e7e0d3; }
+      .lbl-sm{ fill: #9aa3b2; }
+      .lead  { stroke: #4b5563; }
+      .role-e{ fill: #9aa3b2; }
+      .role-o{ fill: #e0a878; }
+    }
+  </style>
+
+  <rect class="bg" width="960" height="460"/>
+
+  <g transform="translate(300 230)">
+    <!-- outer stranded layer -->
+    <circle cx="0" cy="0" r="150" fill="none" stroke="none"/>
+    <g class="steelw">
+      <circle cx="0" cy="-128" r="21"/><circle cx="52" cy="-117" r="21"/>
+      <circle cx="95" cy="-86" r="21"/><circle cx="124" cy="-42" r="21"/>
+      <circle cx="128" cy="10" r="21"/><circle cx="108" cy="58" r="21"/>
+      <circle cx="70" cy="94" r="21"/><circle cx="20" cy="113" r="21"/>
+      <circle cx="-32" cy="110" r="21"/><circle cx="-79" cy="87" r="21"/>
+      <circle cx="-114" cy="49" r="21"/><circle cx="-128" cy="0" r="21"/>
+      <circle cx="-119" cy="-50" r="21"/><circle cx="-88" cy="-93" r="21"/>
+      <circle cx="-45" cy="-120" r="21"/>
+    </g>
+
+    <!-- aluminium tube -->
+    <circle class="tube" cx="0" cy="0" r="86"/>
+    <!-- gel-filled core -->
+    <circle class="gel" cx="0" cy="0" r="56"/>
+
+    <!-- optical fibres -->
+    <g>
+      <circle class="fibre" cx="0" cy="-30" r="7"/>
+      <circle class="fibre" cx="26" cy="-15" r="7"/>
+      <circle class="fibre" cx="26" cy="15" r="7"/>
+      <circle class="fibre" cx="0" cy="30" r="7"/>
+      <circle class="fibre" cx="-26" cy="15" r="7"/>
+      <circle class="fibre" cx="-26" cy="-15" r="7"/>
+      <circle class="fibre-alt" cx="0" cy="0" r="7"/>
+    </g>
+  </g>
+
+  <!-- callouts -->
+  <path class="lead" d="M420 118 L560 96"/>
+  <text class="lbl" x="566" y="100">Aluminium-clad steel wires</text>
+  <text class="lbl-sm" x="566" y="118">Mechanical strength, earth path, and the</text>
+  <text class="lbl-sm" x="566" y="134">surface a lightning strike terminates on</text>
+
+  <path class="lead" d="M372 206 L560 190"/>
+  <text class="lbl" x="566" y="194">Aluminium tube</text>
+  <text class="lbl-sm" x="566" y="212">Protects the core from crushing and heat</text>
+
+  <path class="lead" d="M346 262 L560 274"/>
+  <text class="lbl" x="566" y="278">Gel-filled core with optical fibres</text>
+  <text class="lbl-sm" x="566" y="296">Carries teleprotection signals, SCADA data,</text>
+  <text class="lbl-sm" x="566" y="312">alarms and control traffic between substations</text>
+
+  <!-- the two jobs -->
+  <g transform="translate(566 360)">
+    <rect x="0" y="0" width="176" height="30" rx="3" fill="none" stroke="#b3a68c" stroke-width="1.2"/>
+    <text class="role role-e" x="12" y="20">ELECTRICAL PROTECTION</text>
+    <rect x="188" y="0" width="150" height="30" rx="3" fill="none" stroke="#c9814a" stroke-width="1.2"/>
+    <text class="role role-o" x="200" y="20">COMMUNICATIONS</text>
+  </g>
+  <text class="lbl-sm" x="566" y="416">One cable, two jobs, one corridor.</text>
+
+  <text class="lbl-sm" x="60" y="432">Schematic. Strand and fibre counts vary by cable design.</text>
+  <text class="lbl-sm" x="900" y="432" text-anchor="end">Saudi Energy News</text>
+</svg>
