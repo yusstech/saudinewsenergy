@@ -77,6 +77,22 @@ export default async function LocaleLayout({
       className={fontVariables}
       suppressHydrationWarning
     >
+      <head>
+        {/*
+          Replays a saved theme choice before first paint.
+
+          It has to be inline and synchronous in <head>: anything deferred runs after the
+          browser has already painted, so a reader who chose dark would see a white flash on
+          every navigation. Light is the default and is stored as the absence of the
+          attribute, so this only ever *adds* dark — there is nothing to remove and no work
+          on the common path.
+        */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `try{if(localStorage.getItem('sen_theme')==='dark')document.documentElement.dataset.theme='dark'}catch(e){}`,
+          }}
+        />
+      </head>
       <body className="flex min-h-dvh flex-col bg-canvas text-body antialiased">
         <script
           type="application/ld+json"

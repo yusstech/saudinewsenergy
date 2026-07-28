@@ -120,6 +120,12 @@ via Noto Naskh Arabic for headlines and IBM Plex Sans Arabic for UI — Arabic h
 Naskh is its authority register, so pairing it with a Latin serif is what makes "equal products"
 true at the level readers feel.
 
+**Light is the default for everyone.** The site deliberately does *not* follow
+`prefers-color-scheme`: a reader whose laptop is dark for their editor has expressed a
+preference about applications, not about the newspaper they just opened, and a newsroom that
+answers by turning black reads as a terminal. Dark is available from the masthead toggle,
+stored in `localStorage` and replayed by an inline script before first paint.
+
 **Chrome is two bands** — masthead, then a sticky nav — with a static market rail and a
 *conditional* breaking alert below. It was six stacked bands and two competing marquees; a
 reader now meets ~155px before the first headline instead of ~290px, and nothing moves except

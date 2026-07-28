@@ -130,47 +130,51 @@
 }
 
 /*
- * Dark: its own art direction.
+ * Dark: opt-in, and its own art direction.
  *
- * Not an inversion. The ground is warm near-black rather than blue-black, surfaces *lift*
- * toward the viewer instead of darkening, and the status hues are re-picked — the light-mode
- * red and teal are too dark to carry on a black ground, so they brighten and desaturate.
+ * Not an inversion — the ground is warm near-black rather than blue-black, surfaces *lift*
+ * toward the viewer, and the status hues are re-picked because the light-mode red and teal are
+ * too dark to carry on black.
  *
- * Note this is a plain `:root` rule, not a second `@theme`. Tailwind hoists `@theme` blocks out
- * of any at-rule wrapping them, so a `@theme` nested in `@media` is not conditional at all — it
- * applies always, and the site ships permanently dark with a light palette nobody ever sees.
- * `@theme` emits `:root` custom properties, so overriding those same properties in a later
- * `:root` rule is what actually makes the theme switch.
+ * Following `prefers-color-scheme` sounds correct and is wrong for a newspaper. A reader whose
+ * laptop is set to dark because of their editor or their phone at night has expressed a
+ * preference about *applications*, not about the publication they just opened — and a newsroom
+ * that greets them with a black page reads as a terminal, not as a paper. Print has an answer
+ * to this and it is always the same one: ink on paper.
+ *
+ * So light is the default for everyone, and dark is available to anyone who asks for it via the
+ * masthead toggle. The `[data-theme]` attribute is written by that toggle and set before paint
+ * by the inline script in the layout, so a returning reader never sees a flash of the theme
+ * they didn't choose.
  */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --color-canvas: #0d0c0b;
-    --color-surface: #161513;
-    --color-surface-sunken: #100f0e;
-    --color-surface-raised: #1d1b18;
-    --color-masthead: #000000;
-    --color-masthead-fg: var(--color-sand-100);
-    --color-masthead-muted: #8a8478;
-    --color-line: #26241f;
-    --color-line-strong: #35322c;
-    --color-rule: var(--color-sand-300);
-    --color-body: #e8e2d6;
-    --color-strong: #fbf8f2;
-    --color-muted: #a49d90;
-    --color-faint: #837d72;
-    --color-accent: var(--color-copper-300);
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --color-canvas: #0d0c0b;
+  --color-surface: #161513;
+  --color-surface-sunken: #100f0e;
+  --color-surface-raised: #1d1b18;
+  --color-masthead: #000000;
+  --color-masthead-fg: var(--color-sand-100);
+  --color-masthead-muted: #8a8478;
+  --color-line: #26241f;
+  --color-line-strong: #35322c;
+  --color-rule: var(--color-sand-300);
+  --color-body: #e8e2d6;
+  --color-strong: #fbf8f2;
+  --color-muted: #a49d90;
+  --color-faint: #837d72;
+  --color-accent: var(--color-copper-300);
 
-    --color-breaking: #e8635a;
-    --color-breaking-soft: #2e1512;
-    --color-developing: #d69a3c;
-    --color-developing-soft: #2b2010;
-    --color-live: #3fb3ba;
-    --color-live-soft: #0d2628;
-    --color-market: #dcaa79;
-    --color-market-soft: #2a1d10;
+  --color-breaking: #e8635a;
+  --color-breaking-soft: #2e1512;
+  --color-developing: #d69a3c;
+  --color-developing-soft: #2b2010;
+  --color-live: #3fb3ba;
+  --color-live-soft: #0d2628;
+  --color-market: #dcaa79;
+  --color-market-soft: #2a1d10;
 
-    --shadow-raise: 0 1px 2px rgb(0 0 0 / 0.5), 0 8px 24px -12px rgb(0 0 0 / 0.7);
-  }
+  --shadow-raise: 0 1px 2px rgb(0 0 0 / 0.5), 0 8px 24px -12px rgb(0 0 0 / 0.7);
 }
 
 /* ------------------------------------------------------------------ base -- */
@@ -185,7 +189,7 @@
  * utilities at all. Plain custom properties, no namespace, no collision.
  */
 :root {
-  color-scheme: light dark;
+  color-scheme: light;
   --gutter: clamp(1rem, 0.5rem + 2vw, 2.5rem);
   --space-section: clamp(2.5rem, 1.5rem + 3vw, 4.5rem);
   --space-block: clamp(1.5rem, 1rem + 1.5vw, 2.5rem);

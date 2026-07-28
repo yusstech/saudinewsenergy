@@ -38,6 +38,20 @@ the sourced ones.
 
 ## Photography — `photos/`
 
+### `transmission-corridor-dusk.jpg` — article hero
+
+- **Depicts:** a high-voltage transmission corridor at sunset, lattice towers receding
+  in a line across flat open terrain.
+- **Author:** Matthew Henry (`matthewhenry`)
+- **Licence:** [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) — public
+  domain dedication; no attribution required, credited anyway
+- **Source:** [Unsplash](https://unsplash.com/photos/yETqkLnhsUI), mirrored on
+  [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Matthew_Henry_2016-09-08_(Unsplash).jpg)
+- **Modifications:** resized from 5637px to 1800px on the long edge. No crop, no retouching.
+- **Illustrative:** **yes.** Not the Al Jouf line, not Saudi Arabia. Chosen because it shows a
+  long tower run across flat terrain — the shape of the corridor the story describes — and
+  because the shield wire is visible above the phase conductors, which is the article's subject.
+
 ### `opgw-temporary-ground.jpg`
 
 - **Depicts:** a temporary grounding point clamped to an optical ground wire

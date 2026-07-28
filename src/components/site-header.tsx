@@ -3,6 +3,7 @@ import { Link } from '@/i18n/navigation';
 import { LocaleEditionControls } from './locale-edition-controls';
 import { MobileMenu } from './mobile-menu';
 import { Wordmark } from './wordmark';
+import { ThemeToggle } from './theme-toggle';
 import { PRIMARY_SECTORS, MORE_SECTORS } from '@content/taxonomy';
 import { formatDate, formatTime } from '@/lib/format';
 import type { Locale, Edition } from '@/i18n/config';
@@ -82,6 +83,9 @@ export async function SiteHeader({
             >
               <SearchIcon />
             </Link>
+            <div className="text-masthead-fg">
+              <ThemeToggle onDark />
+            </div>
             <MobileMenu />
           </div>
         </div>

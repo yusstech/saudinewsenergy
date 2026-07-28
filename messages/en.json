@@ -43,7 +43,9 @@
     "changeEdition": "Change edition",
     "changeLanguage": "Change language",
     "editionExplainer": "Edition sets which regional coverage appears alongside Saudi reporting. It does not change the language.",
-    "languageExplainer": "Language sets the interface and story language. It does not change your edition."
+    "languageExplainer": "Language sets the interface and story language. It does not change your edition.",
+    "themeDark": "Switch to dark",
+    "themeLight": "Switch to light"
   },
   "edition": {
     "saudi": "Saudi Arabia",
