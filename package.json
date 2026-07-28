@@ -2,10 +2,9 @@
   "name": "saudienergynews",
   "version": "0.1.0",
   "private": true,
-  "description": "Saudi Energy News — Saudi Arabia's live energy newsroom (Arabic/English)",
-  "packageManager": "pnpm@9.12.3",
+  "description": "Saudi Energy News \u2014 Saudi Arabia's live energy newsroom (Arabic/English)",
   "engines": {
-    "node": ">=20"
+    "node": "22.x"
   },
   "scripts": {
     "dev": "next dev",
