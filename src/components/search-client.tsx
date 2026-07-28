@@ -72,45 +72,45 @@ export function SearchClient({
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder={t('placeholder')}
-          className="w-full rounded-sm border border-[--color-line-strong] bg-[--color-surface] px-3 py-2.5 text-base"
+          className="w-full rounded-sm border border-line-strong bg-surface px-3 py-2.5 text-base"
           autoComplete="off"
           autoFocus
         />
       </form>
 
       <section>
-        <div className="mb-3 flex items-baseline justify-between gap-4 border-b border-[--color-line] pb-1.5">
+        <div className="mb-3 flex items-baseline justify-between gap-4 border-b border-line pb-1.5">
           <h2 className="text-sm font-bold uppercase tracking-wider">
             {t('keywordTitle')}
           </h2>
           {typed && (
-            <p className="text-sm text-[--color-muted]" aria-live="polite">
+            <p className="text-sm text-muted" aria-live="polite">
               {t('resultCount', { count: results.length })}
             </p>
           )}
         </div>
 
         {!typed ? (
-          <p className="py-8 text-sm text-[--color-faint]">{t('placeholder')}</p>
+          <p className="py-8 text-sm text-faint">{t('placeholder')}</p>
         ) : results.length === 0 ? (
           <div className="py-8">
-            <p className="font-medium text-[--color-muted]">{t('noResults')}</p>
-            <p className="mt-1 text-sm text-[--color-faint]">{t('tryAgain')}</p>
+            <p className="font-medium text-muted">{t('noResults')}</p>
+            <p className="mt-1 text-sm text-faint">{t('tryAgain')}</p>
           </div>
         ) : (
-          <ul className="divide-y divide-[--color-line]">
+          <ul className="divide-y divide-line">
             {results.map((doc) => (
               <li key={doc.slug} className="py-3.5">
                 <div className="flex flex-wrap items-center gap-2">
-                  <span className="text-[0.6875rem] font-semibold uppercase tracking-wider text-[--color-muted]">
+                  <span className="text-[0.6875rem] font-semibold uppercase tracking-wider text-muted">
                     {sectorLabel(doc.sector as Sector, locale)}
                   </span>
                   {doc.isSampleContent && (
-                    <span className="rounded-sm bg-[--color-surface-sunken] px-1.5 py-0.5 text-[0.625rem] font-semibold uppercase tracking-wider text-[--color-muted] ring-1 ring-[--color-line-strong]">
+                    <span className="rounded-sm bg-surface-sunken px-1.5 py-0.5 text-[0.625rem] font-semibold uppercase tracking-wider text-muted ring-1 ring-line-strong">
                       {t('sampleLabel')}
                     </span>
                   )}
-                  <span className="numeric text-xs text-[--color-faint]">
+                  <span className="numeric text-xs text-faint">
                     {formatDate(doc.publishedAt, locale)}
                   </span>
                 </div>
@@ -119,7 +119,7 @@ export function SearchClient({
                     {doc.headline}
                   </Link>
                 </h3>
-                <p className="mt-0.5 line-clamp-2 text-sm text-[--color-muted]">
+                <p className="mt-0.5 line-clamp-2 text-sm text-muted">
                   {doc.standfirst}
                 </p>
               </li>

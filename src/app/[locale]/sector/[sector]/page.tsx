@@ -68,14 +68,14 @@ export default async function SectorPage({
         intro={entry.blurb[locale]}
       />
 
-      <div className="mx-auto max-w-[1440px] px-[--spacing-gutter] py-8">
+      <div className="mx-auto max-w-[1440px] px-[var(--gutter)] py-8">
         {!lead ? (
           <EmptyState title={tc('empty')} />
         ) : (
           <div className="space-y-10">
             <StoryCard story={lead} locale={locale} variant="lead" />
             {rest.length > 0 && (
-              <div className="grid gap-6 border-t border-[--color-line] pt-8 sm:grid-cols-2 lg:grid-cols-3">
+              <div className="grid gap-6 border-t border-line pt-8 sm:grid-cols-2 lg:grid-cols-3">
                 {rest.map((s) => (
                   <StoryCard key={s.slug} story={s} locale={locale} />
                 ))}

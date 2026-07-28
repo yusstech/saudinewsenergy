@@ -58,13 +58,13 @@ export function ProjectFilters({
   const dirty = region !== 'all' || sector !== 'all' || status !== 'all';
 
   const select =
-    'rounded-sm border border-[--color-line-strong] bg-[--color-surface] px-2.5 py-1.5 text-sm';
+    'rounded-sm border border-line-strong bg-surface px-2.5 py-1.5 text-sm';
 
   return (
     <>
       <div className="mb-6 flex flex-wrap items-end gap-3">
         <div>
-          <label htmlFor="f-region" className="block text-xs font-semibold uppercase tracking-wider text-[--color-muted]">
+          <label htmlFor="f-region" className="block text-xs font-semibold uppercase tracking-wider text-muted">
             {t('filterRegion')}
           </label>
           <select
@@ -83,7 +83,7 @@ export function ProjectFilters({
         </div>
 
         <div>
-          <label htmlFor="f-sector" className="block text-xs font-semibold uppercase tracking-wider text-[--color-muted]">
+          <label htmlFor="f-sector" className="block text-xs font-semibold uppercase tracking-wider text-muted">
             {t('filterSector')}
           </label>
           <select
@@ -102,7 +102,7 @@ export function ProjectFilters({
         </div>
 
         <div>
-          <label htmlFor="f-status" className="block text-xs font-semibold uppercase tracking-wider text-[--color-muted]">
+          <label htmlFor="f-status" className="block text-xs font-semibold uppercase tracking-wider text-muted">
             {t('filterStatus')}
           </label>
           <select
@@ -128,13 +128,13 @@ export function ProjectFilters({
               setSector('all');
               setStatus('all');
             }}
-            className="rounded-sm px-2.5 py-1.5 text-sm font-medium text-[--color-brand-500] hover:bg-[--color-surface-sunken]"
+            className="rounded-sm px-2.5 py-1.5 text-sm font-medium text-brand-500 hover:bg-surface-sunken"
           >
             {t('clearFilters')}
           </button>
         )}
 
-        <p className="ms-auto text-sm text-[--color-muted]" aria-live="polite">
+        <p className="ms-auto text-sm text-muted" aria-live="polite">
           {t('resultCount', { count: visible.length })}
         </p>
       </div>

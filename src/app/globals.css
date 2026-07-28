@@ -1,108 +1,194 @@
 @import 'tailwindcss';
 
 /*
- * Saudi Energy News — design tokens
+ * Saudi Energy News — design system
  *
- * Art direction: Saudi institutional authority meets a modern energy
- * intelligence desk. Two rules govern colour here, and both are editorial
- * rather than aesthetic:
+ * Art direction: Saudi institutional authority meets a modern energy intelligence desk.
  *
- * 1. **Status colour is reserved.** Red means Breaking, amber means
- *    Developing, teal means Live, copper means a market move. These are never
- *    used decoratively, because a reader who sees red on a routine story stops
- *    trusting red on a real one.
+ * The publication is read in daylight by people between meetings, so the canvas is warm paper
+ * and the ink is near-black. The charcoal is spent in one place — the masthead band — where it
+ * does the work of a masthead: it anchors the page and says this is a publication, not an app.
+ * Copper carries data and rules; it reads as desert and as instrumentation at the same time,
+ * which is the whole brief in one colour.
  *
- * 2. **Green is a brand accent, not a subject.** Renewables and transition
- *    stories get the same neutral treatment as oil and gas. Colouring every
- *    climate story green is editorial judgement smuggled in as styling.
+ * Three rules govern colour, and all three are editorial rather than decorative:
+ *
+ * 1. **Status colour is reserved.** Red means Breaking, amber Developing, teal Live, copper a
+ *    market move. Never decorative — a reader who sees red on a routine story stops trusting
+ *    red on a real one.
+ *
+ * 2. **Green is a brand accent, not a subject.** Renewables and transition stories get the same
+ *    neutral treatment as oil and gas. Colouring every climate story green is editorial
+ *    judgement smuggled in as styling.
+ *
+ * 3. **Dark is designed, not inverted.** The previous build flipped light tokens on
+ *    `prefers-color-scheme` and shipped a palette nobody had looked at. Dark here is its own
+ *    art direction: a warmer near-black, lifted surfaces for elevation, and status colours
+ *    re-tuned for a dark ground rather than reused from the light set.
  */
 
 @theme {
-  /* -- surfaces: warm sandstone light, deep charcoal dark ------------------ */
-  --color-sand-50: #faf8f4;
-  --color-sand-100: #f3efe7;
-  --color-sand-200: #e7e0d3;
-  --color-sand-300: #d4cab6;
-  --color-sand-400: #b3a68c;
+  /* ---------------------------------------------------------------- paper -- */
+  /* Warm sandstone. The hue is held constant across the ramp so tints of it read as the
+     same material lit differently, rather than as different greys. */
+  --color-sand-50: #fcfaf6;
+  --color-sand-100: #f7f3ec;
+  --color-sand-200: #efe9de;
+  --color-sand-300: #e2d9c9;
+  --color-sand-400: #cabfa9;
+  --color-sand-500: #a99c83;
 
-  --color-ink-400: #6b7280;
-  --color-ink-500: #4b5563;
-  --color-ink-600: #374151;
-  --color-ink-700: #252b36;
-  --color-ink-800: #191d26;
-  --color-ink-900: #10131a;
-  --color-ink-950: #0a0c11;
+  /* ------------------------------------------------------------------ ink -- */
+  /* Very slightly warm, so black text on sandstone doesn't read as a cold hole in the page. */
+  --color-ink-300: #8a8578;
+  --color-ink-400: #6f6a5e;
+  --color-ink-500: #55514a;
+  --color-ink-600: #3d3a35;
+  --color-ink-700: #2b2926;
+  --color-ink-800: #1c1b19;
+  --color-ink-900: #131211;
+  --color-ink-950: #0b0b0a;
 
-  /* -- brand: restrained Saudi green -------------------------------------- */
-  --color-brand-400: #3aa06a;
-  --color-brand-500: #1f7a4c;
-  --color-brand-600: #17603c;
-  --color-brand-700: #114a2e;
+  /* ---------------------------------------------------------------- brand -- */
+  --color-brand-400: #3f9d6b;
+  --color-brand-500: #1d7a4a;
+  --color-brand-600: #165c38;
+  --color-brand-700: #0f4429;
 
-  /* -- data emphasis: copper / desert gold --------------------------------- */
-  --color-copper-300: #e0a878;
-  --color-copper-400: #c9814a;
-  --color-copper-500: #a86435;
+  /* ------------------------------------------------------- copper / data -- */
+  --color-copper-200: #edd3b8;
+  --color-copper-300: #dcaa79;
+  --color-copper-400: #c2823f;
+  --color-copper-500: #9c6428;
+  --color-copper-600: #7c4e1e;
 
-  /* -- reserved status colours -------------------------------------------- */
-  --color-breaking: #c8322b;
-  --color-breaking-soft: #f6e3e1;
-  --color-developing: #b7791f;
-  --color-developing-soft: #f8eeda;
-  --color-live: #0f8a91;
+  /* ------------------------------------------------ reserved status hues -- */
+  --color-breaking: #b62a22;
+  --color-breaking-soft: #f9e6e3;
+  --color-developing: #a06a12;
+  --color-developing-soft: #faefda;
+  --color-live: #0d7f86;
   --color-live-soft: #dcf0f1;
-  --color-market: #a86435;
-  --color-market-soft: #f5e7da;
+  --color-market: #9c6428;
+  --color-market-soft: #f7e9d9;
 
-  /* -- semantic surfaces (remapped under dark) ---------------------------- */
+  /* ------------------------------------------------------ semantic layer -- */
+  /* Everything in the app references these, never the ramps above. One place to retheme. */
   --color-canvas: var(--color-sand-50);
   --color-surface: #ffffff;
   --color-surface-sunken: var(--color-sand-100);
+  --color-surface-raised: #ffffff;
+  --color-masthead: var(--color-ink-950);
+  --color-masthead-fg: var(--color-sand-100);
+  --color-masthead-muted: #9d968a;
   --color-line: var(--color-sand-200);
   --color-line-strong: var(--color-sand-300);
+  --color-rule: var(--color-ink-800);
   --color-body: var(--color-ink-800);
+  --color-strong: var(--color-ink-950);
   --color-muted: var(--color-ink-500);
   --color-faint: var(--color-ink-400);
+  --color-accent: var(--color-copper-500);
 
-  /* -- type --------------------------------------------------------------- */
+  /* ----------------------------------------------------------------- type -- */
+  --font-serif:
+    var(--font-newsreader), 'Iowan Old Style', Georgia, 'Times New Roman', serif;
   --font-sans:
-    var(--font-inter), ui-sans-serif, system-ui, -apple-system, 'Segoe UI',
-    sans-serif;
+    var(--font-inter), ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-naskh:
+    var(--font-naskh), 'Noto Naskh Arabic', 'Amiri', 'Traditional Arabic', serif;
   --font-arabic:
-    var(--font-ibm-arabic), 'IBM Plex Sans Arabic', 'Noto Sans Arabic',
-    'Geeza Pro', sans-serif;
-  --font-serif: 'Iowan Old Style', 'Palatino Linotype', Georgia, serif;
+    var(--font-ibm-arabic), 'IBM Plex Sans Arabic', 'Noto Sans Arabic', sans-serif;
   --font-mono: ui-monospace, 'SF Mono', 'JetBrains Mono', monospace;
 
-  /* Tabular data must line up in both directions. */
-  --font-numeric: var(--font-mono);
+  /* A real scale, so call sites stop inventing `text-2xl sm:text-3xl lg:text-[2.1rem]`.
+     Sizes are fluid: they interpolate with the viewport instead of stepping at breakpoints,
+     which is what keeps a lead headline commanding on a laptop and still readable on a phone. */
+  --text-display: clamp(2.25rem, 1.35rem + 3.6vw, 4rem);
+  --text-display--line-height: 1.04;
+  --text-lead: clamp(1.75rem, 1.2rem + 2.2vw, 2.75rem);
+  --text-lead--line-height: 1.1;
+  --text-headline: clamp(1.375rem, 1.1rem + 1.1vw, 1.875rem);
+  --text-headline--line-height: 1.18;
+  --text-subhead: clamp(1.125rem, 1rem + 0.5vw, 1.375rem);
+  --text-subhead--line-height: 1.28;
+  --text-title: 1.0625rem;
+  --text-title--line-height: 1.35;
+  --text-meta: 0.8125rem;
+  --text-meta--line-height: 1.4;
+  --text-micro: 0.6875rem;
+  --text-micro--line-height: 1.3;
+  /* No `--text-body`: `body` is already a colour key, and a name living in both the
+     `--color-*` and `--text-*` namespaces makes `text-body` ambiguous. */
 
-  --spacing-gutter: 1.25rem;
-  --radius-card: 0.25rem;
-  --shadow-card: 0 1px 2px rgb(16 19 26 / 0.06), 0 1px 8px rgb(16 19 26 / 0.04);
+  /* --------------------------------------------------------------- rhythm -- */
+  --container-page: 1360px;
+  --container-prose: 40rem;
+
+  --radius-card: 2px;
+  --shadow-raise: 0 1px 2px rgb(11 11 10 / 0.04), 0 8px 24px -12px rgb(11 11 10 / 0.10);
 }
 
+/*
+ * Dark: its own art direction.
+ *
+ * Not an inversion. The ground is warm near-black rather than blue-black, surfaces *lift*
+ * toward the viewer instead of darkening, and the status hues are re-picked — the light-mode
+ * red and teal are too dark to carry on a black ground, so they brighten and desaturate.
+ *
+ * Note this is a plain `:root` rule, not a second `@theme`. Tailwind hoists `@theme` blocks out
+ * of any at-rule wrapping them, so a `@theme` nested in `@media` is not conditional at all — it
+ * applies always, and the site ships permanently dark with a light palette nobody ever sees.
+ * `@theme` emits `:root` custom properties, so overriding those same properties in a later
+ * `:root` rule is what actually makes the theme switch.
+ */
 @media (prefers-color-scheme: dark) {
-  @theme {
-    --color-canvas: var(--color-ink-950);
-    --color-surface: var(--color-ink-900);
-    --color-surface-sunken: var(--color-ink-800);
-    --color-line: var(--color-ink-700);
-    --color-line-strong: var(--color-ink-600);
-    --color-body: var(--color-sand-100);
-    --color-muted: #9aa3b2;
-    --color-faint: #7b8493;
-    --color-breaking-soft: #3a1614;
-    --color-developing-soft: #33260f;
-    --color-live-soft: #0d2f31;
-    --color-market-soft: #33210f;
+  :root {
+    --color-canvas: #0d0c0b;
+    --color-surface: #161513;
+    --color-surface-sunken: #100f0e;
+    --color-surface-raised: #1d1b18;
+    --color-masthead: #000000;
+    --color-masthead-fg: var(--color-sand-100);
+    --color-masthead-muted: #8a8478;
+    --color-line: #26241f;
+    --color-line-strong: #35322c;
+    --color-rule: var(--color-sand-300);
+    --color-body: #e8e2d6;
+    --color-strong: #fbf8f2;
+    --color-muted: #a49d90;
+    --color-faint: #837d72;
+    --color-accent: var(--color-copper-300);
+
+    --color-breaking: #e8635a;
+    --color-breaking-soft: #2e1512;
+    --color-developing: #d69a3c;
+    --color-developing-soft: #2b2010;
+    --color-live: #3fb3ba;
+    --color-live-soft: #0d2628;
+    --color-market: #dcaa79;
+    --color-market-soft: #2a1d10;
+
+    --shadow-raise: 0 1px 2px rgb(0 0 0 / 0.5), 0 8px 24px -12px rgb(0 0 0 / 0.7);
   }
 }
 
-/* ---------------------------------------------------------------- base ---- */
+/* ------------------------------------------------------------------ base -- */
 
+/*
+ * Rhythm lives outside `@theme` on purpose.
+ *
+ * Tailwind mints utilities from every `--spacing-*` key, and a key named `block` produced an
+ * `inline-block` utility meaning `inline-size` — which collided head-on with the *display*
+ * utility of the same name and pinned every inline-block element on the site to one width.
+ * These three are only ever read through `var()`, so they have no business generating
+ * utilities at all. Plain custom properties, no namespace, no collision.
+ */
 :root {
   color-scheme: light dark;
+  --gutter: clamp(1rem, 0.5rem + 2vw, 2.5rem);
+  --space-section: clamp(2.5rem, 1.5rem + 3vw, 4.5rem);
+  --space-block: clamp(1.5rem, 1rem + 1.5vw, 2.5rem);
 }
 
 html {
@@ -113,51 +199,110 @@ html {
 
 body {
   font-family: var(--font-sans);
+  font-size: 1.0625rem;
   min-height: 100dvh;
-  /* Reader-controlled text size on articles scales from here. */
-  font-size: var(--reader-font-size, 1rem);
 }
 
 /*
- * Arabic is a first-class product, not a translation layer, so it gets its own
- * family and a slightly larger optical size — Arabic letterforms read smaller
- * than Latin at the same nominal size, and matching the number rather than the
- * appearance is how bilingual sites end up with a cramped Arabic edition.
+ * Arabic runs on its own pair.
+ *
+ * Naskh for the reporting voice, IBM Plex Sans Arabic for the interface — the same serif/sans
+ * division the Latin side gets. Arabic also needs a little more vertical room: its ascenders,
+ * descenders and diacritics collide at Latin line-heights, and a cramped Arabic edition is the
+ * usual tell that it was an afterthought.
  */
 [lang='ar'],
 [lang='ar-SA'] {
   font-family: var(--font-arabic);
-  font-size: 1.05em;
   line-height: 1.85;
 }
 
+[lang='ar'] .font-display,
+[lang='ar-SA'] .font-display {
+  font-family: var(--font-naskh);
+  line-height: 1.5;
+}
+
+/* ------------------------------------------------------------------ type -- */
+
 /*
- * Direction is handled with logical properties everywhere in this codebase —
- * `margin-inline-start`, not `margin-left`. The few things that genuinely have
- * a physical direction (a chevron that must point *forward*) are mirrored
- * explicitly below rather than special-cased at each call site.
+ * The editorial voice. Serif for anything a journalist wrote; sans for anything the system
+ * measured. `text-wrap: balance` stops a headline stranding one word on its own line, which is
+ * the single most common way an otherwise good masthead looks amateur.
+ */
+.font-display {
+  font-family: var(--font-serif);
+  font-optical-sizing: auto;
+  font-weight: 600;
+  letter-spacing: -0.012em;
+  text-wrap: balance;
+}
+
+
+/** Small caps label — desks, kickers, section eyebrows. */
+.label {
+  font-family: var(--font-sans);
+  font-size: var(--text-micro);
+  font-weight: 600;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+[lang='ar'] .label,
+[lang='ar-SA'] .label {
+  /* Arabic has no uppercase, and letter-spacing breaks its joins outright. */
+  text-transform: none;
+  letter-spacing: 0;
+  font-weight: 700;
+}
+
+/**
+ * Figures.
+ *
+ * Tabular so columns of capacities and prices align, and isolated LTR so a Latin numeral inside
+ * an Arabic sentence doesn't get reordered by the bidi algorithm — the classic way "110.21 km"
+ * renders as "km 110.21" in an RTL paragraph.
+ */
+.numeric {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: 'tnum';
+  direction: ltr;
+  unicode-bidi: isolate;
+  letter-spacing: -0.01em;
+}
+
+/* --------------------------------------------------------------- surface -- */
+
+.page {
+  margin-inline: auto;
+  max-width: var(--container-page);
+  padding-inline: var(--gutter);
+}
+
+/** A hairline. Physical-direction-free so it mirrors without thought in RTL. */
+.rule-hair {
+  border-block-start: 1px solid var(--color-line);
+}
+
+/*
+ * Layout is direction-agnostic everywhere via logical properties, but a few glyphs carry a
+ * genuine physical direction — an arrow that means "onward" has to point left in Arabic. Those
+ * are mirrored explicitly here rather than special-cased at each call site.
  */
 [dir='rtl'] .mirror-in-rtl {
   transform: scaleX(-1);
 }
 
-/* Latin numerals in Arabic copy still need LTR runs to render correctly. */
-.numeric {
-  font-family: var(--font-numeric);
-  font-variant-numeric: tabular-nums;
-  direction: ltr;
-  unicode-bidi: isolate;
-}
-
 :where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
-  outline: 2px solid var(--color-brand-500);
+  outline: 2px solid var(--color-accent);
   outline-offset: 2px;
   border-radius: 2px;
 }
 
 ::selection {
-  background: var(--color-brand-500);
-  color: #fff;
+  background: var(--color-ink-800);
+  color: var(--color-sand-50);
 }
 
 /* Wide content scrolls inside its own box; the page never scrolls sideways. */
@@ -167,45 +312,22 @@ body {
   scrollbar-width: thin;
 }
 
-/* --------------------------------------------------------------- motion --- */
+/* -------------------------------------------------------------- motion --- */
 
 /*
- * "Controlled urgency" means motion signals liveness, never demands attention.
- * Both the ribbon and the market strip pause on hover *and* keyboard focus —
- * a keyboard reader must be able to stop a moving element to read it, which is
- * the whole reason WCAG 2.2.2 exists.
+ * There is deliberately no marquee here any more.
+ *
+ * The previous build stacked two of them above the masthead. Moving text you cannot finish
+ * reading is worse than static text, and two moving at once is worse than one. What remains is
+ * the live pulse — a 2px dot, the smallest possible signal that coverage is running.
  */
-@keyframes marquee-inline {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
-}
-
-.marquee-track {
-  animation: marquee-inline var(--marquee-duration, 90s) linear infinite;
-  will-change: transform;
-}
-
-[dir='rtl'] .marquee-track {
-  animation-direction: reverse;
-}
-
-.marquee:hover .marquee-track,
-.marquee:focus-within .marquee-track,
-.marquee[data-paused='true'] .marquee-track {
-  animation-play-state: paused;
-}
-
 @keyframes live-pulse {
   0%,
   100% {
     opacity: 1;
   }
   50% {
-    opacity: 0.35;
+    opacity: 0.3;
   }
 }
 
@@ -222,54 +344,80 @@ body {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
-
-  /* Stopping the animation must not hide the content it was carrying. */
-  .marquee-track {
-    animation: none !important;
-    transform: none !important;
-  }
 }
 
-/* -------------------------------------------------------------- article --- */
+/* -------------------------------------------------------------- article -- */
 
+/*
+ * Article body in the serif, at a measure that stays comfortable.
+ *
+ * ~66 characters is the readable line; the container caps it rather than letting a wide
+ * viewport stretch paragraphs into something the eye loses its place in.
+ */
 .prose-article {
-  font-size: 1.0625rem;
-  line-height: 1.75;
-  max-width: 68ch;
+  font-family: var(--font-serif);
+  font-optical-sizing: auto;
+  font-size: 1.1875rem;
+  line-height: 1.68;
+  max-width: var(--container-prose);
+  color: var(--color-body);
+}
+
+[lang='ar'] .prose-article,
+[lang='ar-SA'] .prose-article {
+  font-family: var(--font-naskh);
+  font-size: 1.25rem;
+  line-height: 2;
 }
 
 .prose-article > * + * {
-  margin-block-start: 1.15em;
+  margin-block-start: 1.4em;
 }
 
 .prose-article h2 {
-  font-size: 1.375rem;
-  font-weight: 650;
-  line-height: 1.3;
-  margin-block-start: 2em;
+  font-family: var(--font-serif);
+  font-size: var(--text-subhead);
+  font-weight: 600;
+  line-height: 1.25;
   letter-spacing: -0.01em;
+  margin-block-start: 2.2em;
+  color: var(--color-strong);
+}
+
+[lang='ar'] .prose-article h2,
+[lang='ar-SA'] .prose-article h2 {
+  font-family: var(--font-naskh);
 }
 
 .prose-article h3 {
-  font-size: 1.125rem;
-  font-weight: 650;
-  margin-block-start: 1.6em;
+  font-family: var(--font-sans);
+  font-size: 0.9375rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  margin-block-start: 1.8em;
+  color: var(--color-muted);
 }
 
 .prose-article a {
-  color: var(--color-brand-500);
+  color: inherit;
   text-decoration: underline;
-  text-underline-offset: 0.2em;
+  text-decoration-color: var(--color-copper-400);
   text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+}
+
+.prose-article a:hover {
+  text-decoration-thickness: 2px;
 }
 
 .prose-article ul,
 .prose-article ol {
-  padding-inline-start: 1.4em;
+  padding-inline-start: 1.3em;
 }
 
 .prose-article li + li {
-  margin-block-start: 0.4em;
+  margin-block-start: 0.45em;
 }
 
 .prose-article ul {
@@ -280,20 +428,29 @@ body {
   list-style: decimal;
 }
 
+.prose-article li::marker {
+  color: var(--color-copper-400);
+}
+
 .prose-article blockquote {
-  border-inline-start: 3px solid var(--color-copper-400);
-  padding-inline-start: 1em;
-  font-size: 1.1em;
+  border-inline-start: 2px solid var(--color-copper-400);
+  padding-inline-start: 1.1em;
+  font-style: italic;
   color: var(--color-muted);
+}
+
+.prose-article strong {
+  font-weight: 700;
+  color: var(--color-strong);
 }
 
 /* Reader text-size control, set on <html> by the article toolbar. */
 html[data-reader-size='large'] .prose-article {
-  font-size: 1.1875rem;
+  font-size: 1.3125rem;
 }
 
 html[data-reader-size='xlarge'] .prose-article {
-  font-size: 1.3125rem;
+  font-size: 1.4375rem;
 }
 
 @media print {

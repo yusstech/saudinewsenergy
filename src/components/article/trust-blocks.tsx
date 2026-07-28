@@ -26,15 +26,15 @@ export async function Takeaways({ items }: { items: string[] }) {
   const t = await getTranslations('article');
 
   return (
-    <aside className="my-8 rounded-sm border-s-2 border-[--color-copper-400] bg-[--color-surface] p-5">
-      <h2 className="text-sm font-bold uppercase tracking-wider text-[--color-copper-500] dark:text-[--color-copper-300]">
+    <aside className="my-10 border-s-2 border-copper-400 bg-surface-sunken p-6">
+      <h2 className="label text-copper-500 dark:text-copper-300">
         {t('takeaways')}
       </h2>
       <ul className="mt-3 space-y-2.5">
         {items.map((item, i) => (
-          <li key={i} className="flex gap-3 text-[0.9375rem] leading-relaxed">
+          <li key={i} className="flex gap-3 text-[1rem] leading-relaxed">
             <span
-              className="numeric mt-0.5 shrink-0 text-xs font-bold text-[--color-copper-400]"
+              className="numeric mt-1 shrink-0 text-micro font-bold text-copper-400"
               aria-hidden="true"
             >
               {String(i + 1).padStart(2, '0')}
@@ -124,28 +124,28 @@ export async function ContextPanel({
   const cited = sources.filter((s) => context.sourceIds.includes(s.id));
 
   return (
-    <aside className="my-8 rounded-sm border border-[--color-line] bg-[--color-surface]">
-      <h2 className="border-b border-[--color-line] px-5 py-3 text-sm font-bold uppercase tracking-wider">
+    <aside className="my-10 border border-line bg-surface">
+      <h2 className="label border-b border-line px-5 py-3 text-strong">
         {t('contextPanel')}
       </h2>
       {context.project && (
-        <p className="border-b border-[--color-line] px-5 py-3 text-base font-semibold">
+        <p className="font-display border-b border-line px-5 py-3 text-subhead text-strong">
           {context.project}
         </p>
       )}
       <dl className="grid gap-x-6 gap-y-3 px-5 py-4 sm:grid-cols-2">
         {rows.map(([label, value]) => (
           <div key={label}>
-            <dt className="text-xs uppercase tracking-wider text-[--color-faint]">
+            <dt className="label text-faint">
               {label}
             </dt>
-            <dd className="mt-0.5 text-sm font-medium">{value}</dd>
+            <dd className="mt-0.5 text-meta font-medium text-strong">{value}</dd>
           </div>
         ))}
       </dl>
       {cited.length > 0 && (
-        <div className="border-t border-[--color-line] px-5 py-3">
-          <p className="text-xs text-[--color-faint]">
+        <div className="border-t border-line px-5 py-3">
+          <p className="text-micro leading-relaxed text-faint">
             {tp('field.source')}:{' '}
             {cited.map((s) => s.label).join('; ')}
           </p>
@@ -168,13 +168,13 @@ export async function FaqBlock({ items }: { items: Story['faq'] }) {
   const t = await getTranslations('search');
 
   return (
-    <section className="my-10 border-t border-[--color-line] pt-6">
-      <h2 className="text-lg font-bold tracking-tight">{t('title')}</h2>
+    <section className="my-12 border-t border-rule pt-7">
+      <h2 className="font-display text-subhead text-strong">{t('title')}</h2>
       <dl className="mt-4 space-y-5">
         {items.map((f, i) => (
           <div key={i} id={`faq-${i + 1}`} className="scroll-mt-24">
-            <dt className="font-semibold leading-snug">{f.question}</dt>
-            <dd className="mt-1.5 text-[0.9375rem] leading-relaxed text-[--color-muted]">
+            <dt className="font-display text-title font-semibold text-strong">{f.question}</dt>
+            <dd className="mt-1.5 leading-relaxed text-muted">
               {f.answer}
             </dd>
           </div>
@@ -204,8 +204,8 @@ export async function Sources({
   const t = await getTranslations('article');
 
   return (
-    <section className="my-8 rounded-sm bg-[--color-surface-sunken] p-5">
-      <h2 className="text-sm font-bold uppercase tracking-wider">
+    <section className="my-10 bg-surface-sunken p-6">
+      <h2 className="label text-strong">
         {t('sources')}
       </h2>
 
@@ -228,7 +228,7 @@ export async function Sources({
                 )}
               </p>
               {s.note && (
-                <p className="mt-0.5 text-xs text-[--color-muted]">{s.note}</p>
+                <p className="mt-0.5 text-xs text-muted">{s.note}</p>
               )}
             </li>
           ))}
@@ -236,11 +236,11 @@ export async function Sources({
       )}
 
       {sourcingNote && (
-        <div className="mt-4 border-t border-[--color-line-strong] pt-3">
-          <h3 className="text-xs font-bold uppercase tracking-wider text-[--color-muted]">
+        <div className="mt-4 border-t border-line-strong pt-3">
+          <h3 className="text-xs font-bold uppercase tracking-wider text-muted">
             {t('sourcingNote')}
           </h3>
-          <p className="mt-1.5 text-sm leading-relaxed text-[--color-muted]">
+          <p className="mt-1.5 text-sm leading-relaxed text-muted">
             {sourcingNote}
           </p>
         </div>
@@ -267,8 +267,8 @@ export async function Corrections({
   const t = await getTranslations('article');
 
   return (
-    <section className="my-8 rounded-sm border border-[--color-developing] bg-[--color-developing-soft] p-5">
-      <h2 className="text-sm font-bold uppercase tracking-wider text-[--color-developing]">
+    <section className="my-10 border-s-2 border-developing bg-developing-soft p-6">
+      <h2 className="label text-developing">
         {t('corrections')}
       </h2>
       <ol className="mt-3 space-y-2">
@@ -306,14 +306,14 @@ export async function TranslationStatus({
   const t = await getTranslations('article');
   if (translation.status === 'original') {
     return (
-      <p className="text-xs text-[--color-faint]">{t('originalReporting')}</p>
+      <p className="text-micro leading-relaxed text-faint">{t('originalReporting')}</p>
     );
   }
 
   const from = translation.originalLocale;
 
   return (
-    <p className="text-xs text-[--color-muted]">
+    <p className="text-micro text-muted">
       {t('translatedFrom', {
         language: from === 'ar' ? 'العربية' : 'English',
       })}

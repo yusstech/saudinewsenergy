@@ -4,6 +4,8 @@ import { useEffect, useState } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
 import { Link, usePathname } from '@/i18n/navigation';
 import { SECTORS } from '@content/taxonomy';
+import { LocaleEditionControls } from './locale-edition-controls';
+import { resolveEditionClient } from '@/lib/edition-client';
 import type { Locale } from '@/i18n/config';
 
 /**
@@ -44,7 +46,7 @@ export function MobileMenu() {
         type="button"
         onClick={() => setOpen(true)}
         aria-expanded={open}
-        className="rounded-sm p-2 hover:bg-[--color-surface-sunken] md:hidden"
+        className="rounded-sm p-2 hover:bg-surface-sunken md:hidden"
       >
         <span className="sr-only">{t('openMenu')}</span>
         <svg viewBox="0 0 16 16" className="size-5" fill="currentColor" aria-hidden="true">
@@ -57,16 +59,16 @@ export function MobileMenu() {
           role="dialog"
           aria-modal="true"
           aria-label={t('menu')}
-          className="fixed inset-0 z-50 flex flex-col bg-[--color-surface] md:hidden"
+          className="fixed inset-0 z-50 flex flex-col bg-surface md:hidden"
         >
-          <div className="flex items-center justify-between border-b border-[--color-line] px-[--spacing-gutter] py-3">
+          <div className="flex items-center justify-between border-b border-line px-[var(--gutter)] py-3">
             <h2 className="text-sm font-semibold uppercase tracking-wider">
               {t('sections')}
             </h2>
             <button
               type="button"
               onClick={() => setOpen(false)}
-              className="rounded-sm p-2 hover:bg-[--color-surface-sunken]"
+              className="rounded-sm p-2 hover:bg-surface-sunken"
             >
               <span className="sr-only">{t('close')}</span>
               <svg viewBox="0 0 16 16" className="size-5" fill="currentColor" aria-hidden="true">
@@ -75,7 +77,7 @@ export function MobileMenu() {
             </button>
           </div>
 
-          <nav className="flex-1 overflow-y-auto px-[--spacing-gutter] py-4">
+          <nav className="flex-1 overflow-y-auto px-[var(--gutter)] py-4">
             <ul className="space-y-0.5">
               <li>
                 <Link href="/latest" className="block rounded-sm py-2.5 text-base font-semibold">
@@ -113,6 +115,12 @@ export function MobileMenu() {
                 </Link>
               </li>
             </ul>
+
+            {/* The masthead hides these below `md`; they live here instead so a phone
+                reader can still change language or edition. */}
+            <div className="rule-hair mt-4 pt-4">
+              <LocaleEditionControls edition={resolveEditionClient()} />
+            </div>
           </nav>
         </div>
       )}
@@ -135,7 +143,7 @@ export function MobileBottomNav() {
   return (
     <nav
       aria-label={t('primary')}
-      className="no-print sticky bottom-0 z-30 border-t border-[--color-line] bg-[--color-surface] md:hidden"
+      className="no-print sticky bottom-0 z-30 border-t border-line bg-surface md:hidden"
       style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}
     >
       <ul className="mx-auto flex max-w-[1440px]">
@@ -143,7 +151,7 @@ export function MobileBottomNav() {
           <li key={href} className="flex-1">
             <Link
               href={href}
-              className="flex flex-col items-center gap-0.5 py-2 text-[0.625rem] font-medium text-[--color-muted] hover:text-[--color-body]"
+              className="flex flex-col items-center gap-0.5 py-2 text-[0.625rem] font-medium text-muted hover:text-body"
             >
               <Icon />
               {label}

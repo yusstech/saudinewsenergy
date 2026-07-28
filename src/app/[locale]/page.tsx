@@ -12,11 +12,11 @@ import {
 } from '@/lib/content';
 import { PROJECTS } from '@content/projects';
 import { COMPANIES } from '@content/companies';
-import { SECTORS, regionLabel } from '@content/taxonomy';
-import { StoryCard, storyHref } from '@/components/story-card';
+import { SECTORS } from '@content/taxonomy';
+import { StoryCard } from '@/components/story-card';
 import { Section } from '@/components/section';
 import { LiveDesk } from '@/components/live-desk';
-import { EnergyPulse, type PulseItem } from '@/components/energy-pulse';
+import { LatestRail } from '@/components/latest-rail';
 import { SaudiDashboard } from '@/components/saudi-dashboard';
 import { ProjectCard } from '@/components/project-card';
 
@@ -29,6 +29,24 @@ export async function generateMetadata({
   return baseMetadata(locale, '/');
 }
 
+/**
+ * The front page.
+ *
+ * Composed as a newspaper rather than a dashboard, which is the difference the previous build
+ * missed. Concretely that means three things:
+ *
+ * **One thing dominates.** The lead story gets a display-sized serif headline and the full
+ * left column. Previously the lead and its three siblings were near enough the same size that a
+ * reader had to *work out* what mattered most — which is the newsroom's job, not theirs.
+ *
+ * **Sections differ.** Each division uses a different header weight and a different layout, so
+ * the page has rhythm. Six identical caps-and-rule bands is why the old page read as one note
+ * repeated.
+ *
+ * **Whitespace does the framing.** Story cards lost their borders; sections are separated by
+ * generous space and hairlines. Outlined boxes in a grid read as an admin panel however good
+ * the type inside them is.
+ */
 export default async function HomePage({
   params,
 }: {
@@ -46,9 +64,7 @@ export default async function HomePage({
   const live = getLiveStories(locale);
   const mostRead = getMostRead(locale, 5);
 
-  // The lead is the highest-weighted featured story; the rest of the grid
-  // follows it in published order. Editorial ranking, not recency alone —
-  // recency is what the Pulse tabs above are for.
+  // Editorial ranking, not recency alone — recency is what the Latest rail is for.
   const ranked = [...stories].sort(
     (a, b) =>
       Number(b.featured) - Number(a.featured) ||
@@ -57,128 +73,74 @@ export default async function HomePage({
   );
 
   const [lead, ...rest] = ranked;
-  const secondary = rest.slice(0, 3);
-  const remainder = rest.slice(3);
-
   if (!lead) {
-    return (
-      <div className="mx-auto max-w-[1440px] px-[--spacing-gutter] py-16">
-        <p className="text-[--color-muted]">—</p>
-      </div>
-    );
+    return <div className="page py-24" />;
   }
 
-  const pulse: PulseItem[] = [
-    ...stories.slice(0, 6).map((s) => ({
-      slug: `latest-${s.slug}`,
-      href: storyHref(s),
-      headline: s.cardHeadline ?? s.headline,
-      time: s.publishedAt,
-      tab: 'latest' as const,
-    })),
-    ...getStoriesBySector(locale, 'markets')
-      .slice(0, 6)
-      .map((s) => ({
-        slug: `markets-${s.slug}`,
-        href: storyHref(s),
-        headline: s.cardHeadline ?? s.headline,
-        time: s.publishedAt,
-        tab: 'markets' as const,
-      })),
-    ...getStoriesBySector(locale, 'projects')
-      .slice(0, 6)
-      .map((s) => ({
-        slug: `projects-${s.slug}`,
-        href: storyHref(s),
-        headline: s.cardHeadline ?? s.headline,
-        time: s.publishedAt,
-        tab: 'projects' as const,
-      })),
-    ...mostRead.map((s) => ({
-      slug: `mostread-${s.slug}`,
-      href: storyHref(s),
-      headline: s.cardHeadline ?? s.headline,
-      time: s.publishedAt,
-      tab: 'mostRead' as const,
-    })),
-    ...stories
-      .filter((s) => s.editions.includes('gcc'))
-      .slice(0, 6)
-      .map((s) => ({
-        slug: `gcc-${s.slug}`,
-        href: storyHref(s),
-        headline: s.cardHeadline ?? s.headline,
-        time: s.publishedAt,
-        tab: 'gcc' as const,
-      })),
-    ...stories
-      .filter((s) => s.editions.includes('global'))
-      .slice(0, 6)
-      .map((s) => ({
-        slug: `global-${s.slug}`,
-        href: storyHref(s),
-        headline: s.cardHeadline ?? s.headline,
-        time: s.publishedAt,
-        tab: 'global' as const,
-      })),
-  ];
+  const secondary = rest.slice(0, 3);
+  const remainder = rest.slice(3);
 
   const sectorsWithStories = SECTORS.map((sector) => ({
     sector,
     stories: getStoriesBySector(locale, sector.slug).slice(0, 3),
-  })).filter((s) => s.stories.length > 0);
+  }))
+    .filter((s) => s.stories.length > 0)
+    .slice(0, 4);
 
   return (
-    <div className="space-y-10 pb-4">
-      <EnergyPulse items={pulse} locale={locale} />
+    <div className="pb-[var(--space-section)]">
+      {/* ================================================================ hero */}
+      <div className="page grid gap-x-10 gap-y-[var(--space-block)] pt-[var(--space-block)] lg:grid-cols-[minmax(0,1fr)_19rem] xl:grid-cols-[minmax(0,1fr)_21rem]">
+        <div>
+          <h1 className="sr-only">{t('leadTitle')}</h1>
+          <StoryCard story={lead} locale={locale} variant="lead" />
 
-      {/* ------------------------------------------- lead grid + live desk */}
-      <div className="mx-auto max-w-[1440px] px-[--spacing-gutter]">
-        <h1 className="sr-only">{t('leadTitle')}</h1>
-        <div className="grid gap-8 lg:grid-cols-[3fr_2fr] xl:grid-cols-[minmax(0,2.2fr)_minmax(0,1fr)]">
-          <div className="space-y-8">
-            <StoryCard story={lead} locale={locale} variant="lead" />
-
-            {secondary.length > 0 && (
-              <div className="grid gap-6 border-t border-[--color-line] pt-6 sm:grid-cols-3">
-                {secondary.map((s) => (
-                  <StoryCard
-                    key={s.slug}
-                    story={s}
-                    locale={locale}
-                    variant="standard"
-                    showImage={false}
-                  />
-                ))}
-              </div>
-            )}
-          </div>
-
-          <LiveDesk stories={live} locale={locale} />
+          {secondary.length > 0 && (
+            <div className="mt-[var(--space-block)] grid gap-8 border-t border-rule pt-[var(--space-block)] sm:grid-cols-3">
+              {secondary.map((s) => (
+                <StoryCard
+                  key={s.slug}
+                  story={s}
+                  locale={locale}
+                  variant="compact"
+                />
+              ))}
+            </div>
+          )}
         </div>
+
+        {/* The rail: what is happening now, and what landed most recently. */}
+        <aside className="space-y-[var(--space-block)] lg:border-s lg:border-line lg:ps-10">
+          <LiveDesk stories={live} locale={locale} />
+          <LatestRail stories={stories.slice(0, 6)} locale={locale} />
+        </aside>
       </div>
 
-      {/* --------------------------------------------- Saudi energy dashboard */}
-      <SaudiDashboard locale={locale} />
+      {/* =========================================================== dashboard */}
+      <div className="mt-[var(--space-section)]">
+        <SaudiDashboard locale={locale} />
+      </div>
 
-      {/* ------------------------------------------------------------ sectors */}
-      <Section title={t('sectorsTitle')}>
-        <div className="grid gap-x-6 gap-y-8 sm:grid-cols-2 lg:grid-cols-4">
-          {sectorsWithStories.slice(0, 4).map(({ sector, stories: list }) => (
+      {/* ============================================================= sectors */}
+      <Section
+        title={t('sectorsTitle')}
+        variant="major"
+        className="mt-[var(--space-section)]"
+      >
+        <div className="grid gap-x-8 gap-y-[var(--space-block)] sm:grid-cols-2 lg:grid-cols-4">
+          {sectorsWithStories.map(({ sector, stories: list }) => (
             <div key={sector.slug}>
-              <h3 className="mb-3 border-b border-[--color-line] pb-1.5 text-sm font-bold uppercase tracking-wider">
-                <Link href={`/sector/${sector.slug}`} className="hover:text-[--color-brand-500]">
+              <h3 className="mb-3 border-b border-line pb-1.5">
+                <Link
+                  href={`/sector/${sector.slug}`}
+                  className="label text-accent hover:underline underline-offset-4"
+                >
                   {sector.label[locale]}
                 </Link>
               </h3>
               <div className="space-y-4">
                 {list.map((s) => (
-                  <StoryCard
-                    key={s.slug}
-                    story={s}
-                    locale={locale}
-                    variant="compact"
-                  />
+                  <StoryCard key={s.slug} story={s} locale={locale} variant="compact" />
                 ))}
               </div>
             </div>
@@ -186,42 +148,31 @@ export default async function HomePage({
         </div>
       </Section>
 
-      {/* ----------------------------------------------------------- projects */}
+      {/* ============================================================ projects */}
       <Section
         title={t('projectsTitle')}
+        subtitle={tp('intro')}
         href="/projects"
         hrefLabel={t('viewAll')}
+        variant="major"
+        className="mt-[var(--space-section)]"
       >
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {PROJECTS.slice(0, 3).map((p) => (
             <ProjectCard key={p.slug} project={p} locale={locale} />
           ))}
         </div>
       </Section>
 
-      {/* ---------------------------------------------------------- companies */}
-      <Section title={t('companiesTitle')}>
-        <ul className="flex flex-wrap gap-2">
-          {COMPANIES.map((c) => (
-            <li key={c.slug}>
-              <Link
-                href={`/company/${c.slug}`}
-                className="inline-flex items-center gap-2 rounded-sm border border-[--color-line] bg-[--color-surface] px-3 py-1.5 text-sm font-medium hover:border-[--color-line-strong]"
-              >
-                {c.name[locale]}
-                <span className="text-[0.625rem] uppercase tracking-wider text-[--color-faint]">
-                  {tc(`type.${c.type}`)}
-                </span>
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </Section>
-
-      {/* -------------------------------------------------- remaining stories */}
+      {/* ============================================================ analysis */}
       {remainder.length > 0 && (
-        <Section title={t('analysisTitle')} href="/latest" hrefLabel={t('viewAll')}>
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <Section
+          title={t('analysisTitle')}
+          href="/latest"
+          hrefLabel={t('viewAll')}
+          className="mt-[var(--space-section)]"
+        >
+          <div className="grid gap-x-8 gap-y-[var(--space-block)] sm:grid-cols-2 lg:grid-cols-3">
             {remainder.slice(0, 6).map((s) => (
               <StoryCard key={s.slug} story={s} locale={locale} />
             ))}
@@ -229,39 +180,57 @@ export default async function HomePage({
         </Section>
       )}
 
-      {/* ---------------------------------------------------------- most read */}
-      <Section title={t('mostReadTitle')}>
-        <ol className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
-          {mostRead.map((s, i) => (
-            <li key={s.slug} className="flex gap-3">
-              <span
-                className="numeric text-2xl font-bold leading-none text-[--color-line-strong]"
-                aria-hidden="true"
-              >
-                {i + 1}
-              </span>
-              <StoryCard story={s} locale={locale} variant="compact" />
-            </li>
-          ))}
-        </ol>
-      </Section>
+      {/* =================================================== most read + desks */}
+      <div className="page mt-[var(--space-section)] grid gap-x-10 gap-y-[var(--space-block)] lg:grid-cols-[minmax(0,1fr)_19rem] xl:grid-cols-[minmax(0,1fr)_21rem]">
+        <section>
+          <h2 className="label mb-4 border-b border-rule pb-2 text-strong">
+            {t('mostReadTitle')}
+          </h2>
+          {/*
+            Numbered in the serif at display weight. The numeral is the design here — it does
+            the ranking visually so the headlines beside it can stay a uniform size.
+          */}
+          <ol className="grid gap-x-8 gap-y-5 sm:grid-cols-2">
+            {mostRead.map((s, i) => (
+              <li key={s.slug} className="flex gap-4">
+                <span
+                  className="font-display text-[2rem] leading-none text-line-strong"
+                  aria-hidden="true"
+                >
+                  {i + 1}
+                </span>
+                <StoryCard story={s} locale={locale} variant="compact" className="flex-1" />
+              </li>
+            ))}
+          </ol>
+        </section>
 
-      {/* ------------------------------------------------- regional footprint */}
-      <Section title={tp('title')} subtitle={tp('intro')}>
-        <ul className="flex flex-wrap gap-2">
-          {[...new Set(PROJECTS.map((p) => p.region))].map((r) => (
-            <li
-              key={r}
-              className="rounded-sm bg-[--color-surface-sunken] px-3 py-1.5 text-sm font-medium"
-            >
-              {regionLabel(r, locale)}
-              <span className="numeric ms-2 text-xs text-[--color-faint]">
-                {PROJECTS.filter((p) => p.region === r).length}
-              </span>
-            </li>
-          ))}
-        </ul>
-      </Section>
+        {/*
+          Companies as an editorial directory, not a row of grey pills. The old treatment read
+          as a filter bar because that is what a wrapped row of bordered chips is; a ruled list
+          of names with their role beside them reads as a masthead index, which is what it is.
+        */}
+        <aside className="lg:border-s lg:border-line lg:ps-10">
+          <h2 className="label mb-3 border-b border-rule pb-2 text-strong">
+            {t('companiesTitle')}
+          </h2>
+          <ul className="divide-y divide-line">
+            {COMPANIES.map((c) => (
+              <li key={c.slug}>
+                <Link
+                  href={`/company/${c.slug}`}
+                  className="flex items-baseline justify-between gap-3 py-2 hover:text-accent"
+                >
+                  <span className="text-meta font-medium">{c.name[locale]}</span>
+                  <span className="label shrink-0 text-faint">
+                    {tc(`type.${c.type}`)}
+                  </span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </aside>
+      </div>
     </div>
   );
 }

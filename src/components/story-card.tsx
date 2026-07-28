@@ -15,11 +15,16 @@ type Variant = 'lead' | 'standard' | 'compact' | 'row';
 /**
  * One story, at four densities.
  *
- * All four carry the same trust furniture — desk, alert state, timestamp, and
- * the prototype label where it applies — because a card in a "Most read" rail
- * is as likely to be a reader's first contact with a story as the lead is.
- * Dropping the labelling on the small variants would put the disclosure only
- * where there was room for it, which is the wrong basis for that decision.
+ * Headlines are set in the serif — that single change does more for how this reads as a
+ * publication than any amount of border and shadow work. The cards themselves have *lost* their
+ * borders: a grid of outlined boxes reads as a dashboard, while whitespace and a hairline read
+ * as a page. Borders are kept only where a card is genuinely a discrete object you might act on,
+ * which is the project record, not a story teaser.
+ *
+ * All four variants carry the same trust furniture — desk, alert state, timestamp, and the
+ * prototype label where it applies. A card in a "Most read" rail is as likely to be a reader's
+ * first contact with a story as the lead is, so dropping the labelling on the small variants
+ * would put disclosure only where there happened to be room for it.
  */
 export function StoryCard({
   story,
@@ -36,7 +41,6 @@ export function StoryCard({
 }) {
   const t = useTranslations('article');
   const href = storyHref(story);
-
   const headline = story.cardHeadline ?? story.headline;
   const hasImage = showImage && story.hero;
 
@@ -44,7 +48,7 @@ export function StoryCard({
     <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
       {story.alert && <AlertBadge state={story.alert} />}
       <TypeLabel type={story.type} />
-      <span className="text-[0.6875rem] font-semibold uppercase tracking-wider text-[--color-muted]">
+      <span className="label text-faint">
         {sectorLabel(story.sector, locale)}
       </span>
       {story.isSampleContent && <SampleBadge />}
@@ -54,113 +58,127 @@ export function StoryCard({
   const stamp = (
     <time
       dateTime={machineDate(story.updatedAt ?? story.publishedAt)}
-      className="text-xs text-[--color-faint]"
+      className="text-micro text-faint"
     >
       {formatRelative(story.updatedAt ?? story.publishedAt, locale)}
     </time>
   );
 
+  const headlineLink = (extra: string) => (
+    <Link
+      href={href}
+      className={`font-display text-strong decoration-copper-400 decoration-2 underline-offset-[6px] hover:underline ${extra}`}
+    >
+      {headline}
+    </Link>
+  );
+
+  /* ------------------------------------------------------------------ lead */
   if (variant === 'lead') {
+    /*
+     * Words first, then the picture.
+     *
+     * An image-led hero pushed the headline to ~730px — below the fold on a laptop, so a reader
+     * arriving at the front page saw a diagram and had to scroll to find out what the story
+     * was. Leading with the headline puts it around 190px instead. It is also simply how a
+     * broadsheet works: the headline is the story's claim on your attention, and the photograph
+     * supports it rather than the other way round.
+     */
     return (
       <article className={`group ${className}`}>
+        <div className="space-y-4">
+          {meta}
+          <h2 className="text-display">{headlineLink('')}</h2>
+          <p className="max-w-[46ch] text-[1.0625rem] leading-relaxed text-muted">
+            {story.standfirst}
+          </p>
+          <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-micro text-faint">
+            <span className="font-medium text-muted">
+              {story.authors.map((a) => a.name).join(', ')}
+            </span>
+            <Dot />
+            {stamp}
+            <Dot />
+            <span>{t('readingTime', { minutes: readingMinutes(story.wordCount) })}</span>
+          </div>
+        </div>
+
         {hasImage && (
-          <Link href={href} className="mb-4 block overflow-hidden rounded-sm bg-[--color-surface-sunken]">
+          <Link href={href} className="mt-5 block overflow-hidden bg-surface-sunken">
             <img
               src={story.hero!.src}
               alt={story.hero!.alt}
-              className="aspect-[16/9] w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+              className="aspect-[16/9] w-full object-cover transition-transform duration-700 group-hover:scale-[1.015]"
               loading="eager"
               fetchPriority="high"
             />
           </Link>
         )}
-        <div className="space-y-3">
-          {meta}
-          <h2 className="text-2xl font-bold leading-[1.15] tracking-tight sm:text-3xl lg:text-[2.1rem]">
-            <Link href={href} className="hover:underline decoration-2 underline-offset-4">
-              {headline}
-            </Link>
-          </h2>
-          <p className="max-w-[52ch] text-[--color-muted] leading-relaxed">
-            {story.standfirst}
-          </p>
-          <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-[--color-faint]">
-            <span>{story.authors.map((a) => a.name).join(', ')}</span>
-            <span aria-hidden="true">·</span>
-            {stamp}
-            <span aria-hidden="true">·</span>
-            <span>{t('readingTime', { minutes: readingMinutes(story.wordCount) })}</span>
-          </div>
-        </div>
       </article>
     );
   }
 
+  /* ------------------------------------------------------------------- row */
   if (variant === 'row') {
     return (
       <article className={`group flex gap-3 ${className}`}>
         {hasImage && (
-          <Link
-            href={href}
-            className="shrink-0 overflow-hidden rounded-sm bg-[--color-surface-sunken]"
-          >
+          <Link href={href} className="shrink-0 overflow-hidden bg-surface-sunken">
             <img
               src={story.hero!.src}
               alt=""
-              className="size-[72px] object-cover"
+              className="size-[76px] object-cover"
               loading="lazy"
             />
           </Link>
         )}
         <div className="min-w-0 space-y-1">
           {meta}
-          <h3 className="text-sm font-semibold leading-snug">
-            <Link href={href} className="hover:underline underline-offset-2">
-              {headline}
-            </Link>
-          </h3>
+          <h3 className="text-title">{headlineLink('font-semibold')}</h3>
           {stamp}
         </div>
       </article>
     );
   }
 
+  /* --------------------------------------------------------------- compact */
   if (variant === 'compact') {
     return (
-      <article className={`group space-y-1 ${className}`}>
+      <article className={`group space-y-1.5 ${className}`}>
         {meta}
-        <h3 className="text-[0.9375rem] font-semibold leading-snug">
-          <Link href={href} className="hover:underline underline-offset-2">
-            {headline}
-          </Link>
-        </h3>
+        <h3 className="text-title">{headlineLink('')}</h3>
         {stamp}
       </article>
     );
   }
 
+  /* -------------------------------------------------------------- standard */
   return (
-    <article className={`group space-y-2.5 ${className}`}>
+    <article className={`group space-y-3 ${className}`}>
       {hasImage && (
-        <Link href={href} className="block overflow-hidden rounded-sm bg-[--color-surface-sunken]">
+        <Link href={href} className="block overflow-hidden bg-surface-sunken">
           <img
             src={story.hero!.src}
             alt={story.hero!.alt}
-            className="aspect-[16/9] w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+            className="aspect-[16/9] w-full object-cover transition-transform duration-700 group-hover:scale-[1.015]"
             loading="lazy"
           />
         </Link>
       )}
       {meta}
-      <h3 className="text-lg font-bold leading-tight tracking-tight">
-        <Link href={href} className="hover:underline decoration-2 underline-offset-4">
-          {headline}
-        </Link>
-      </h3>
-      <p className="line-clamp-3 text-sm text-[--color-muted] leading-relaxed">
+      <h3 className="text-headline">{headlineLink('')}</h3>
+      <p className="line-clamp-3 text-meta leading-relaxed text-muted">
         {story.standfirst}
       </p>
       {stamp}
     </article>
+  );
+}
+
+function Dot() {
+  return (
+    <span aria-hidden="true" className="text-line-strong">
+      ·
+    </span>
   );
 }

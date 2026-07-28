@@ -54,9 +54,9 @@ export default async function SavedPage({
   return (
     <>
       <PageHeader title={t('title')} intro={t('intro')} />
-      <div className="mx-auto max-w-[1440px] px-[--spacing-gutter] py-8">
+      <div className="mx-auto max-w-[1440px] px-[var(--gutter)] py-8">
         <SavedList entries={entries} locale={locale} />
-        <p className="mt-6 text-xs text-[--color-faint]">{t('deviceOnly')}</p>
+        <p className="mt-6 text-xs text-faint">{t('deviceOnly')}</p>
       </div>
     </>
   );

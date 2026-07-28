@@ -12,18 +12,18 @@ export function PageHeader({
   children?: ReactNode;
 }) {
   return (
-    <header className="border-b border-[--color-line] bg-[--color-surface]">
-      <div className="mx-auto max-w-[1440px] px-[--spacing-gutter] py-8">
+    <header className="border-b border-line bg-surface-sunken">
+      <div className="page py-[var(--space-block)]">
         {eyebrow && (
-          <p className="text-xs font-semibold uppercase tracking-wider text-[--color-brand-500]">
+          <p className="label text-accent">
             {eyebrow}
           </p>
         )}
-        <h1 className="mt-1 text-3xl font-bold tracking-tight sm:text-4xl">
+        <h1 className="font-display mt-1.5 text-lead text-strong">
           {title}
         </h1>
         {intro && (
-          <p className="mt-2 max-w-[60ch] text-[--color-muted]">{intro}</p>
+          <p className="mt-2.5 max-w-[58ch] text-[1.0625rem] leading-relaxed text-muted">{intro}</p>
         )}
         {children}
       </div>
@@ -39,9 +39,9 @@ export function EmptyState({
   hint?: string;
 }) {
   return (
-    <div className="rounded-sm border border-dashed border-[--color-line-strong] px-6 py-14 text-center">
-      <p className="font-medium text-[--color-muted]">{title}</p>
-      {hint && <p className="mt-1 text-sm text-[--color-faint]">{hint}</p>}
+    <div className="border border-dashed border-line-strong px-6 py-16 text-center">
+      <p className="font-display text-subhead text-muted">{title}</p>
+      {hint && <p className="mt-1.5 text-meta text-faint">{hint}</p>}
     </div>
   );
 }

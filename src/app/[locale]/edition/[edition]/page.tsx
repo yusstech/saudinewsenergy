@@ -6,6 +6,7 @@ import { baseMetadata } from '@/lib/seo';
 import { getStoriesByEdition } from '@/lib/content';
 import { EDITION_LABEL } from '@content/taxonomy';
 import { StoryCard } from '@/components/story-card';
+import { SectionHeading } from '@/components/section';
 import { PageHeader, EmptyState } from '@/components/page-header';
 
 /**
@@ -76,11 +77,9 @@ export default async function EditionPage({
         intro={tu('editionExplainer')}
       />
 
-      <div className="mx-auto max-w-[1440px] space-y-10 px-[--spacing-gutter] py-8">
+      <div className="page space-y-[var(--space-section)] py-[var(--space-block)]">
         <section>
-          <h2 className="mb-4 border-b-2 border-[--color-body] pb-1.5 text-lg font-bold uppercase tracking-wide">
-            {t('saudi')}
-          </h2>
+          <SectionHeading title={t('saudi')} />
           {saudi.length === 0 ? (
             <EmptyState title={tc('empty')} />
           ) : (
@@ -94,9 +93,7 @@ export default async function EditionPage({
 
         {regional.length > 0 && (
           <section>
-            <h2 className="mb-4 border-b-2 border-[--color-body] pb-1.5 text-lg font-bold uppercase tracking-wide">
-              {th('globalTitle')}
-            </h2>
+            <SectionHeading title={th('globalTitle')} />
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {regional.map((s) => (
                 <StoryCard key={s.slug} story={s} locale={locale} />

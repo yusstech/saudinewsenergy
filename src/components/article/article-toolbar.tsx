@@ -66,10 +66,10 @@ export function ArticleToolbar({ slug, url }: { slug: string; url: string }) {
 
   const saved = ready && isSaved(slug);
   const btn =
-    'inline-flex items-center gap-1.5 rounded-sm px-2.5 py-1.5 text-xs font-medium hover:bg-[--color-surface-sunken]';
+    'inline-flex items-center gap-1.5 rounded-sm px-2.5 py-1.5 text-xs font-medium hover:bg-surface-sunken';
 
   return (
-    <div className="no-print flex flex-wrap items-center gap-1 border-y border-[--color-line] py-2">
+    <div className="no-print flex flex-wrap items-center gap-1 border-y border-line py-2">
       <button
         type="button"
         onClick={() => toggle(slug)}
@@ -117,8 +117,8 @@ export function ArticleToolbar({ slug, url }: { slug: string; url: string }) {
             )}
             className={`rounded-sm px-2 py-1 font-serif leading-none transition-colors ${
               size === s
-                ? 'bg-[--color-body] text-[--color-canvas]'
-                : 'hover:bg-[--color-surface-sunken]'
+                ? 'bg-body text-canvas'
+                : 'hover:bg-surface-sunken'
             }`}
             style={{ fontSize: `${0.75 + i * 0.18}rem` }}
           >
@@ -177,7 +177,7 @@ export function ReadingProgress() {
       aria-hidden="true"
     >
       <div
-        className="h-full bg-[--color-copper-400] transition-[width] duration-75"
+        className="h-full bg-copper-400 transition-[width] duration-75"
         style={{ width: `${progress}%` }}
       />
     </div>

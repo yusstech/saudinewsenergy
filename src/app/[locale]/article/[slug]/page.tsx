@@ -82,7 +82,7 @@ export default async function ArticlePage({
         }}
       />
 
-      <article className="mx-auto max-w-[1440px] px-[--spacing-gutter] py-6">
+      <article className="mx-auto max-w-[1440px] px-[var(--gutter)] py-6">
         <div className="mx-auto max-w-[68ch]">
           <ArticleHeader story={story} locale={locale} url={articleCanonical(story)} />
         </div>
@@ -114,10 +114,10 @@ export default async function ArticlePage({
 
           {/* ------------------------------------------------- entity links */}
           {(story.companies.length > 0 || story.projects.length > 0) && (
-            <section className="my-8 border-t border-[--color-line] pt-5">
+            <section className="my-8 border-t border-line pt-5">
               {story.companies.length > 0 && (
                 <>
-                  <h2 className="text-xs font-bold uppercase tracking-wider text-[--color-muted]">
+                  <h2 className="text-xs font-bold uppercase tracking-wider text-muted">
                     {t('relatedCompanies')}
                   </h2>
                   <ul className="mt-2 flex flex-wrap gap-2">
@@ -128,7 +128,7 @@ export default async function ArticlePage({
                         <li key={s}>
                           <Link
                             href={`/company/${s}`}
-                            className="inline-block rounded-sm border border-[--color-line] px-2.5 py-1 text-sm hover:border-[--color-line-strong]"
+                            className="inline-block rounded-sm border border-line px-2.5 py-1 text-sm hover:border-line-strong"
                           >
                             {c.name[locale]}
                           </Link>
@@ -141,7 +141,7 @@ export default async function ArticlePage({
 
               {story.projects.length > 0 && (
                 <>
-                  <h2 className="mt-4 text-xs font-bold uppercase tracking-wider text-[--color-muted]">
+                  <h2 className="mt-4 text-xs font-bold uppercase tracking-wider text-muted">
                     {t('relatedProjects')}
                   </h2>
                   <ul className="mt-2 flex flex-wrap gap-2">
@@ -152,7 +152,7 @@ export default async function ArticlePage({
                         <li key={s}>
                           <Link
                             href={`/projects#${s}`}
-                            className="inline-block rounded-sm border border-[--color-line] px-2.5 py-1 text-sm hover:border-[--color-line-strong]"
+                            className="inline-block rounded-sm border border-line px-2.5 py-1 text-sm hover:border-line-strong"
                           >
                             {p.name[locale]}
                           </Link>
@@ -163,7 +163,7 @@ export default async function ArticlePage({
                 </>
               )}
 
-              <p className="mt-4 text-xs text-[--color-faint]">
+              <p className="mt-4 text-xs text-faint">
                 {sectorLabel(story.sector, locale)} ·{' '}
                 {regionLabel(story.region, locale)}
               </p>
@@ -173,7 +173,7 @@ export default async function ArticlePage({
 
         {/* ---------------------------------------------------- related */}
         {related.length > 0 && (
-          <section className="mt-12 border-t-2 border-[--color-body] pt-5">
+          <section className="mt-12 border-t-2 border-body pt-5">
             <h2 className="mb-4 text-lg font-bold uppercase tracking-wide">
               {t('relatedStories')}
             </h2>

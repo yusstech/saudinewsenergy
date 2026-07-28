@@ -29,7 +29,7 @@ export async function Figure({
 
   return (
     <figure className={`my-8 ${className}`}>
-      <div className="overflow-hidden rounded-sm bg-[--color-surface-sunken]">
+      <div className="overflow-hidden bg-surface-sunken">
         <img
           src={asset.src}
           alt={asset.alt}
@@ -41,17 +41,17 @@ export async function Figure({
         />
       </div>
 
-      <figcaption className="mt-2 space-y-1 text-sm text-[--color-muted]">
+      <figcaption className="mt-2.5 space-y-1 text-meta leading-relaxed text-muted">
         {asset.caption && <p>{asset.caption}</p>}
 
         {asset.isIllustrative && (
-          <p className="font-medium text-[--color-copper-500] dark:text-[--color-copper-300]">
+          <p className="font-medium text-copper-500 dark:text-copper-300">
             {t('illustrative')}
             {asset.depicts && <>. {asset.depicts}</>}
           </p>
         )}
 
-        <p className="text-xs text-[--color-faint]">
+        <p className="text-micro text-faint">
           {asset.isDiagram ? (
             <>{t('diagram')}</>
           ) : (

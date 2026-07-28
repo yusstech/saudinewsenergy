@@ -10,6 +10,7 @@ import { getStoriesByCompany } from '@/lib/content';
 import { sectorLabel } from '@content/taxonomy';
 import { StoryCard } from '@/components/story-card';
 import { ProjectCard } from '@/components/project-card';
+import { SectionHeading } from '@/components/section';
 import { PageHeader, EmptyState } from '@/components/page-header';
 
 /**
@@ -105,7 +106,7 @@ export default async function CompanyPage({
           {company.sectors.map((s) => (
             <span
               key={s}
-              className="rounded-sm bg-[--color-surface-sunken] px-2 py-1 text-xs font-medium"
+              className="rounded-sm bg-surface-sunken px-2 py-1 text-xs font-medium"
             >
               {sectorLabel(s, locale)}
             </span>
@@ -115,7 +116,7 @@ export default async function CompanyPage({
               href={company.url}
               target="_blank"
               rel="noopener"
-              className="text-xs font-medium text-[--color-brand-500] underline underline-offset-4"
+              className="text-xs font-medium text-brand-500 underline underline-offset-4"
             >
               {company.url.replace(/^https?:\/\//, '')}
             </a>
@@ -123,11 +124,9 @@ export default async function CompanyPage({
         </div>
       </PageHeader>
 
-      <div className="mx-auto max-w-[1440px] space-y-10 px-[--spacing-gutter] py-8">
+      <div className="page space-y-[var(--space-section)] py-[var(--space-block)]">
         <section>
-          <h2 className="mb-4 border-b-2 border-[--color-body] pb-1.5 text-lg font-bold uppercase tracking-wide">
-            {t('coverage')}
-          </h2>
+          <SectionHeading title={t('coverage')} />
           {stories.length === 0 ? (
             <EmptyState title={t('noCoverage')} />
           ) : (
@@ -141,9 +140,7 @@ export default async function CompanyPage({
 
         {projects.length > 0 && (
           <section>
-            <h2 className="mb-4 border-b-2 border-[--color-body] pb-1.5 text-lg font-bold uppercase tracking-wide">
-              {tp('title')}
-            </h2>
+            <SectionHeading title={tp('title')} />
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {projects.map((p) => (
                 <ProjectCard

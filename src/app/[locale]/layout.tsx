@@ -5,7 +5,7 @@ import { NextIntlClientProvider, hasLocale } from 'next-intl';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { routing } from '@/i18n/routing';
 import { DIRECTION, LOCALE_TAG, type Locale } from '@/i18n/config';
-import { inter, ibmArabic } from '../fonts';
+import { fontVariables } from '../fonts';
 import { SITE, siteName, siteDescriptor } from '@/lib/site';
 import { baseMetadata, siteJsonLd, jsonLdScript } from '@/lib/seo';
 import { resolveEdition } from '@/lib/edition';
@@ -74,10 +74,10 @@ export default async function LocaleLayout({
     <html
       lang={LOCALE_TAG[typed]}
       dir={DIRECTION[typed]}
-      className={`${inter.variable} ${ibmArabic.variable}`}
+      className={fontVariables}
       suppressHydrationWarning
     >
-      <body className="flex min-h-dvh flex-col bg-[--color-canvas] text-[--color-body] antialiased">
+      <body className="flex min-h-dvh flex-col bg-canvas text-body antialiased">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: jsonLdScript(siteJsonLd(typed)) }}
@@ -85,15 +85,25 @@ export default async function LocaleLayout({
 
         <a
           href="#main"
-          className="sr-only focus:not-sr-only focus:absolute focus:start-2 focus:top-2 focus:z-[100] focus:rounded-sm focus:bg-[--color-brand-500] focus:px-3 focus:py-2 focus:text-sm focus:font-semibold focus:text-white"
+          className="sr-only focus:not-sr-only focus:absolute focus:start-2 focus:top-2 focus:z-[100] focus:rounded-sm focus:bg-brand-500 focus:px-3 focus:py-2 focus:text-sm focus:font-semibold focus:text-white"
         >
           {t('skipToContent')}
         </a>
 
         <NextIntlClientProvider>
-          <MarketStrip indicators={MARKET_INDICATORS} locale={typed} />
-          <BreakingRibbon items={alerts} />
+          {/*
+            Band order, and why.
+
+            The masthead comes first because it identifies the publication — nothing should
+            precede it. The alert sits directly beneath it only when there is genuinely
+            breaking news, so when it appears it reads as an interruption rather than as
+            furniture. The market rail comes last of the three because it is reference data:
+            useful to have near the top, never more important than the masthead or a real
+            alert. That is three thin bands where there were six.
+          */}
           <SiteHeader locale={typed} edition={edition} />
+          <BreakingRibbon items={alerts} locale={typed} />
+          <MarketStrip indicators={MARKET_INDICATORS} locale={typed} />
           <EditionSuggestion />
 
           <main id="main" className="flex-1">

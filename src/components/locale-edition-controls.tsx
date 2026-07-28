@@ -28,10 +28,11 @@ import {
  */
 export function LocaleEditionControls({
   edition,
-  compact = false,
+  onDark = false,
 }: {
   edition: Edition;
-  compact?: boolean;
+  /** Rendered inside the charcoal masthead band, so hover and text invert. */
+  onDark?: boolean;
 }) {
   const t = useTranslations('utility');
   const te = useTranslations('edition');
@@ -55,8 +56,9 @@ export function LocaleEditionControls({
     startTransition(() => router.refresh());
   }
 
-  const button =
-    'inline-flex items-center gap-1 rounded-sm px-1.5 py-1 text-xs font-medium hover:bg-[--color-surface-sunken]';
+  const button = `inline-flex items-center gap-1 rounded-sm px-2 py-1.5 text-meta font-medium ${
+    onDark ? 'hover:bg-white/10' : 'hover:bg-surface-sunken'
+  }`;
 
   return (
     <div className="flex items-center gap-1" data-pending={pending || undefined}>
@@ -69,14 +71,14 @@ export function LocaleEditionControls({
           aria-haspopup="menu"
           onClick={() => setOpen((o) => (o === 'lang' ? null : 'lang'))}
         >
-          {!compact && <span className="sr-only">{t('changeLanguage')}</span>}
+          <span className="sr-only">{t('changeLanguage')}</span>
           <span lang={locale === 'ar' ? 'ar' : 'en'}>{LOCALE_LABEL[locale]}</span>
           <Chevron />
         </button>
 
         {open === 'lang' && (
           <Menu onClose={() => setOpen(null)} label={t('changeLanguage')}>
-            <p className="px-3 pb-2 pt-1 text-[0.6875rem] leading-snug text-[--color-muted]">
+            <p className="px-3 pb-2 pt-1 text-[0.6875rem] leading-snug text-muted">
               {t('languageExplainer')}
             </p>
             {LOCALES.map((l) => (
@@ -86,7 +88,7 @@ export function LocaleEditionControls({
                 role="menuitemradio"
                 aria-checked={l === locale}
                 onClick={() => chooseLocale(l)}
-                className="flex w-full items-center justify-between px-3 py-1.5 text-start text-sm hover:bg-[--color-surface-sunken]"
+                className="flex w-full items-center justify-between px-3 py-1.5 text-start text-sm hover:bg-surface-sunken"
               >
                 <span lang={l === 'ar' ? 'ar' : 'en'}>{LOCALE_LABEL[l]}</span>
                 {l === locale && <Check />}
@@ -96,9 +98,10 @@ export function LocaleEditionControls({
         )}
       </div>
 
-      <span className="text-[--color-line-strong]" aria-hidden="true">
-        |
-      </span>
+      <span
+        className={`hidden h-3 w-px sm:block ${onDark ? 'bg-white/15' : 'bg-line-strong'}`}
+        aria-hidden="true"
+      />
 
       {/* --------------------------------------------------------- edition */}
       <div className="relative">
@@ -116,7 +119,7 @@ export function LocaleEditionControls({
 
         {open === 'edition' && (
           <Menu onClose={() => setOpen(null)} label={t('changeEdition')}>
-            <p className="px-3 pb-2 pt-1 text-[0.6875rem] leading-snug text-[--color-muted]">
+            <p className="px-3 pb-2 pt-1 text-[0.6875rem] leading-snug text-muted">
               {t('editionExplainer')}
             </p>
             {EDITIONS.map((e) => (
@@ -126,7 +129,7 @@ export function LocaleEditionControls({
                 role="menuitemradio"
                 aria-checked={e === edition}
                 onClick={() => chooseEdition(e)}
-                className="flex w-full items-center justify-between px-3 py-1.5 text-start text-sm hover:bg-[--color-surface-sunken]"
+                className="flex w-full items-center justify-between px-3 py-1.5 text-start text-sm hover:bg-surface-sunken"
               >
                 <span>{te(e)}</span>
                 {e === edition && <Check />}
@@ -155,7 +158,7 @@ function Menu({
       <div
         role="menu"
         aria-label={label}
-        className="absolute start-0 top-full z-50 mt-1 min-w-[15rem] rounded-sm border border-[--color-line] bg-[--color-surface] py-1 shadow-lg"
+        className="absolute start-0 top-full z-50 mt-1 min-w-[15rem] rounded-sm border border-line bg-surface py-1 shadow-lg"
         onKeyDown={(e) => {
           if (e.key === 'Escape') onClose();
         }}

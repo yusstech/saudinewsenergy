@@ -108,6 +108,40 @@ round trip and nothing that can be unavailable.
 
 ---
 
+## Design system
+
+Warm sandstone canvas, charcoal reserved for the masthead band and the Saudi Energy Dashboard,
+copper for rules and data. Status colour is reserved: red = Breaking, amber = Developing,
+teal = Live, copper = Market Move, never decorative.
+
+**Typography carries the identity.** Newsreader (variable, optical-size axis) for headlines and
+article body; Inter for interface, metadata and figures. Arabic gets the same serif/sans split
+via Noto Naskh Arabic for headlines and IBM Plex Sans Arabic for UI — Arabic has no serif, and
+Naskh is its authority register, so pairing it with a Latin serif is what makes "equal products"
+true at the level readers feel.
+
+**Chrome is two bands** — masthead, then a sticky nav — with a static market rail and a
+*conditional* breaking alert below. It was six stacked bands and two competing marquees; a
+reader now meets ~155px before the first headline instead of ~290px, and nothing moves except
+one live-status dot.
+
+### Two Tailwind v4 traps this codebase hit
+
+Both cost real debugging time and are easy to repeat:
+
+1. **Theme keys mint utilities, so key names can collide.** `--spacing-block` generated an
+   `inline-block` utility meaning `inline-size` that collided with the *display* utility of the
+   same name, pinning every inline-block element to one width. Rhythm tokens now live in
+   `:root`, outside `@theme`, since they are only ever read via `var()`.
+
+2. **`bg-[--color-x]` is not valid in v4.3** — it emits `background-color: --color-x`, which is
+   invalid CSS and silently drops. Use the generated utility (`bg-canvas`) for theme keys, or
+   `[var(--x)]` for anything else. Relatedly, `@theme` cannot be nested inside `@media`: it is
+   hoisted, so a dark block written that way applies unconditionally. Dark overrides are a plain
+   `:root` rule inside the media query.
+
+---
+
 ## Bilingual and RTL
 
 Language and edition are independent axes. **Language** is the URL prefix

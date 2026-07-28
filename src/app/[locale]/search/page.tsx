@@ -33,7 +33,7 @@ export default async function SearchPage({
   return (
     <>
       <PageHeader title={t('title')} intro={t('intro')} />
-      <div className="mx-auto max-w-[1440px] px-[--spacing-gutter] py-8">
+      <div className="mx-auto max-w-[1440px] px-[var(--gutter)] py-8">
         <SearchClient index={buildSearchIndex(locale)} locale={locale} />
       </div>
     </>

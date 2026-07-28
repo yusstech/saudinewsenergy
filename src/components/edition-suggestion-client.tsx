@@ -35,18 +35,18 @@ export function EditionSuggestionClient({
       // a screen-reader user is currently hearing to make it would be the
       // audible equivalent of a modal nobody asked for.
       aria-live="polite"
-      className="border-b border-[--color-line] bg-[--color-surface-sunken]"
+      className="border-b border-line bg-surface-sunken"
     >
-      <div className="mx-auto flex max-w-[1440px] flex-wrap items-center gap-x-4 gap-y-2 px-[--spacing-gutter] py-2.5">
+      <div className="mx-auto flex max-w-[1440px] flex-wrap items-center gap-x-4 gap-y-2 px-[var(--gutter)] py-2.5">
         <p className="min-w-0 flex-1 text-sm">
           <span className="font-semibold">{title}</span>{' '}
-          <span className="text-[--color-muted]">{body}</span>
+          <span className="text-muted">{body}</span>
         </p>
         <div className="flex shrink-0 items-center gap-2">
           <button
             type="button"
             onClick={() => set(edition)}
-            className="rounded-sm bg-[--color-brand-500] px-3 py-1.5 text-xs font-semibold text-white hover:bg-[--color-brand-600]"
+            className="rounded-sm bg-brand-500 px-3 py-1.5 text-xs font-semibold text-white hover:bg-brand-600"
           >
             {accept}
           </button>
@@ -55,7 +55,7 @@ export function EditionSuggestionClient({
             // Dismissing writes the default rather than only hiding the banner,
             // so the answer sticks across visits instead of being asked again.
             onClick={() => set('saudi')}
-            className="rounded-sm px-2 py-1.5 text-xs font-medium text-[--color-muted] hover:text-[--color-body]"
+            className="rounded-sm px-2 py-1.5 text-xs font-medium text-muted hover:text-body"
           >
             {dismiss}
           </button>

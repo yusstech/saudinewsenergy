@@ -19,13 +19,13 @@ export default function Error({
   }, [error]);
 
   return (
-    <div className="mx-auto max-w-[1440px] px-[--spacing-gutter] py-24 text-center">
+    <div className="mx-auto max-w-[1440px] px-[var(--gutter)] py-24 text-center">
       <h1 className="text-2xl font-bold tracking-tight">{t('error')}</h1>
-      <p className="mt-2 text-[--color-muted]">{t('errorBody')}</p>
+      <p className="mt-2 text-muted">{t('errorBody')}</p>
       <button
         type="button"
         onClick={reset}
-        className="mt-6 rounded-sm bg-[--color-brand-500] px-4 py-2 text-sm font-semibold text-white hover:bg-[--color-brand-600]"
+        className="mt-6 rounded-sm bg-brand-500 px-4 py-2 text-sm font-semibold text-white hover:bg-brand-600"
       >
         {t('retry')}
       </button>

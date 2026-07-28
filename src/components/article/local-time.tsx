@@ -37,7 +37,7 @@ export function LocalTime({ iso, label }: { iso: string; label: string }) {
   if (!local) return null;
 
   return (
-    <p className="text-xs text-[--color-faint]">
+    <p className="text-xs text-faint">
       {label}{' '}
       <time dateTime={iso} className="numeric">
         {local}

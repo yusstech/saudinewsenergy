@@ -34,7 +34,7 @@ export async function ArticleHeader({
         {story.alert && <AlertBadge state={story.alert} />}
         <Link
           href={`/sector/${story.sector}`}
-          className="text-[0.6875rem] font-semibold uppercase tracking-wider text-[--color-brand-500] hover:underline underline-offset-4"
+          className="label text-accent hover:underline underline-offset-4"
         >
           {sectorLabel(story.sector, locale)}
         </Link>
@@ -42,16 +42,16 @@ export async function ArticleHeader({
         {story.isSampleContent && <SampleBadge />}
       </div>
 
-      <h1 className="text-3xl font-bold leading-[1.12] tracking-tight sm:text-4xl lg:text-[2.75rem]">
+      <h1 className="font-display text-display text-strong">
         {story.headline}
       </h1>
 
-      <p className="text-lg leading-relaxed text-[--color-muted]">
+      <p className="max-w-[52ch] text-[1.1875rem] leading-relaxed text-muted">
         {story.standfirst}
       </p>
 
       {story.isSampleContent && (
-        <p className="rounded-sm border border-[--color-copper-400] bg-[--color-surface] px-3 py-2 text-sm text-[--color-copper-500] dark:text-[--color-copper-300]">
+        <p className="border-s-2 border-copper-400 bg-surface-sunken px-4 py-3 text-meta leading-relaxed text-copper-500 dark:text-copper-300">
           {/*
             Stated in full on the article, not just as a chip. A reader who
             reaches the body of a story deserves an unambiguous sentence, not a
@@ -62,24 +62,24 @@ export async function ArticleHeader({
         </p>
       )}
 
-      <div className="space-y-1 text-sm">
-        <p className="font-medium">
+      <div className="space-y-1.5">
+        <p className="text-meta font-semibold text-body">
           {t('byline', { author: story.authors.map((a) => a.name).join(', ') })}
         </p>
 
-        <div className="flex flex-wrap items-center gap-x-3 gap-y-0.5 text-xs text-[--color-faint]">
+        <div className="flex flex-wrap items-center gap-x-3 gap-y-0.5 text-micro text-faint">
           <span>
             {t('publishedAt')}{' '}
             <time dateTime={machineDate(story.publishedAt)} className="numeric">
               {formatDateTime(story.publishedAt, locale)}
             </time>{' '}
-            <span className="uppercase tracking-wider">{t('riyadhTime')}</span>
+            <span className="label">{t('riyadhTime')}</span>
           </span>
 
           {story.updatedAt && story.updatedAt !== story.publishedAt && (
             <>
               <span aria-hidden="true">·</span>
-              <span className="font-medium text-[--color-muted]">
+              <span className="font-medium text-muted">
                 {t('updatedAt')}{' '}
                 <time dateTime={machineDate(story.updatedAt)} className="numeric">
                   {formatDateTime(story.updatedAt, locale)}

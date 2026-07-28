@@ -67,7 +67,7 @@ export default async function ProjectsPage({
 
       <PageHeader title={t('title')} intro={t('intro')} />
 
-      <div className="mx-auto max-w-[1440px] px-[--spacing-gutter] py-8">
+      <div className="mx-auto max-w-[1440px] px-[var(--gutter)] py-8">
         <ProjectFilters cards={cards} locale={locale} />
       </div>
     </>

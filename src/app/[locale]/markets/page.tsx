@@ -5,6 +5,7 @@ import { baseMetadata } from '@/lib/seo';
 import { MARKET_INDICATORS, MARKETS_ARE_SAMPLE } from '@content/markets';
 import { getStoriesBySector } from '@/lib/content';
 import { StoryCard } from '@/components/story-card';
+import { SectionHeading } from '@/components/section';
 import { PageHeader } from '@/components/page-header';
 import {
   formatNumber,
@@ -34,9 +35,9 @@ export async function generateMetadata({
 }
 
 const TREND = {
-  up: 'text-[--color-brand-500] dark:text-[--color-brand-400]',
-  down: 'text-[--color-breaking]',
-  flat: 'text-[--color-muted]',
+  up: 'text-brand-500 dark:text-brand-400',
+  down: 'text-breaking',
+  flat: 'text-muted',
 } as const;
 
 export default async function MarketsPage({
@@ -54,13 +55,13 @@ export default async function MarketsPage({
     <>
       <PageHeader title={t('overviewTitle')} intro={t('overviewIntro')} />
 
-      <div className="mx-auto max-w-[1440px] space-y-10 px-[--spacing-gutter] py-8">
+      <div className="page space-y-[var(--space-section)] py-[var(--space-block)]">
         {/*
           The disclosure leads the page. Putting it below the table would mean
           a reader forms a view of the numbers before learning what they are.
         */}
         {MARKETS_ARE_SAMPLE && (
-          <p className="rounded-sm border border-[--color-copper-400] bg-[--color-surface] px-4 py-3 text-sm font-medium text-[--color-copper-500] dark:text-[--color-copper-300]">
+          <p className="rounded-sm border border-copper-400 bg-surface px-4 py-3 text-sm font-medium text-copper-500 dark:text-copper-300">
             {t('sampleDataNotice')}
           </p>
         )}
@@ -69,7 +70,7 @@ export default async function MarketsPage({
           <table className="w-full min-w-[42rem] border-collapse text-sm">
             <caption className="sr-only">{t('overviewTitle')}</caption>
             <thead>
-              <tr className="border-b-2 border-[--color-body] text-start">
+              <tr className="border-b border-rule text-start">
                 <th scope="col" className="py-2 text-start font-semibold">
                   {t('stripLabel')}
                 </th>
@@ -94,11 +95,11 @@ export default async function MarketsPage({
               {MARKET_INDICATORS.map((m) => {
                 const dir = direction(m.change);
                 return (
-                  <tr key={m.id} className="border-b border-[--color-line]">
+                  <tr key={m.id} className="border-b border-line">
                     <th scope="row" className="py-2.5 text-start font-medium">
                       {m.label[locale]}
                       {m.isSample && (
-                        <span className="ms-2 rounded-sm bg-[--color-surface-sunken] px-1 py-px text-[0.5625rem] font-semibold uppercase tracking-wider text-[--color-copper-500] ring-1 ring-[--color-line-strong] dark:text-[--color-copper-300]">
+                        <span className="ms-2 rounded-sm bg-surface-sunken px-1 py-px text-[0.5625rem] font-semibold uppercase tracking-wider text-copper-500 ring-1 ring-line-strong dark:text-copper-300">
                           {t('sampleData')}
                         </span>
                       )}
@@ -109,7 +110,7 @@ export default async function MarketsPage({
                         maximumFractionDigits: 2,
                       })}
                     </td>
-                    <td className="py-2.5 text-end text-xs text-[--color-faint]">
+                    <td className="py-2.5 text-end text-xs text-faint">
                       {m.unit}
                     </td>
                     <td className={`numeric py-2.5 text-end ${TREND[dir]}`}>
@@ -119,7 +120,7 @@ export default async function MarketsPage({
                     <td className={`numeric py-2.5 text-end ${TREND[dir]}`}>
                       {formatPercent(m.changePercent, locale)}
                     </td>
-                    <td className="py-2.5 text-end text-xs text-[--color-faint]">
+                    <td className="py-2.5 text-end text-xs text-faint">
                       <time dateTime={machineDate(m.asOf)} className="numeric">
                         {formatDateTime(m.asOf, locale)}
                       </time>
@@ -138,9 +139,7 @@ export default async function MarketsPage({
 
         {stories.length > 0 && (
           <section>
-            <h2 className="mb-4 border-b-2 border-[--color-body] pb-1.5 text-lg font-bold uppercase tracking-wide">
-              {t('overviewTitle')}
-            </h2>
+            <SectionHeading title={t('overviewTitle')} />
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {stories.map((s) => (
                 <StoryCard key={s.slug} story={s} locale={locale} />

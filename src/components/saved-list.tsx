@@ -46,24 +46,24 @@ export function SavedList({
 
   if (saved.length === 0) {
     return (
-      <div className="rounded-sm border border-dashed border-[--color-line-strong] px-6 py-14 text-center">
-        <p className="font-medium text-[--color-muted]">{t('empty')}</p>
-        <p className="mt-1 text-sm text-[--color-faint]">{t('emptyHint')}</p>
+      <div className="rounded-sm border border-dashed border-line-strong px-6 py-14 text-center">
+        <p className="font-medium text-muted">{t('empty')}</p>
+        <p className="mt-1 text-sm text-faint">{t('emptyHint')}</p>
       </div>
     );
   }
 
   return (
-    <ul className="divide-y divide-[--color-line]">
+    <ul className="divide-y divide-line">
       {saved.map((entry) => (
         <li key={entry.slug} className="flex gap-4 py-4">
           <div className="min-w-0 flex-1">
             <div className="flex flex-wrap items-center gap-2">
-              <span className="text-[0.6875rem] font-semibold uppercase tracking-wider text-[--color-muted]">
+              <span className="text-[0.6875rem] font-semibold uppercase tracking-wider text-muted">
                 {sectorLabel(entry.sector, locale)}
               </span>
               {entry.isSampleContent && (
-                <span className="rounded-sm bg-[--color-surface-sunken] px-1.5 py-0.5 text-[0.6875rem] font-semibold uppercase tracking-wider text-[--color-muted] ring-1 ring-[--color-line-strong]">
+                <span className="rounded-sm bg-surface-sunken px-1.5 py-0.5 text-[0.6875rem] font-semibold uppercase tracking-wider text-muted ring-1 ring-line-strong">
                   {tm('sampleData')}
                 </span>
               )}
@@ -73,10 +73,10 @@ export function SavedList({
                 {entry.headline}
               </Link>
             </h2>
-            <p className="mt-1 line-clamp-2 text-sm text-[--color-muted]">
+            <p className="mt-1 line-clamp-2 text-sm text-muted">
               {entry.standfirst}
             </p>
-            <p className="numeric mt-1 text-xs text-[--color-faint]">
+            <p className="numeric mt-1 text-xs text-faint">
               {formatDate(entry.publishedAt, locale)}
             </p>
           </div>
@@ -84,7 +84,7 @@ export function SavedList({
           <button
             type="button"
             onClick={() => remove(entry.slug)}
-            className="shrink-0 self-start rounded-sm px-2 py-1 text-xs font-medium text-[--color-muted] hover:bg-[--color-surface-sunken] hover:text-[--color-body]"
+            className="shrink-0 self-start rounded-sm px-2 py-1 text-xs font-medium text-muted hover:bg-surface-sunken hover:text-body"
           >
             {t('remove')}
           </button>

@@ -11,18 +11,18 @@ export async function SiteFooter({ locale }: { locale: Locale }) {
   const ts = await getTranslations('standards');
 
   return (
-    <footer className="mt-16 border-t border-[--color-line] bg-[--color-surface]">
+    <footer className="mt-[var(--space-section)] border-t border-rule bg-surface-sunken">
       {/* ------------------------------------------------------ newsletters */}
-      <section className="border-b border-[--color-line]">
-        <div className="mx-auto max-w-[1440px] px-[--spacing-gutter] py-8">
-          <h2 className="text-lg font-bold tracking-tight">{t('newsletters')}</h2>
-          <p className="mt-1 text-sm text-[--color-muted]">{t('newsletterIntro')}</p>
+      <section className="border-b border-line">
+        <div className="page py-[var(--space-block)]">
+          <h2 className="font-display text-subhead text-strong">{t('newsletters')}</h2>
+          <p className="mt-1 text-meta text-muted">{t('newsletterIntro')}</p>
 
           <ul className="mt-4 grid gap-2 sm:grid-cols-2 lg:grid-cols-4">
             {(['daily', 'weekly', 'markets', 'transition'] as const).map((k) => (
               <li
                 key={k}
-                className="rounded-sm border border-[--color-line] px-3 py-2.5 text-sm font-medium"
+                className="border border-line bg-surface px-3 py-2.5 text-meta font-medium"
               >
                 {t(k)}
               </li>
@@ -37,11 +37,11 @@ export async function SiteFooter({ locale }: { locale: Locale }) {
               id="newsletter-email"
               type="email"
               placeholder={t('emailPlaceholder')}
-              className="min-w-0 flex-1 rounded-sm border border-[--color-line-strong] bg-[--color-canvas] px-3 py-2 text-sm"
+              className="min-w-0 flex-1 border border-line-strong bg-surface px-3 py-2 text-meta"
             />
             <button
               type="submit"
-              className="rounded-sm bg-[--color-brand-500] px-4 py-2 text-sm font-semibold text-white hover:bg-[--color-brand-600]"
+              className="bg-masthead px-4 py-2 text-meta font-semibold text-masthead-fg hover:bg-ink-800"
             >
               {t('subscribe')}
             </button>
@@ -50,12 +50,12 @@ export async function SiteFooter({ locale }: { locale: Locale }) {
       </section>
 
       {/* ----------------------------------------------------------- links */}
-      <div className="mx-auto grid max-w-[1440px] gap-8 px-[--spacing-gutter] py-10 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="page grid gap-8 py-[var(--space-block)] sm:grid-cols-2 lg:grid-cols-4">
         <nav aria-labelledby="footer-sections">
-          <h2 id="footer-sections" className="text-xs font-semibold uppercase tracking-wider text-[--color-muted]">
+          <h2 id="footer-sections" className="label text-strong">
             {t('sections')}
           </h2>
-          <ul className="mt-3 space-y-1.5 text-sm">
+          <ul className="mt-3 space-y-1.5 text-meta">
             {SECTORS.map((s) => (
               <li key={s.slug}>
                 <Link href={`/sector/${s.slug}`} className="hover:underline underline-offset-4">
@@ -67,10 +67,10 @@ export async function SiteFooter({ locale }: { locale: Locale }) {
         </nav>
 
         <nav aria-labelledby="footer-editorial">
-          <h2 id="footer-editorial" className="text-xs font-semibold uppercase tracking-wider text-[--color-muted]">
+          <h2 id="footer-editorial" className="label text-strong">
             {t('editorial')}
           </h2>
-          <ul className="mt-3 space-y-1.5 text-sm">
+          <ul className="mt-3 space-y-1.5 text-meta">
             <li>
               <Link href="/standards" className="hover:underline underline-offset-4">
                 {ts('title')}
@@ -95,10 +95,10 @@ export async function SiteFooter({ locale }: { locale: Locale }) {
         </nav>
 
         <nav aria-labelledby="footer-editions">
-          <h2 id="footer-editions" className="text-xs font-semibold uppercase tracking-wider text-[--color-muted]">
+          <h2 id="footer-editions" className="label text-strong">
             {t('editions')}
           </h2>
-          <ul className="mt-3 space-y-1.5 text-sm">
+          <ul className="mt-3 space-y-1.5 text-meta">
             {EDITIONS.map((e) => (
               <li key={e}>
                 <Link href={`/edition/${e}`} className="hover:underline underline-offset-4">
@@ -108,10 +108,10 @@ export async function SiteFooter({ locale }: { locale: Locale }) {
             ))}
           </ul>
 
-          <h2 className="mt-5 text-xs font-semibold uppercase tracking-wider text-[--color-muted]">
+          <h2 className="label mt-5 text-strong">
             {t('languages')}
           </h2>
-          <ul className="mt-3 space-y-1.5 text-sm">
+          <ul className="mt-3 space-y-1.5 text-meta">
             {LOCALES.map((l) => (
               <li key={l}>
                 <Link
@@ -128,13 +128,13 @@ export async function SiteFooter({ locale }: { locale: Locale }) {
         </nav>
 
         <div>
-          <h2 className="text-xs font-semibold uppercase tracking-wider text-[--color-muted]">
+          <h2 className="label text-strong">
             {tn('home')}
           </h2>
-          <p className="mt-3 max-w-[32ch] text-sm text-[--color-muted]">
+          <p className="mt-3 max-w-[32ch] text-meta leading-relaxed text-muted">
             {SITE.promise[locale]}
           </p>
-          <p className="mt-3 text-sm">
+          <p className="mt-3 text-meta">
             <a
               href={`mailto:${SITE.contact}`}
               className="hover:underline underline-offset-4"
@@ -146,18 +146,18 @@ export async function SiteFooter({ locale }: { locale: Locale }) {
       </div>
 
       {/* --------------------------------------------------------- bottom */}
-      <div className="border-t border-[--color-line]">
-        <div className="mx-auto max-w-[1440px] space-y-2 px-[--spacing-gutter] py-5">
+      <div className="border-t border-line">
+        <div className="page space-y-2 py-5">
           {/*
             The prototype disclosure sits in the footer of every page, not only
             on the pages showing sample content. A reader who lands directly on
             an article should be able to find out what this site currently is
             without navigating anywhere.
           */}
-          <p className="text-xs text-[--color-copper-500] dark:text-[--color-copper-300]">
+          <p className="text-micro leading-relaxed text-copper-500 dark:text-copper-300">
             {t('prototypeNotice')}
           </p>
-          <p className="text-xs text-[--color-faint]">
+          <p className="text-micro text-faint">
             {t('rights', { year: new Date().getFullYear() })}
           </p>
         </div>

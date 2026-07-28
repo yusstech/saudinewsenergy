@@ -46,14 +46,14 @@ export default async function LatestPage({
     <>
       <PageHeader title={t('title')} intro={t('intro')} />
 
-      <div className="mx-auto max-w-[1440px] px-[--spacing-gutter] py-8">
+      <div className="mx-auto max-w-[1440px] px-[var(--gutter)] py-8">
         {stories.length === 0 ? (
           <EmptyState title={tc('empty')} />
         ) : (
           <div className="space-y-10">
             {[...byDay.entries()].map(([day, list]) => (
               <section key={day}>
-                <h2 className="mb-4 border-b border-[--color-line] pb-1.5 text-sm font-bold uppercase tracking-wider text-[--color-muted]">
+                <h2 className="mb-4 border-b border-line pb-1.5 text-sm font-bold uppercase tracking-wider text-muted">
                   <time dateTime={day}>{formatDate(day, locale)}</time>
                 </h2>
                 <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">

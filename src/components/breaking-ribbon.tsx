@@ -1,9 +1,8 @@
-'use client';
-
-import { useState } from 'react';
-import { useTranslations } from 'next-intl';
+import { getTranslations } from 'next-intl/server';
 import { Link } from '@/i18n/navigation';
+import { formatTime, machineDate } from '@/lib/format';
 import type { AlertState } from '@content/schema';
+import type { Locale } from '@/i18n/config';
 
 export interface RibbonItem {
   slug: string;
@@ -13,118 +12,80 @@ export interface RibbonItem {
   time: string;
 }
 
-const DOT: Record<AlertState, string> = {
-  breaking: 'bg-[--color-breaking]',
-  developing: 'bg-[--color-developing]',
-  live: 'bg-[--color-live]',
-  'market-move': 'bg-[--color-market]',
-  'project-update': 'bg-[--color-line-strong]',
-};
-
-const KEY: Record<AlertState, string> = {
-  breaking: 'breaking',
-  developing: 'developing',
-  live: 'live',
-  'market-move': 'marketMove',
-  'project-update': 'projectUpdate',
-};
-
 /**
- * The breaking and developing ribbon.
+ * The breaking alert.
  *
- * Motion here is a signal, and signals have to be escapable. Three separate
- * mechanisms stop it: hovering, focusing anything inside it with a keyboard,
- * and an explicit pause button — and `prefers-reduced-motion` removes the
- * animation entirely rather than merely slowing it. WCAG 2.2.2 requires a pause
- * mechanism for anything that moves for more than five seconds, and a
- * hover-only pause silently excludes every keyboard and touch reader, which is
- * why the button exists even though it looks redundant on a desktop mouse.
+ * Two changes from what this was, both of them the point:
  *
- * The track is duplicated so the loop closes without a visible jump. The copy
- * is `aria-hidden` — a screen reader that announced every headline twice would
- * be describing an implementation detail.
+ * **It is conditional.** Previously it rendered on every page whatever the news, which made it
+ * furniture. An alert that is always on is not an alert — a reader learns within a day that the
+ * red bar means nothing and stops seeing it. It now appears only for `breaking` and
+ * `developing`, the two states that describe a material event still in motion. Live coverage,
+ * market moves and project updates have their own surfaces and do not belong in an alert.
+ *
+ * **It is static.** It used to be a marquee, stacked above a second marquee. Moving text you
+ * cannot finish reading is worse than static text, so the top item simply sits there, at a size
+ * you can actually read, with the rest reachable behind a count. No animation means no pause
+ * control to get wrong and nothing for `prefers-reduced-motion` to suppress.
  */
-export function BreakingRibbon({ items }: { items: RibbonItem[] }) {
-  const t = useTranslations('status');
-  const tc = useTranslations('common');
-  const [paused, setPaused] = useState(false);
-
-  if (!items.length) return null;
-
-  // Slow enough to read at a glance, and scaled to the amount of content so a
-  // two-item ribbon does not race past.
-  const duration = Math.max(45, items.length * 16);
-
-  const row = (hidden: boolean) => (
-    <ul
-      className="flex shrink-0 items-center"
-      aria-hidden={hidden || undefined}
-    >
-      {items.map((item) => (
-        <li key={`${hidden ? 'dup-' : ''}${item.slug}`} className="flex items-center">
-          <span
-            className={`mx-3 inline-block size-1.5 shrink-0 rounded-full ${DOT[item.state]} ${
-              item.state === 'live' ? 'live-dot' : ''
-            }`}
-            aria-hidden="true"
-          />
-          <Link
-            href={item.href}
-            tabIndex={hidden ? -1 : undefined}
-            className="whitespace-nowrap text-sm hover:underline underline-offset-4"
-          >
-            <span className="font-semibold uppercase tracking-wider text-[0.6875rem]">
-              {t(KEY[item.state])}
-            </span>
-            <span className="mx-2 text-[--color-faint]" aria-hidden="true">
-              /
-            </span>
-            {item.headline}
-          </Link>
-        </li>
-      ))}
-    </ul>
+export async function BreakingRibbon({
+  items,
+  locale,
+}: {
+  items: RibbonItem[];
+  locale: Locale;
+}) {
+  const alerts = items.filter(
+    (i) => i.state === 'breaking' || i.state === 'developing',
   );
+  if (!alerts.length) return null;
+
+  const t = await getTranslations('status');
+  const [lead, ...rest] = alerts;
+  if (!lead) return null;
+
+  const breaking = lead.state === 'breaking';
 
   return (
-    <div className="border-b border-[--color-line] bg-[--color-surface]">
-      <div className="mx-auto flex max-w-[1440px] items-center gap-3 px-[--spacing-gutter]">
-        <h2 className="sr-only">{t('breaking')}</h2>
-
-        <div
-          className="marquee relative min-w-0 flex-1 overflow-hidden py-2"
-          data-paused={paused}
+    <aside
+      aria-label={t(breaking ? 'breaking' : 'developing')}
+      className={`border-b ${
+        breaking
+          ? 'border-breaking bg-breaking-soft'
+          : 'border-developing bg-developing-soft'
+      }`}
+    >
+      <div className="page flex items-baseline gap-3 py-2.5">
+        <span
+          className={`label shrink-0 ${
+            breaking ? 'text-breaking' : 'text-developing'
+          }`}
         >
-          <div
-            className="marquee-track flex w-max"
-            style={{ ['--marquee-duration' as string]: `${duration}s` }}
+          {t(breaking ? 'breaking' : 'developing')}
+        </span>
+
+        <p className="min-w-0 flex-1 text-title font-medium leading-snug">
+          <Link href={lead.href} className="hover:underline underline-offset-4">
+            {lead.headline}
+          </Link>
+        </p>
+
+        <time
+          dateTime={machineDate(lead.time)}
+          className="numeric hidden shrink-0 text-micro text-muted sm:block"
+        >
+          {formatTime(lead.time, locale)}
+        </time>
+
+        {rest.length > 0 && (
+          <Link
+            href="/latest"
+            className="hidden shrink-0 text-micro font-semibold text-muted hover:text-body sm:block"
           >
-            {row(false)}
-            {row(true)}
-          </div>
-        </div>
-
-        <button
-          type="button"
-          onClick={() => setPaused((p) => !p)}
-          aria-pressed={paused}
-          className="shrink-0 rounded-sm p-1.5 text-[--color-muted] hover:bg-[--color-surface-sunken] hover:text-[--color-body]"
-          title={paused ? tc('retry') : tc('dismiss')}
-        >
-          <span className="sr-only">
-            {paused ? 'Resume headline ticker' : 'Pause headline ticker'}
-          </span>
-          {paused ? (
-            <svg viewBox="0 0 16 16" className="size-3.5" fill="currentColor" aria-hidden="true">
-              <path d="M4 2.5v11l9-5.5-9-5.5Z" />
-            </svg>
-          ) : (
-            <svg viewBox="0 0 16 16" className="size-3.5" fill="currentColor" aria-hidden="true">
-              <path d="M4 2.5h3v11H4v-11Zm5 0h3v11H9v-11Z" />
-            </svg>
-          )}
-        </button>
+            +{rest.length}
+          </Link>
+        )}
       </div>
-    </div>
+    </aside>
   );
 }

@@ -47,14 +47,14 @@ export default async function CorrectionsPage({
   return (
     <>
       <PageHeader title={t('corrections')} />
-      <div className="mx-auto max-w-[1440px] px-[--spacing-gutter] py-8">
+      <div className="mx-auto max-w-[1440px] px-[var(--gutter)] py-8">
         {entries.length === 0 ? (
           <EmptyState title={tc('empty')} />
         ) : (
-          <ol className="divide-y divide-[--color-line]">
+          <ol className="divide-y divide-line">
             {entries.map(({ story, correction }, i) => (
               <li key={`${story.slug}-${i}`} className="py-4">
-                <p className="text-xs font-semibold uppercase tracking-wider text-[--color-developing]">
+                <p className="text-xs font-semibold uppercase tracking-wider text-developing">
                   {correction.kind === 'correction'
                     ? ta('correctedOn', { date: formatDate(correction.date, locale) })
                     : ta('updatedOn', { date: formatDate(correction.date, locale) })}
@@ -67,7 +67,7 @@ export default async function CorrectionsPage({
                     {story.headline}
                   </Link>
                 </h2>
-                <p className="mt-1 text-sm text-[--color-muted]">{correction.note}</p>
+                <p className="mt-1 text-sm text-muted">{correction.note}</p>
               </li>
             ))}
           </ol>
@@ -75,12 +75,12 @@ export default async function CorrectionsPage({
       </div>
       <Prose>
         {locale === 'en' ? (
-          <p className="text-sm text-[--color-muted]">
+          <p className="text-sm text-muted">
             Spotted an error? Write to the newsroom and we will look at it.
             Material corrections are recorded on the story and listed here.
           </p>
         ) : (
-          <p className="text-sm text-[--color-muted]">
+          <p className="text-sm text-muted">
             هل لاحظت خطأً؟ راسل غرفة الأخبار وسننظر فيه. وتُسجَّل التصحيحات
             الجوهرية في المادة نفسها وتُدرج هنا.
           </p>
