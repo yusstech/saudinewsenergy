@@ -112,15 +112,13 @@
     "readingTime": "{minutes} min read",
     "takeaways": "Key energy takeaways",
     "contextPanel": "The project in context",
-    "sources": "Sources",
-    "sourcingNote": "Sourcing note",
+    "faq": "Questions answered",
     "corrections": "Corrections & updates",
     "correctedOn": "Corrected {date}",
     "updatedOn": "Updated {date}",
     "translation": "Translation",
     "translatedFrom": "Translated from {language}",
     "readOriginal": "Read the original",
-    "machineTranslated": "Machine-assisted translation, not yet reviewed by an editor",
     "originalReporting": "Original reporting",
     "relatedProjects": "Related project",
     "relatedCompanies": "Organisations in this story",
@@ -139,8 +137,6 @@
     "readingProgress": "Reading progress",
     "liveUpdates": "Live updates",
     "newestFirst": "Newest first",
-    "imageCredit": "Credit",
-    "illustrative": "Illustrative image",
     "diagram": "Saudi Energy News diagram"
   },
   "sector": {
@@ -217,7 +213,6 @@
     "placeholder": "Search Saudi energy coverage",
     "submit": "Search",
     "keywordTitle": "Matching stories",
-    "sampleLabel": "Sample",
     "resultCount": "{count, plural, =0 {No results} one {1 result} other {# results}}",
     "noResults": "No stories match that search yet.",
     "tryAgain": "Try a different wording, or browse the latest coverage."
@@ -235,14 +230,9 @@
     "intro": "Every story, newest first."
   },
   "standards": {
-    "title": "Editorial standards",
     "corrections": "Corrections",
     "about": "About",
-    "contact": "Contact",
-    "sourcePolicy": "Source policy",
-    "sponsoredPolicy": "Sponsored content policy",
-    "accessibility": "Accessibility",
-    "privacy": "Privacy"
+    "contact": "Contact"
   },
   "footer": {
     "newsletters": "Newsletters",
@@ -251,8 +241,7 @@
     "editorial": "Editorial",
     "editions": "Editions",
     "languages": "Languages",
-    "rights": "© {year} Saudi Energy News. All rights reserved.",
-    "prototypeNotice": "Every story here is reported and sourced. This site publishes no market data."
+    "rights": "© {year} Saudi Energy News. All rights reserved."
   },
   "common": {
     "loading": "Loading…",
@@ -267,7 +256,6 @@
     "empty": "Nothing here yet",
     "readMore": "Read more",
     "dismiss": "Dismiss",
-    "more": "More",
-    "sampleData": "Sample data"
+    "more": "More"
   }
 }

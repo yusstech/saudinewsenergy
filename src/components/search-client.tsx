@@ -105,11 +105,6 @@ export function SearchClient({
                   <span className="text-[0.6875rem] font-semibold uppercase tracking-wider text-muted">
                     {sectorLabel(doc.sector as Sector, locale)}
                   </span>
-                  {doc.isSampleContent && (
-                    <span className="rounded-sm bg-surface-sunken px-1.5 py-0.5 text-[0.625rem] font-semibold uppercase tracking-wider text-muted ring-1 ring-line-strong">
-                      {t('sampleLabel')}
-                    </span>
-                  )}
                   <span className="numeric text-xs text-faint">
                     {formatDate(doc.publishedAt, locale)}
                   </span>

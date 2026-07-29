@@ -35,7 +35,7 @@ public/media/        diagrams, licensed photography, LICENSES.md
 ```
 
 **Page types:** home · edition · latest · sector · article · live article ·
-projects · company · search · saved · standards / corrections / about / contact,
+projects · company · search · saved · corrections / about / contact,
 in both locales. The live-article route currently generates nothing — there is no
 live coverage running — and returns the day there is.
 
@@ -49,13 +49,16 @@ the `slug` in the frontmatter, and the frontmatter must satisfy
 
 Validation is fatal by design: a story with a malformed date or a missing sector
 fails `pnpm build` rather than rendering a broken card. A red build is a
-five-minute problem; a story that published without its sourcing note is a
+five-minute problem; a story that published with a malformed date is a
 correction.
 
 Reference figures from the frontmatter `images` array in the body with
 `<Figure id="1" />` (1-indexed). There is deliberately no way to put a raw
 `<img>` in a story body — every asset must carry the alt text, credit and
-licence the schema requires.
+licence the schema requires. The credit and licence are the newsroom's own
+record rather than page furniture, which puts one rule on image sourcing: only
+use images whose licence requires no on-page attribution. See
+`public/media/LICENSES.md`.
 
 ---
 
@@ -113,9 +116,9 @@ translation is published, the pair becomes a genuine alternate automatically.
 where a story carries extractable Q&A. `mentions` is derived from the editorial
 links in the body, so the markup cannot drift from what the page says.
 
-**`/llms.txt`** — a plain-text index for answer engines, carrying the sourcing
-position. It is generated from published stories rather than maintained by hand,
-so placeholder content has no path by which it could appear. Answer-engine crawlers are
+**`/llms.txt`** — a plain-text index for answer engines. It is generated from
+published stories rather than maintained by hand, so nothing unpublished has a
+path by which it could appear. Answer-engine crawlers are
 allowed in `robots.ts` deliberately: a specialist publication's reason to exist
 is being the thing people cite, and the citation carries the masthead into rooms
 the page view never reaches.

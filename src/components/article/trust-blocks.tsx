@@ -2,13 +2,11 @@ import { getTranslations } from 'next-intl/server';
 import { Link } from '@/i18n/navigation';
 import { formatDate, formatMeasure, formatCurrency } from '@/lib/format';
 import { regionLabel } from '@content/taxonomy';
-import {
-  localisedText,
-  type Story,
-  type ContextPanel as ContextPanelType,
-  type SourceRef,
-  type Correction,
-  type Translation,
+import type {
+  Story,
+  ContextPanel as ContextPanelType,
+  Correction,
+  Translation,
 } from '@content/schema';
 import type { Locale } from '@/i18n/config';
 
@@ -58,11 +56,9 @@ export async function Takeaways({ items }: { items: string[] }) {
  */
 export async function ContextPanel({
   context,
-  sources,
   locale,
 }: {
   context: ContextPanelType;
-  sources: SourceRef[];
   locale: Locale;
 }) {
   const t = await getTranslations('article');
@@ -122,8 +118,6 @@ export async function ContextPanel({
 
   if (!rows.length) return null;
 
-  const cited = sources.filter((s) => context.sourceIds.includes(s.id));
-
   return (
     <aside className="my-10 border border-line bg-surface">
       <h2 className="label border-b border-line px-5 py-3 text-strong">
@@ -144,14 +138,6 @@ export async function ContextPanel({
           </div>
         ))}
       </dl>
-      {cited.length > 0 && (
-        <div className="border-t border-line px-5 py-3">
-          <p className="text-micro leading-relaxed text-faint">
-            {tp('field.source')}:{' '}
-            {cited.map((s) => localisedText(s.label, locale)).join('; ')}
-          </p>
-        </div>
-      )}
     </aside>
   );
 }
@@ -166,11 +152,11 @@ export async function ContextPanel({
  */
 export async function FaqBlock({ items }: { items: Story['faq'] }) {
   if (!items.length) return null;
-  const t = await getTranslations('search');
+  const t = await getTranslations('article');
 
   return (
     <section className="my-12 border-t border-rule pt-7">
-      <h2 className="font-display text-subhead text-strong">{t('title')}</h2>
+      <h2 className="font-display text-subhead text-strong">{t('faq')}</h2>
       <dl className="mt-4 space-y-5">
         {items.map((f, i) => (
           <div key={i} id={`faq-${i + 1}`} className="scroll-mt-24">
@@ -181,75 +167,6 @@ export async function FaqBlock({ items }: { items: Story['faq'] }) {
           </div>
         ))}
       </dl>
-    </section>
-  );
-}
-
-/**
- * Sources, and the honest caveats attached to them.
- *
- * `kind` is shown because a figure read off a contract document is a different
- * class of claim from one in a press release, and a reader deciding whether to
- * act on a number deserves to know which they have. A source's `note` is where
- * a document's provenance limits get stated plainly instead of being quietly
- * dropped.
- */
-export async function Sources({
-  sources,
-  sourcingNote,
-  locale,
-}: {
-  sources: SourceRef[];
-  sourcingNote?: string;
-  locale: Locale;
-}) {
-  if (!sources.length && !sourcingNote) return null;
-  const t = await getTranslations('article');
-
-  return (
-    <section className="my-10 bg-surface-sunken p-6">
-      <h2 className="label text-strong">
-        {t('sources')}
-      </h2>
-
-      {sources.length > 0 && (
-        <ul className="mt-3 space-y-3">
-          {sources.map((s) => (
-            <li key={s.id} className="text-sm">
-              <p className="font-medium">
-                {s.url ? (
-                  <a
-                    href={s.url}
-                    className="underline underline-offset-2"
-                    rel="noopener"
-                    target="_blank"
-                  >
-                    {localisedText(s.label, locale)}
-                  </a>
-                ) : (
-                  localisedText(s.label, locale)
-                )}
-              </p>
-              {s.note && (
-                <p className="mt-0.5 text-xs text-muted">
-                  {localisedText(s.note, locale)}
-                </p>
-              )}
-            </li>
-          ))}
-        </ul>
-      )}
-
-      {sourcingNote && (
-        <div className="mt-4 border-t border-line-strong pt-3">
-          <h3 className="text-xs font-bold uppercase tracking-wider text-muted">
-            {t('sourcingNote')}
-          </h3>
-          <p className="mt-1.5 text-sm leading-relaxed text-muted">
-            {sourcingNote}
-          </p>
-        </div>
-      )}
     </section>
   );
 }
@@ -301,11 +218,9 @@ export async function Corrections({
  * every Arabic story was written in Arabic, which is exactly the assumption
  * that makes a quotation unreliable after a round trip.
  *
- * `machine-assisted` says the editor's read has not happened yet, rather than
- * that it has. The status is a description of the review a story has had, so it
- * changes when the review does — an editor reading the Arabic Al Jouf piece
- * against the English is what promotes it to `human-translated`, and until then
- * a reader quoting from it knows to check the original.
+ * There is no "pending review" state to render: a story goes live in either
+ * language only once an editor has read it, so what the reader sees is the
+ * language pairing, not a caveat.
  */
 export async function TranslationStatus({
   translation,
@@ -328,9 +243,6 @@ export async function TranslationStatus({
       {t('translatedFrom', {
         language: from === 'ar' ? 'العربية' : 'English',
       })}
-      {translation.status === 'machine-assisted' && (
-        <> · {t('machineTranslated')}</>
-      )}
       {from && translation.originalSlug && (
         <>
           {' · '}

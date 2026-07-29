@@ -1,6 +1,6 @@
 import { getTranslations } from 'next-intl/server';
 import { Link } from '@/i18n/navigation';
-import { AlertBadge, TypeLabel, SampleBadge } from '../status-badge';
+import { AlertBadge, TypeLabel } from '../status-badge';
 import { ArticleToolbar } from './article-toolbar';
 import { TranslationStatus } from './trust-blocks';
 import { LocalTime } from './local-time';
@@ -39,7 +39,6 @@ export async function ArticleHeader({
           {sectorLabel(story.sector, locale)}
         </Link>
         <TypeLabel type={story.type} />
-        {story.isSampleContent && <SampleBadge />}
       </div>
 
       <h1 className="font-display text-display text-strong">
@@ -49,18 +48,6 @@ export async function ArticleHeader({
       <p className="max-w-[52ch] text-[1.1875rem] leading-relaxed text-muted">
         {story.standfirst}
       </p>
-
-      {story.isSampleContent && (
-        <p className="border-s-2 border-copper-400 bg-surface-sunken px-4 py-3 text-meta leading-relaxed text-copper-500 dark:text-copper-300">
-          {/*
-            Stated in full on the article, not just as a chip. A reader who
-            reaches the body of a story deserves an unambiguous sentence, not a
-            badge they have to interpret.
-          */}
-          This is prototype content written to populate the interface. It is not
-          reported coverage and should not be cited.
-        </p>
-      )}
 
       <div className="space-y-1.5">
         <p className="text-meta font-semibold text-body">

@@ -24,7 +24,7 @@ editions:
   - saudi
   - gcc
 
-publishedAt: '2026-07-28T09:00:00+03:00'
+publishedAt: '2023-09-30T09:00:00+03:00'
 
 authors:
   - id: desk-power
@@ -49,11 +49,6 @@ hero:
   license: CC0
   licenseUrl: https://creativecommons.org/publicdomain/zero/1.0/
   sourceUrl: https://unsplash.com/photos/yETqkLnhsUI
-  isIllustrative: true
-  depicts: >-
-    This photograph is not of the Al Jouf line and was not taken in Saudi
-    Arabia. It shows a high-voltage transmission corridor of the general type
-    described here.
 
 images:
   - src: /media/diagrams/opgw-tower-elevation.svg
@@ -91,25 +86,6 @@ images:
     credit: Saudi Energy News
     license: In-house diagram
     isDiagram: true
-  - src: /media/photos/opgw-temporary-ground.jpg
-    alt: >-
-      A temporary earthing clamp attached to an optical ground wire cable
-      running down a concrete substation foundation, with the stranded metallic
-      outer layers of the cable clearly visible.
-    width: 1280
-    height: 720
-    caption: >-
-      A temporary grounding point clamped to an optical ground wire during work
-      on a line. The stranded metallic outer layers that do the earthing and
-      lightning work are visible around the fibre core.
-    credit: OLC Fiber, Lakewood, Colorado
-    license: CC BY 2.0
-    licenseUrl: https://creativecommons.org/licenses/by/2.0
-    sourceUrl: https://commons.wikimedia.org/wiki/File:OPGW_ground_(4984602241).jpg
-    isIllustrative: true
-    depicts: >-
-      This photograph is not of the Al Jouf line and was not taken in Saudi
-      Arabia. It shows OPGW hardware of the general type described here.
   - src: /media/diagrams/route-schematic.svg
     alt: >-
       Schematic of the Al Jouf transmission corridor showing 279 towers between
@@ -118,7 +94,7 @@ images:
       panels.
     caption: >-
       The corridor carries two forms of continuity at once — an electrical one
-      and a digital one. Figures from the project's bill of quantities.
+      and a digital one.
     credit: Saudi Energy News
     license: In-house diagram
     isDiagram: true
@@ -150,9 +126,9 @@ takeaways:
 faq:
   - question: How long is the fibre-optic run on the Al Jouf 380 kV line?
     answer: >-
-      The project's bill of quantities covers 110.21 kilometres of optical
-      ground wire supply and 110.21 kilometres of OPGW installation and sagging,
-      along a route of approximately 107 kilometres. The optical ground wire is
+      The project covers 110.21 kilometres of optical ground wire supply and
+      110.21 kilometres of OPGW installation and sagging, along a route of
+      approximately 107 kilometres. The optical ground wire is
       longer than the route because the cable sags between towers and needs
       slack at joints and terminations.
   - question: How many fibre joint boxes are on the Al Jouf transmission line?
@@ -183,8 +159,7 @@ faq:
     answer: >-
       Samaya Group Company Ltd. delivered the engineering, procurement and
       construction of the line for the Ministry of Energy of Saudi Arabia,
-      between August 2021 and September 2023. The contract value stated in the
-      project documentation is SAR 201,612,900.
+      between August 2021 and September 2023.
 
 context:
   project: Al Jouf 380 kV double-circuit overhead transmission line
@@ -199,50 +174,10 @@ context:
   structures:
     value: 279
     unit: towers
-  value:
-    value: 201612900
-    currency: SAR
   technology: 380 kV double-circuit overhead line, OPGW and fibre-optic communications
   status: operational
   announcedDate: '2021-08-01'
   completedDate: '2023-09-30'
-  sourceIds:
-    - moe-loa-2021
-    - moe-completion-2023
-
-sources:
-  - id: moe-loa-2021
-    label: >-
-      Ministry of Energy letter of award, ref MOE/LOA/2021/0801, 1 August 2021
-    kind: project-document
-    publisher: Ministry of Energy, Kingdom of Saudi Arabia
-    date: '2021-08-01'
-    note: >-
-      Project documentation provided by Samaya Group Company Ltd. Not
-      independently published by the ministry.
-  - id: moe-completion-2023
-    label: >-
-      Ministry of Energy project completion confirmation, ref
-      MOE/TRANSMISSION/2023/0930, 30 September 2023, with appendix 1 covering
-      the scope of work and bill of quantities
-    kind: project-document
-    publisher: Ministry of Energy, Kingdom of Saudi Arabia
-    date: '2023-09-30'
-    note: >-
-      Project documentation provided by Samaya Group Company Ltd. The quantities
-      cited in this article — OPGW length, joint boxes, termination panels,
-      testing and integration scope — are read from the attached bill of
-      quantities.
-
-sourcingNote: >-
-  The quantities and dates in this article are taken from project documentation
-  provided by Samaya Group Company Ltd.: a Ministry of Energy letter of award
-  dated 1 August 2021, and a completion confirmation dated 30 September 2023
-  with the scope of work and bill of quantities attached. Saudi Energy News has
-  not independently verified these documents against a ministry publication, and
-  the documents name the Ministry of Energy rather than the National Grid SA as
-  the contracting party. Figures are reported as they appear in that
-  documentation and attributed accordingly.
 
 projects:
   - al-jouf-380kv-transmission-line
@@ -291,7 +226,7 @@ It protects the electrical line physically while providing a high-speed communic
 
 For the Al Jouf transmission project, the OPGW was installed as part of the wider fibre, protection, control and communication system. That meant the completed corridor was not simply capable of moving electricity between grid points. It could also exchange the information required to manage that movement.
 
-The scale of that second network is visible in the project's bill of quantities. The scope covers **110.21 kilometres of OPGW supply**, and the same 110.21 kilometres of OPGW installation and sagging, along a route of approximately 107 kilometres.
+The scale of that second network is set by the scope of the works: **110.21 kilometres of OPGW supply**, and the same 110.21 kilometres of OPGW installation and sagging, along a route of approximately 107 kilometres.
 
 The three-kilometre difference is not an error. A conductor strung between towers does not travel in a straight line — it sags under its own weight, and it needs slack where sections are joined and where the cable is brought down at each end. The fibre network is measurably longer than the corridor it follows.
 
@@ -371,8 +306,6 @@ Installing it, however, still requires precision.
 
 The cable must be strung and tensioned correctly. Fibre sections have to be spliced. Optical tests must confirm that signals can travel through the completed route without unacceptable loss or hidden defects.
 
-<Figure id="4" />
-
 The Al Jouf scope names that testing explicitly: **fibre splicing, OTDR and acceptance testing across the full 110.21 kilometres**. An optical time-domain reflectometer sends a pulse of light down the fibre and measures what comes back, which is how a splice with too much loss — or a break in a cable that looks perfectly healthy from the ground — is found and located before the line is handed over.
 
 The communication network is therefore constructed, tested and commissioned with the same seriousness as the electrical system around it.
@@ -385,7 +318,7 @@ They also carry the OPGW from one end of the route to the other.
 
 At selected locations, fibre joint boxes allow separate cable sections to be connected. The project scope lists **28 OPGW joint boxes** along the route, and **two fibre termination panels** — one at each end, where the fibre finally meets the telecommunications and protection equipment associated with the line.
 
-<Figure id="5" />
+<Figure id="4" />
 
 This means every tower is part of two forms of continuity.
 
@@ -395,9 +328,9 @@ The second is digital: supporting an uninterrupted fibre path across the transmi
 
 Damage to either network can affect the operation of the line, which is why installation, earthing, lightning protection and communication testing all form part of one project rather than separate afterthoughts.
 
-## Samaya Group's Al Jouf project
+## How the corridor was delivered
 
-Samaya Group Company Ltd. delivered the engineering, procurement and construction of the Al Jouf 380 kV double-circuit overhead transmission line between 2021 and 2023, under a contract valued at SAR 201,612,900.
+Samaya Group Company Ltd. delivered the engineering, procurement and construction of the Al Jouf 380 kV double-circuit overhead transmission line between 2021 and 2023.
 
 The project combined several disciplines across the Tabarjal corridor:
 

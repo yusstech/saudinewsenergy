@@ -10,7 +10,6 @@ export interface SearchDoc {
   standfirst: string;
   sector: string;
   publishedAt: string;
-  isSampleContent: boolean;
   /** Lowercased haystack for keyword matching. */
   haystack: string;
 }
@@ -22,8 +21,6 @@ export interface SearchDoc {
  * server round trip and nothing that can be unavailable. When the corpus
  * outgrows a single payload this is the one place that has to change.
  *
- * Prototype stories stay in the index. A reader browsing the prototype should
- * be able to find them, and the results label them as sample content.
  */
 export function buildSearchIndex(locale: Locale): SearchDoc[] {
   return getStories(locale).map((story) => ({
@@ -34,7 +31,6 @@ export function buildSearchIndex(locale: Locale): SearchDoc[] {
     standfirst: story.standfirst,
     sector: story.sector,
     publishedAt: story.publishedAt,
-    isSampleContent: story.isSampleContent,
     haystack: [
       story.headline,
       story.standfirst,

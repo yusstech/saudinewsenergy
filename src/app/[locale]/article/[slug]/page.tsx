@@ -15,7 +15,6 @@ import {
   Takeaways,
   ContextPanel,
   FaqBlock,
-  Sources,
   Corrections,
 } from '@/components/article/trust-blocks';
 import { ReadingProgress } from '@/components/article/article-toolbar';
@@ -99,20 +98,10 @@ export default async function ArticlePage({
           <ArticleBody source={story.body} images={story.images} />
 
           {story.context && (
-            <ContextPanel
-              context={story.context}
-              sources={story.sources}
-              locale={locale}
-            />
+            <ContextPanel context={story.context} locale={locale} />
           )}
 
           <FaqBlock items={story.faq} />
-
-          <Sources
-            sources={story.sources}
-            sourcingNote={story.sourcingNote}
-            locale={locale}
-          />
 
           <Corrections corrections={story.corrections} locale={locale} />
 

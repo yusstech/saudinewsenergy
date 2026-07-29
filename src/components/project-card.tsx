@@ -5,7 +5,7 @@ import { regionLabel } from '@content/taxonomy';
 import { getCompany } from '@content/companies';
 import { getStoriesByProject } from '@/lib/content';
 import { storyHref } from './story-card';
-import { localisedText, type Project } from '@content/schema';
+import type { Project } from '@content/schema';
 import type { Locale } from '@/i18n/config';
 
 const STATUS_STYLE: Record<Project['status'], string> = {
@@ -23,13 +23,6 @@ const STATUS_STYLE: Record<Project['status'], string> = {
  * Every quantity renders through `formatMeasure` or `formatCurrency`, so a
  * number can never reach the page without its unit — the card has no code path
  * that produces a bare figure.
- *
- * A project whose figures come from primary documentation says so on the card
- * itself, not only on the article. That distinction is the most useful thing
- * this card carries for a professional reader: "operational, 107 km, 279
- * towers" from a signed completion certificate is a different class of claim
- * from the same words in a press release, and the reader should be able to
- * tell which they are looking at before they click.
  *
  * **`teaser` truncates and links. `record` shows everything and does not.**
  * That split exists because the card previously did neither: it clamped the
@@ -62,8 +55,6 @@ export async function ProjectCard({
   // the same dead end as a clamped summary with no link. Teasers skip this: they
   // point at the record, and the record points at the coverage.
   const coverage = teaser ? [] : getStoriesByProject(locale, project.slug);
-
-  const documented = project.sources.some((s) => s.kind === 'project-document');
 
   const rows: Array<[string, string]> = [];
   if (project.capacity) {
@@ -196,17 +187,6 @@ export async function ProjectCard({
           </ul>
         </div>
       )}
-
-      <p className="mt-4 border-t border-line pt-2 text-micro leading-relaxed text-faint">
-        {documented
-          ? `${t('field.source')}: ${localisedText(
-              project.sources.find((s) => s.kind === 'project-document')!.label,
-              locale,
-            )}`
-          : project.sources[0]?.note
-            ? localisedText(project.sources[0].note, locale)
-            : ''}
-      </p>
 
       {teaser && (
         <Link

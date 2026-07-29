@@ -1,6 +1,6 @@
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
-import { AlertBadge, TypeLabel, SampleBadge } from './status-badge';
+import { AlertBadge, TypeLabel } from './status-badge';
 import { formatRelative, machineDate, readingMinutes } from '@/lib/format';
 import { sectorLabel } from '@content/taxonomy';
 import type { Story } from '@content/schema';
@@ -51,7 +51,6 @@ export function StoryCard({
       <span className="label text-faint">
         {sectorLabel(story.sector, locale)}
       </span>
-      {story.isSampleContent && <SampleBadge />}
     </div>
   );
 

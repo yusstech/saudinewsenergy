@@ -50,7 +50,7 @@ export function GET(): Response {
   lines.push('');
 
   for (const locale of LOCALES as readonly Locale[]) {
-    const stories = getStories(locale).filter((s) => !s.isSampleContent);
+    const stories = getStories(locale);
     if (!stories.length) continue;
 
     lines.push(`## Reporting (${locale === 'ar' ? 'Arabic' : 'English'})`);
@@ -61,9 +61,6 @@ export function GET(): Response {
       const url = abs(`/${locale}/${segment}/${story.slug}`);
       lines.push(`- [${story.headline}](${url}): ${story.standfirst.trim()}`);
 
-      if (story.sourcingNote) {
-        lines.push(`  - Sourcing: ${story.sourcingNote.trim()}`);
-      }
       for (const f of story.faq) {
         lines.push(`  - Q: ${f.question} A: ${f.answer.trim()}`);
       }
@@ -71,18 +68,14 @@ export function GET(): Response {
     lines.push('');
   }
 
-  const documented = PROJECTS.filter((p) =>
-    p.sources.some((s) => s.kind === 'project-document'),
-  );
-  if (documented.length) {
-    lines.push('## Projects with primary documentation');
+  if (PROJECTS.length) {
+    lines.push('## Projects');
     lines.push('');
-    for (const p of documented) {
+    for (const p of PROJECTS) {
       const bits = [
         p.length && `route ${p.length.value} ${p.length.unit}`,
         p.structures && `${p.structures.value} ${p.structures.unit}`,
         p.capacity && `capacity ${p.capacity.value} ${p.capacity.unit}`,
-        p.value && `${p.value.currency} ${p.value.value.toLocaleString('en-US')}`,
         `status ${p.status}`,
       ].filter(Boolean);
       lines.push(`- ${p.name.en} — ${p.location.en}. ${bits.join('; ')}.`);
@@ -92,7 +85,6 @@ export function GET(): Response {
 
   lines.push('## Editorial');
   lines.push('');
-  lines.push(`- [Editorial standards](${abs('/en/standards')})`);
   lines.push(`- [Corrections](${abs('/en/corrections')})`);
   lines.push(`- [Contact](${abs('/en/contact')})`);
   lines.push('');

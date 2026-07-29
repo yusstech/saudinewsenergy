@@ -88,20 +88,3 @@ export function TypeLabel({
 
   return <span className={`label ${TYPE_STYLE[type]} ${className}`}>{t(type)}</span>;
 }
-
-/**
- * The prototype-content label.
- *
- * Non-dismissible by design, and rendered on the card as well as the article, because a reader
- * who meets a card in a feed has already formed an impression before they click.
- */
-export function SampleBadge({ className = '' }: { className?: string }) {
-  const t = useTranslations('common');
-  return (
-    <span
-      className={`label inline-flex items-center rounded-[2px] bg-surface-sunken px-1.5 py-0.5 text-muted ring-1 ring-inset ring-line-strong ${className}`}
-    >
-      {t('sampleData')}
-    </span>
-  );
-}

@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 import { LOCALES, LOCALE_TAG, type Locale } from '@/i18n/config';
 import { abs, siteUrl, SITE, siteName } from './site';
 import { hasTranslation } from './content';
-import { localisedText, type Story, type Project, type SourceRef } from '@content/schema';
+import type { Story, Project } from '@content/schema';
 
 /**
  * Canonicals, hreflang and structured data.
@@ -148,10 +148,6 @@ export function storyMetadata(story: Story): Metadata {
       description,
       ...(image ? { images: [image] } : {}),
     },
-    // Prototype stories must never be indexed. They are plausible-looking
-    // energy copy that nobody reported, and the one thing worse than an
-    // unindexed prototype is an indexed one.
-    ...(story.isSampleContent ? { robots: { index: false, follow: false } } : {}),
   };
 }
 
@@ -188,8 +184,13 @@ export function siteJsonLd(locale: Locale) {
         url: base,
         description: SITE.promise[locale],
         knowsLanguage: ['en', 'ar'],
-        // Points a reader — and a rating system — at how we say we work.
-        publishingPrinciples: abs(`/${locale}/standards`),
+        // Consumers that build a publisher entity want a mark to attach to it.
+        // This is the masthead favicon, which is the only logo that exists;
+        // swap it for a raster lockup when there is one.
+        logo: {
+          '@type': 'ImageObject',
+          url: abs('/icon.svg'),
+        },
         correctionsPolicy: abs(`/${locale}/corrections`),
       },
       {
@@ -437,13 +438,4 @@ export function jsonLdScript(data: unknown): string {
   // `<` is escaped so a value containing "</script>" cannot break out of the
   // block. JSON-LD consumers unescape < transparently.
   return JSON.stringify(data).replace(/</g, '\\u003c');
-}
-
-export function sourceLine(source: SourceRef, locale: Locale): string {
-  const label = localisedText(source.label, locale);
-  const parts = [label];
-  if (source.publisher && !label.includes(source.publisher)) {
-    parts.push(source.publisher);
-  }
-  return parts.join(' — ');
 }

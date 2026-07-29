@@ -8,7 +8,15 @@ import type { Locale } from '@/i18n/config';
  * this one value, so it is read in exactly one place. On Vercel preview builds
  * the env var is usually unset; falling back to the deployment URL keeps
  * previews self-consistent rather than silently pointing at production.
+ *
+ * The last resort is the production origin, not localhost. These values are
+ * baked into a static build and are expensive to correct once indexed, so the
+ * failure mode of a forgotten env var has to be "correct URLs" rather than
+ * "a sitemap full of localhost". Local development overrides it in `.env.local`
+ * when it needs to; nothing about a wrong canonical matters on a dev machine.
  */
+export const PRODUCTION_ORIGIN = 'https://saudienergynews.com';
+
 export function siteUrl(): string {
   const explicit = process.env.NEXT_PUBLIC_SITE_URL;
   if (explicit) return explicit.replace(/\/+$/, '');
@@ -16,7 +24,7 @@ export function siteUrl(): string {
   const vercel = process.env.VERCEL_URL;
   if (vercel) return `https://${vercel}`;
 
-  return 'http://localhost:3000';
+  return PRODUCTION_ORIGIN;
 }
 
 /** Absolute URL for a site-relative path. */

@@ -3,56 +3,14 @@ import { projectSchema, type Project } from './schema';
 /**
  * Project records.
  *
- * Two classes of record live here and they are not interchangeable:
- *
- * - **Al Jouf** is built from primary project documentation supplied by the
- *   contractor (a Ministry of Energy letter of award, a completion
- *   confirmation, and the bill of quantities attached to it). Its figures are
- *   exact because the document is exact, and its `sources` say precisely that.
- *
- * - The remaining records carry **publicly announced** headline figures for
- *   well-reported Saudi projects. They are here so the projects feed, filters
- *   and entity pages have realistic shape. Their capacities are the announced
- *   round numbers, not derived estimates, and none of them claims a precision
- *   the public record does not support.
+ * The reference table behind the reporting: what each project is, where it is,
+ * what it consists of and where it has got to. Records are shared by both
+ * locales, so their prose is written twice.
  *
  * Nothing in this file is invented. If a figure is not known, the field is
  * absent rather than filled — the schema makes every quantitative field
  * optional for exactly that reason.
  */
-
-// Records are shared by both locales, so their prose is written twice. Document
-// reference numbers are identifiers rather than prose and stay as issued.
-const ALJOUF_DOCS = [
-  {
-    id: 'moe-loa-2021',
-    label: {
-      en: 'Ministry of Energy letter of award, ref MOE/LOA/2021/0801, 1 August 2021',
-      ar: 'خطاب ترسية من وزارة الطاقة، المرجع MOE/LOA/2021/0801، بتاريخ 1 أغسطس 2021',
-    },
-    kind: 'project-document' as const,
-    publisher: 'Ministry of Energy, Kingdom of Saudi Arabia',
-    date: '2021-08-01',
-    note: {
-      en: 'Project documentation provided by Samaya Group Company Ltd. Not independently published by the ministry.',
-      ar: 'وثائق مشروع مقدَّمة من شركة مجموعة سمايا المحدودة. لم تنشرها الوزارة بصورة مستقلة.',
-    },
-  },
-  {
-    id: 'moe-completion-2023',
-    label: {
-      en: 'Ministry of Energy project completion confirmation, ref MOE/TRANSMISSION/2023/0930, 30 September 2023, with appendix 1 (scope of work and bill of quantities)',
-      ar: 'تأكيد إنجاز مشروع من وزارة الطاقة، المرجع MOE/TRANSMISSION/2023/0930، بتاريخ 30 سبتمبر 2023، مع الملحق 1 (نطاق العمل وجدول الكميات)',
-    },
-    kind: 'project-document' as const,
-    publisher: 'Ministry of Energy, Kingdom of Saudi Arabia',
-    date: '2023-09-30',
-    note: {
-      en: 'Project documentation provided by Samaya Group Company Ltd. Quantities cited in coverage are read from the attached bill of quantities.',
-      ar: 'وثائق مشروع مقدَّمة من شركة مجموعة سمايا المحدودة. والكميات الواردة في التغطية مقروءة من جدول الكميات المرفق.',
-    },
-  },
-];
 
 const raw: Project[] = [
   {
@@ -73,7 +31,6 @@ const raw: Project[] = [
     contractor: 'samaya-group',
     length: { value: 107, unit: 'km', note: 'approximate route length' },
     structures: { value: 279, unit: 'towers' },
-    value: { value: 201_612_900, currency: 'SAR' },
     technology: [
       '380 kV double-circuit overhead line',
       'ACSR twin bundle conductor',
@@ -83,7 +40,6 @@ const raw: Project[] = [
     ],
     announcedDate: '2021-08-01',
     completedDate: '2023-09-30',
-    sources: ALJOUF_DOCS,
   },
   {
     slug: 'sakaka-solar-pv',
@@ -98,20 +54,6 @@ const raw: Project[] = [
     status: 'operational',
     capacity: { value: 300, unit: 'MW' },
     technology: ['Solar photovoltaic'],
-    sources: [
-      {
-        id: 'public-announced',
-        label: {
-          en: 'Publicly announced project figures',
-          ar: 'أرقام المشروع المعلنة علناً',
-        },
-        kind: 'publication',
-        note: {
-          en: 'Headline capacity as publicly announced. Not verified against project documentation.',
-          ar: 'السعة المعلنة كما أُعلنت علناً. غير متحقَّق منها مقابل وثائق المشروع.',
-        },
-      },
-    ],
   },
   {
     slug: 'sudair-solar-pv',
@@ -126,20 +68,6 @@ const raw: Project[] = [
     status: 'operational',
     capacity: { value: 1500, unit: 'MW' },
     technology: ['Solar photovoltaic'],
-    sources: [
-      {
-        id: 'public-announced',
-        label: {
-          en: 'Publicly announced project figures',
-          ar: 'أرقام المشروع المعلنة علناً',
-        },
-        kind: 'publication',
-        note: {
-          en: 'Headline capacity as publicly announced. Not verified against project documentation.',
-          ar: 'السعة المعلنة كما أُعلنت علناً. غير متحقَّق منها مقابل وثائق المشروع.',
-        },
-      },
-    ],
   },
   {
     slug: 'shuaibah-2-solar-pv',
@@ -154,20 +82,6 @@ const raw: Project[] = [
     status: 'under-construction',
     capacity: { value: 2060, unit: 'MW' },
     technology: ['Solar photovoltaic'],
-    sources: [
-      {
-        id: 'public-announced',
-        label: {
-          en: 'Publicly announced project figures',
-          ar: 'أرقام المشروع المعلنة علناً',
-        },
-        kind: 'publication',
-        note: {
-          en: 'Headline capacity as publicly announced. Not verified against project documentation.',
-          ar: 'السعة المعلنة كما أُعلنت علناً. غير متحقَّق منها مقابل وثائق المشروع.',
-        },
-      },
-    ],
   },
   {
     slug: 'neom-green-hydrogen',
@@ -185,20 +99,6 @@ const raw: Project[] = [
     status: 'under-construction',
     capacity: { value: 2.2, unit: 'GW', note: 'dedicated renewable generation' },
     technology: ['Electrolysis', 'Green ammonia', 'Solar', 'Wind'],
-    sources: [
-      {
-        id: 'public-announced',
-        label: {
-          en: 'Publicly announced project figures',
-          ar: 'أرقام المشروع المعلنة علناً',
-        },
-        kind: 'publication',
-        note: {
-          en: 'Headline figures as publicly announced. Not verified against project documentation.',
-          ar: 'الأرقام الرئيسية كما أُعلنت علناً. غير متحقَّق منها مقابل وثائق المشروع.',
-        },
-      },
-    ],
   },
 ];
 

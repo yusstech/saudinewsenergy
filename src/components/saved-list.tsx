@@ -16,7 +16,6 @@ export interface SavedEntry {
   standfirst: string;
   publishedAt: string;
   sector: Sector;
-  isSampleContent: boolean;
 }
 
 export function SavedList({
@@ -27,7 +26,6 @@ export function SavedList({
   locale: Locale;
 }) {
   const t = useTranslations('saved');
-  const tm = useTranslations('common');
   const { slugs, remove } = useSavedStories();
   const [ready, setReady] = useState(false);
 
@@ -62,11 +60,6 @@ export function SavedList({
               <span className="text-[0.6875rem] font-semibold uppercase tracking-wider text-muted">
                 {sectorLabel(entry.sector, locale)}
               </span>
-              {entry.isSampleContent && (
-                <span className="rounded-sm bg-surface-sunken px-1.5 py-0.5 text-[0.6875rem] font-semibold uppercase tracking-wider text-muted ring-1 ring-line-strong">
-                  {tm('sampleData')}
-                </span>
-              )}
             </div>
             <h2 className="mt-1 text-lg font-bold leading-snug">
               <Link href={entry.href} className="hover:underline underline-offset-4">

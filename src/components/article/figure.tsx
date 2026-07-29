@@ -2,19 +2,14 @@ import { getTranslations } from 'next-intl/server';
 import type { MediaAsset } from '@content/schema';
 
 /**
- * A figure, with its credit and licence always attached.
+ * A figure and its caption.
  *
- * The `isIllustrative` branch is the important one. This publication reports on
- * specific physical assets, and the cheapest available mistake is to run a
- * stock photograph of *a* transmission line under a story about *this*
- * transmission line and let the caption imply they are the same. Once that
- * happens the masthead is asserting something it cannot support, and a reader
- * who recognises the tower design knows it.
+ * The caption carries the editorial line and nothing else. Where the picture
+ * came from is recorded in the asset's frontmatter — `credit` and `license` are
+ * required by the schema — but that record is the newsroom's, not the page's,
+ * and it is what governs which images may be used here in the first place.
  *
- * So an illustrative image is labelled as illustrative, in the caption, every
- * time — and `depicts` states what the photograph actually shows rather than
- * what the article is about. There is no code path that renders a photograph
- * without a credit, because `credit` and `license` are required by the schema.
+ * The one mark the page does carry is on in-house diagrams, which say so.
  */
 export async function Figure({
   asset,
@@ -44,48 +39,7 @@ export async function Figure({
       <figcaption className="mt-2.5 space-y-1 text-meta leading-relaxed text-muted">
         {asset.caption && <p>{asset.caption}</p>}
 
-        {asset.isIllustrative && (
-          <p className="font-medium text-copper-500 dark:text-copper-300">
-            {t('illustrative')}
-            {asset.depicts && <>. {asset.depicts}</>}
-          </p>
-        )}
-
-        <p className="text-micro text-faint">
-          {asset.isDiagram ? (
-            <>{t('diagram')}</>
-          ) : (
-            <>
-              {t('imageCredit')}: {asset.credit} · {asset.license}
-              {asset.licenseUrl && (
-                <>
-                  {' '}
-                  <a
-                    href={asset.licenseUrl}
-                    className="underline underline-offset-2"
-                    rel="license noopener"
-                    target="_blank"
-                  >
-                    ↗
-                  </a>
-                </>
-              )}
-              {asset.sourceUrl && (
-                <>
-                  {' · '}
-                  <a
-                    href={asset.sourceUrl}
-                    className="underline underline-offset-2"
-                    rel="noopener"
-                    target="_blank"
-                  >
-                    source
-                  </a>
-                </>
-              )}
-            </>
-          )}
-        </p>
+        {asset.isDiagram && <p className="text-micro text-faint">{t('diagram')}</p>}
       </figcaption>
     </figure>
   );

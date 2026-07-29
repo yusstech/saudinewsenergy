@@ -112,15 +112,13 @@
     "readingTime": "قراءة {minutes} دقيقة",
     "takeaways": "أبرز النقاط",
     "contextPanel": "المشروع في سطور",
-    "sources": "المصادر",
-    "sourcingNote": "ملاحظة حول المصادر",
+    "faq": "أسئلة وأجوبة",
     "corrections": "التصحيحات والتحديثات",
     "correctedOn": "صُحّح في {date}",
     "updatedOn": "حُدّث في {date}",
     "translation": "الترجمة",
     "translatedFrom": "مترجم عن {language}",
     "readOriginal": "قراءة النص الأصلي",
-    "machineTranslated": "ترجمة آلية لم يراجعها محرر بعد",
     "originalReporting": "تغطية أصلية",
     "relatedProjects": "المشروع ذو الصلة",
     "relatedCompanies": "الجهات الواردة في التقرير",
@@ -139,8 +137,6 @@
     "readingProgress": "تقدم القراءة",
     "liveUpdates": "تحديثات مباشرة",
     "newestFirst": "الأحدث أولاً",
-    "imageCredit": "المصدر",
-    "illustrative": "صورة توضيحية",
     "diagram": "رسم من إعداد أخبار الطاقة السعودية"
   },
   "sector": {
@@ -217,7 +213,6 @@
     "placeholder": "ابحث في تغطية الطاقة السعودية",
     "submit": "بحث",
     "keywordTitle": "مواد مطابقة",
-    "sampleLabel": "تجريبي",
     "resultCount": "{count, plural, =0 {لا توجد نتائج} one {نتيجة واحدة} two {نتيجتان} few {# نتائج} many {# نتيجة} other {# نتيجة}}",
     "noResults": "لا توجد مواد مطابقة لهذا البحث بعد.",
     "tryAgain": "جرّب صياغة أخرى، أو تصفّح أحدث التغطية."
@@ -235,14 +230,9 @@
     "intro": "كل المواد، الأحدث أولاً."
   },
   "standards": {
-    "title": "المعايير التحريرية",
     "corrections": "التصحيحات",
     "about": "من نحن",
-    "contact": "اتصل بنا",
-    "sourcePolicy": "سياسة المصادر",
-    "sponsoredPolicy": "سياسة المحتوى المموّل",
-    "accessibility": "إمكانية الوصول",
-    "privacy": "الخصوصية"
+    "contact": "اتصل بنا"
   },
   "footer": {
     "newsletters": "النشرات",
@@ -251,8 +241,7 @@
     "editorial": "التحرير",
     "editions": "النسخ",
     "languages": "اللغات",
-    "rights": "© {year} أخبار الطاقة السعودية. جميع الحقوق محفوظة.",
-    "prototypeNotice": "كل مادة هنا مُسندة إلى مصادرها. ولا ينشر هذا الموقع أي بيانات سوقية."
+    "rights": "© {year} أخبار الطاقة السعودية. جميع الحقوق محفوظة."
   },
   "common": {
     "loading": "جارٍ التحميل…",
@@ -267,7 +256,6 @@
     "empty": "لا يوجد شيء هنا بعد",
     "readMore": "اقرأ المزيد",
     "dismiss": "إغلاق",
-    "more": "المزيد",
-    "sampleData": "بيانات تجريبية"
+    "more": "المزيد"
   }
 }

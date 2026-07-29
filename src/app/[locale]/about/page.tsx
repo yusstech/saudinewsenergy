@@ -59,15 +59,14 @@ export default async function AboutPage({
               in Arabic, and a reader in Riyadh can follow global energy in
               English.
             </p>
-            <h2>Current status</h2>
+            <h2>What we cover</h2>
             <p>
-              We are publishing. Everything on this site is reporting: one
-              story so far, on the Al Jouf 380 kV transmission line, sourced from
-              the project documentation and available in both languages. The
-              placeholder stories the interface was built against have been
-              deleted rather than left in place, and the site carries no market
-              data. It is a small publication that says only what it can source,
-              which is the version worth growing.
+              Oil and gas, power and utilities, renewables, hydrogen, carbon
+              management, petrochemicals, markets, projects and policy. Saudi
+              Arabia is the editorial centre of every edition; international
+              stories appear here because they affect the Kingdom, its
+              companies, its markets or the wider energy system. Where we cannot
+              establish a figure, we leave it out.
             </p>
           </>
         ) : (
@@ -94,14 +93,13 @@ export default async function AboutPage({
               النسخة السعودية بالعربية، ولقارئ في الرياض متابعة الطاقة عالمياً
               بالإنجليزية.
             </p>
-            <h2>الوضع الحالي</h2>
+            <h2>ما نغطيه</h2>
             <p>
-              نحن ننشر. وكل ما في هذا الموقع تغطية صحفية: مادة واحدة حتى الآن،
-              عن خط نقل الجوف جهد 380 كيلوفولت، مصدرها وثائق المشروع، ومتاحة
-              باللغتين. أما المواد التجريبية التي بُنيت عليها الواجهة فقد حُذفت
-              بدل أن تُترك في مكانها، ولا يحمل الموقع أي بيانات سوقية. إنها منصة
-              صغيرة لا تقول إلا ما تستطيع إسناده، وهذه هي النسخة الجديرة
-              بالنمو.
+              النفط والغاز، والكهرباء والمرافق، والطاقة المتجددة، والهيدروجين،
+              وإدارة الكربون، والبتروكيماويات، والأسواق، والمشاريع، والسياسات.
+              والسعودية هي المركز التحريري في كل نسخة، وتظهر الأخبار الدولية
+              هنا لأنها تمسّ المملكة أو شركاتها أو أسواقها أو منظومة الطاقة
+              الأوسع. وحين يتعذّر إثبات رقم، نحذفه.
             </p>
           </>
         )}

@@ -49,7 +49,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: '/latest', priority: 0.9, frequency: 'hourly' as const },
     { path: '/projects', priority: 0.7, frequency: 'daily' as const },
     { path: '/search', priority: 0.4, frequency: 'monthly' as const },
-    { path: '/standards', priority: 0.4, frequency: 'yearly' as const },
     { path: '/corrections', priority: 0.4, frequency: 'weekly' as const },
     { path: '/about', priority: 0.4, frequency: 'yearly' as const },
     { path: '/contact', priority: 0.3, frequency: 'yearly' as const },
@@ -102,7 +101,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // consolidation rule the canonicals apply.
   for (const locale of LOCALES as readonly Locale[]) {
     for (const story of getStories(locale)) {
-      if (story.isSampleContent) continue;
       const segment = story.isLive ? 'live' : 'article';
       entries.push({
         url: abs(`/${locale}/${segment}/${story.slug}`),

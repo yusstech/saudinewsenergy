@@ -62,11 +62,6 @@ export async function SiteFooter({ locale }: { locale: Locale }) {
           </h2>
           <ul className="mt-3 space-y-1.5 text-meta">
             <li>
-              <Link href="/standards" className="hover:underline underline-offset-4">
-                {ts('title')}
-              </Link>
-            </li>
-            <li>
               <Link href="/corrections" className="hover:underline underline-offset-4">
                 {ts('corrections')}
               </Link>
@@ -138,15 +133,6 @@ export async function SiteFooter({ locale }: { locale: Locale }) {
       {/* --------------------------------------------------------- bottom */}
       <div className="border-t border-line">
         <div className="page space-y-2 py-5">
-          {/*
-            The prototype disclosure sits in the footer of every page, not only
-            on the pages showing sample content. A reader who lands directly on
-            an article should be able to find out what this site currently is
-            without navigating anywhere.
-          */}
-          <p className="text-micro leading-relaxed text-copper-500 dark:text-copper-300">
-            {t('prototypeNotice')}
-          </p>
           <p className="text-micro text-faint">
             {t('rights', { year: new Date().getFullYear() })}
           </p>

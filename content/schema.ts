@@ -18,9 +18,9 @@ import { z } from 'zod';
  *   apart when they live in separate fields, and a figure quoted onward without
  *   its unit is how a 110 km fibre run becomes a 110 mile one.
  *
- * - **A claim carries its provenance.** Sourced figures, translation status and
- *   corrections are modelled, not free text, because the concept's "trust is
- *   visible" pillar is only real if the data layer can express it.
+ * - **An absent fact stays absent.** Every quantitative field is optional and
+ *   the templates omit what is missing. A capacity we do not have is a field
+ *   left empty, never a number inferred from somewhere else on the page.
  */
 
 /* ------------------------------------------------------------ vocabulary -- */
@@ -185,47 +185,12 @@ export function localisedText(
 }
 
 /**
- * Where a fact came from.
- *
- * `kind` matters editorially: a figure read off a contract document is not the
- * same class of claim as one from a press release, and the article template
- * renders them differently.
- */
-export const sourceRefSchema = z.object({
-  id: z.string().min(1),
-  label: localisedTextSchema,
-  kind: z.enum([
-    'project-document',
-    'official-statement',
-    'filing',
-    'press-release',
-    'interview',
-    'data-provider',
-    'publication',
-  ]),
-  /** Present only when the source is publicly reachable. */
-  url: z.string().url().optional(),
-  publisher: z.string().optional(),
-  date: isoDateSchema.optional(),
-  /**
-   * A plain-language caveat shown to readers. This is where a document's
-   * provenance limits get stated rather than quietly ignored.
-   */
-  note: localisedTextSchema.optional(),
-});
-export type SourceRef = z.infer<typeof sourceRefSchema>;
-
-/**
  * A media asset.
  *
- * `credit` and `license` are required on every asset with no default, which is
- * the point: an image cannot be published without someone stating where it came
- * from and under what terms.
- *
- * `depicts` is the guard against the failure mode this publication cannot
- * afford — captioning a stock photograph as if it were the asset being
- * reported. It records what the image *actually shows*, and `isIllustrative`
- * forces the template to label it as such.
+ * `credit` and `license` are required on every asset with no default. They are
+ * the newsroom's own record of where a picture came from and on what terms —
+ * kept in the frontmatter so no image can enter the site unaccounted for, and
+ * consulted before anything third-party is used rather than after.
  */
 export const mediaAssetSchema = z.object({
   src: z.string().min(1),
@@ -237,13 +202,6 @@ export const mediaAssetSchema = z.object({
   license: z.string().min(1),
   licenseUrl: z.string().url().optional(),
   sourceUrl: z.string().url().optional(),
-  /** What the image genuinely depicts. Never aspirational. */
-  depicts: z.string().optional(),
-  /**
-   * True when the image is not of the specific asset being reported. The
-   * article template renders an explicit "illustrative" label for these.
-   */
-  isIllustrative: z.boolean().default(false),
   /** Original diagrams produced in-house; no third-party rights attach. */
   isDiagram: z.boolean().default(false),
 });
@@ -262,10 +220,12 @@ export type Author = z.infer<typeof authorSchema>;
  *
  * `original` is the honest default and the one this newsroom prefers. Anything
  * else must name the language it came from, so the reader is never left
- * guessing whether a quotation survived a round trip.
+ * guessing whether a quotation survived a round trip. There is no third state:
+ * nothing publishes in either language until an editor has read it, so the
+ * label describes the pairing rather than a pending review.
  */
 export const translationSchema = z.object({
-  status: z.enum(['original', 'human-translated', 'machine-assisted']),
+  status: z.enum(['original', 'human-translated']),
   originalLocale: localeSchema.optional(),
   /** Slug of the source-language story, when one is published. */
   originalSlug: z.string().optional(),
@@ -304,8 +264,6 @@ export const contextPanelSchema = z.object({
   announcedDate: isoDateSchema.optional(),
   completedDate: isoDateSchema.optional(),
   expectedMilestone: z.string().optional(),
-  /** IDs into the story's own `sources` array. */
-  sourceIds: z.array(z.string()).default([]),
 });
 export type ContextPanel = z.infer<typeof contextPanelSchema>;
 
@@ -367,13 +325,6 @@ export const storyFrontmatterSchema = z.object({
   faq: z.array(faqSchema).default([]),
   context: contextPanelSchema.optional(),
 
-  sources: z.array(sourceRefSchema).default([]),
-  /**
-   * A reader-facing note about how this story was sourced and what its
-   * documentation does and does not establish.
-   */
-  sourcingNote: z.string().optional(),
-
   translation: translationSchema.default({ status: 'original' }),
   corrections: z.array(correctionSchema).default([]),
 
@@ -386,19 +337,6 @@ export const storyFrontmatterSchema = z.object({
   /** Higher sorts earlier within the lead grid. */
   weight: z.number().int().default(0),
 
-  /**
-   * True while this story is prototype content written to populate the
-   * interface rather than reported coverage.
-   *
-   * The same reasoning as `isSample` on a market indicator, and it matters more
-   * here: an invented price is obviously a placeholder to anyone who checks,
-   * but an invented *story* about a real company reads exactly like reporting.
-   * Sample stories are rendered with a persistent label that the card and
-   * article templates cannot omit, and they are excluded from the AI answer
-   * corpus entirely — an answer engine must never be able to launder prototype
-   * content into a citation.
-   */
-  isSampleContent: z.boolean().default(false),
 });
 
 export type StoryFrontmatter = z.infer<typeof storyFrontmatterSchema>;
@@ -430,7 +368,6 @@ export const projectSchema = z.object({
   technology: z.array(z.string()).default([]),
   announcedDate: isoDateSchema.optional(),
   completedDate: isoDateSchema.optional(),
-  sources: z.array(sourceRefSchema).default([]),
 });
 export type Project = z.infer<typeof projectSchema>;
 

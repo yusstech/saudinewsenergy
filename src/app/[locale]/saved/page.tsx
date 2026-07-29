@@ -48,7 +48,6 @@ export default async function SavedPage({
     standfirst: s.standfirst,
     publishedAt: s.publishedAt,
     sector: s.sector,
-    isSampleContent: s.isSampleContent,
   }));
 
   return (
