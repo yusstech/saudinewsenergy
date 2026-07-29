@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 440" width="960" height="440" role="img" aria-labelledby="t d">
+  <title id="t">What a transposition tower does to the phase order</title>
+  <desc id="d">A schematic of phase transposition along a transmission route. Three phase conductors occupy top, middle and bottom positions on the tower. At each transposition tower the phases swap positions, so that over the full route each phase spends comparable time in every position and the electrical differences between them even out.</desc>
+
+  <style>
+    .bg    { fill: #faf8f4; }
+    .pA    { stroke: #a86435; stroke-width: 3; fill: none; }
+    .pB    { stroke: #4b5563; stroke-width: 3; fill: none; }
+    .pC    { stroke: #1f7a4c; stroke-width: 3; fill: none; }
+    .mast  { stroke: #9aa3b2; stroke-width: 2.2; fill: none; }
+    .arm   { stroke: #9aa3b2; stroke-width: 1.6; fill: none; }
+    .lbl   { font: 500 13px/1.3 ui-sans-serif, system-ui, sans-serif; fill: #374151; }
+    .lbl-sm{ font: 400 12px/1.3 ui-sans-serif, system-ui, sans-serif; fill: #6b7280; }
+    .hd    { font: 700 11.5px/1 ui-sans-serif, system-ui, sans-serif; fill: #6b7280; letter-spacing: .1em; }
+    .cap   { font: 400 11.5px/1.35 ui-sans-serif, system-ui, sans-serif; fill: #6b7280; }
+    .pos   { font: 700 10.5px/1 ui-sans-serif, system-ui, sans-serif; fill: #6b7280; letter-spacing: .08em; }
+    .rule  { stroke: #e7e0d3; stroke-width: 1; }
+    .rule-s{ stroke: #b3a68c; stroke-width: 1.2; }
+    .tow   { fill: #faf8f4; stroke: #b3a68c; stroke-width: 1.4; }
+    @media (prefers-color-scheme: dark) {
+      .bg    { fill: #10131a; }
+      .pA    { stroke: #e0a878; }
+      .pB    { stroke: #cbd2dc; }
+      .pC    { stroke: #3aa06a; }
+      .mast, .arm { stroke: #6b7480; }
+      .lbl   { fill: #e7e0d3; }
+      .lbl-sm, .cap, .pos, .hd { fill: #9aa3b2; }
+      .rule  { stroke: #252b36; }
+      .rule-s{ stroke: #4b5563; }
+      .tow   { fill: #10131a; stroke: #4b5563; }
+    }
+  </style>
+
+  <rect class="bg" width="960" height="440"/>
+
+  <text class="hd" x="48" y="42">PHASE TRANSPOSITION — ONE PHASE, THREE POSITIONS</text>
+  <line class="rule-s" x1="48" y1="56" x2="912" y2="56"/>
+
+  <!-- Position rails: top y=120, middle y=190, bottom y=260 -->
+  <text class="pos" x="48" y="124">TOP</text>
+  <text class="pos" x="48" y="194">MIDDLE</text>
+  <text class="pos" x="48" y="264">BOTTOM</text>
+
+  <line class="rule" x1="110" y1="120" x2="912" y2="120"/>
+  <line class="rule" x1="110" y1="190" x2="912" y2="190"/>
+  <line class="rule" x1="110" y1="260" x2="912" y2="260"/>
+
+  <!-- Transposition towers at x=380 and x=650 -->
+  <g class="tow">
+    <rect x="368" y="96" width="24" height="188" rx="3"/>
+    <rect x="638" y="96" width="24" height="188" rx="3"/>
+  </g>
+
+  <!-- Phase A (copper): top -> middle -> bottom -->
+  <path class="pA" d="M130 120 H368 M392 120 C440 120 440 190 470 190 H638 M662 190 C700 190 700 260 730 260 H900"/>
+  <!-- Phase B (grey): middle -> bottom -> top -->
+  <path class="pB" d="M130 190 H368 M392 190 C440 190 440 260 470 260 H638 M662 260 C700 260 700 120 730 120 H900"/>
+  <!-- Phase C (green): bottom -> top -> middle -->
+  <path class="pC" d="M130 260 H368 M392 260 C440 260 440 120 470 120 H638 M662 120 C700 120 700 190 730 190 H900"/>
+
+  <text class="lbl-sm" x="368" y="308">transposition tower</text>
+  <text class="lbl-sm" x="638" y="308">transposition tower</text>
+
+  <line class="rule-s" x1="48" y1="336" x2="912" y2="336"/>
+
+  <g class="lbl">
+    <rect x="48" y="352" width="22" height="4" rx="2" fill="#a86435"/>
+    <text x="80" y="360">Phase A</text>
+    <rect x="168" y="352" width="22" height="4" rx="2" fill="#4b5563"/>
+    <text x="200" y="360">Phase B</text>
+    <rect x="288" y="352" width="22" height="4" rx="2" fill="#1f7a4c"/>
+    <text x="320" y="360">Phase C</text>
+  </g>
+
+  <text class="cap" x="48" y="400">Over the full route each phase occupies every position, so the small</text>
+  <text class="cap" x="48" y="418">electrical differences between positions even out.</text>
+</svg>

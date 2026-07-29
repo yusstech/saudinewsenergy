@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 520" width="960" height="520" role="img" aria-labelledby="t d">
+  <title id="t">Six tower designs across the Tabuk 380 kV route</title>
+  <desc id="d">A proportional breakdown of the 309 towers on the Tabuk 380 kV transmission line: 206 suspension towers, 33 small-angle, 23 medium-angle, 19 heavy-angle, 19 transposition and 9 dead-end or terminal towers. Suspension structures carry two-thirds of the route; the remaining designs handle direction changes, phase transposition and the points where conductor tension is anchored.</desc>
+
+  <style>
+    .bg    { fill: #faf8f4; }
+    .barA  { fill: #9aa3b2; }
+    .barB  { fill: #a86435; }
+    .barC  { fill: #4b5563; }
+    .lbl   { font: 500 14px/1.3 ui-sans-serif, system-ui, sans-serif; fill: #374151; }
+    .lbl-sm{ font: 400 12.5px/1.3 ui-sans-serif, system-ui, sans-serif; fill: #6b7280; }
+    .fig   { font: 700 20px/1 ui-sans-serif, system-ui, sans-serif; fill: #374151; font-variant-numeric: tabular-nums; }
+    .fig-o { font: 700 20px/1 ui-sans-serif, system-ui, sans-serif; fill: #a86435; font-variant-numeric: tabular-nums; }
+    .cap   { font: 400 11.5px/1.35 ui-sans-serif, system-ui, sans-serif; fill: #6b7280; }
+    .hd    { font: 700 11.5px/1 ui-sans-serif, system-ui, sans-serif; fill: #6b7280; letter-spacing: .1em; }
+    .rule  { stroke: #e7e0d3; stroke-width: 1; }
+    .rule-s{ stroke: #b3a68c; stroke-width: 1.2; }
+    @media (prefers-color-scheme: dark) {
+      .bg    { fill: #10131a; }
+      .barA  { fill: #6b7480; }
+      .barB  { fill: #e0a878; }
+      .barC  { fill: #9aa3b2; }
+      .lbl   { fill: #e7e0d3; }
+      .lbl-sm, .cap, .hd { fill: #9aa3b2; }
+      .fig   { fill: #e7e0d3; }
+      .fig-o { fill: #e0a878; }
+      .rule  { stroke: #252b36; }
+      .rule-s{ stroke: #4b5563; }
+    }
+  </style>
+
+  <rect class="bg" width="960" height="520"/>
+
+  <text class="hd" x="48" y="42">TOWER SCHEDULE — TABUK 380 KV, 309 POSITIONS</text>
+  <line class="rule-s" x1="48" y1="56" x2="912" y2="56"/>
+
+  <!-- Bars start at x=250; 206 towers scales to 560px. Rows repeat every 68px. -->
+
+  <text class="lbl" x="48" y="100">Suspension</text>
+  <text class="lbl-sm" x="48" y="118">straight sections</text>
+  <rect class="barA" x="250" y="84" width="560" height="26" rx="2"/>
+  <text class="fig" x="824" y="104">206</text>
+  <line class="rule" x1="48" y1="136" x2="912" y2="136"/>
+
+  <text class="lbl" x="48" y="168">Small-angle</text>
+  <text class="lbl-sm" x="48" y="186">modest direction change</text>
+  <rect class="barC" x="250" y="152" width="90" height="26" rx="2"/>
+  <text class="fig" x="838" y="172">33</text>
+  <line class="rule" x1="48" y1="204" x2="912" y2="204"/>
+
+  <text class="lbl" x="48" y="236">Medium-angle</text>
+  <text class="lbl-sm" x="48" y="254">larger deviation</text>
+  <rect class="barC" x="250" y="220" width="63" height="26" rx="2"/>
+  <text class="fig" x="838" y="240">23</text>
+  <line class="rule" x1="48" y1="272" x2="912" y2="272"/>
+
+  <text class="lbl" x="48" y="304">Heavy-angle</text>
+  <text class="lbl-sm" x="48" y="322">the most demanding turns</text>
+  <rect class="barC" x="250" y="288" width="52" height="26" rx="2"/>
+  <text class="fig" x="838" y="308">19</text>
+  <line class="rule" x1="48" y1="340" x2="912" y2="340"/>
+
+  <text class="lbl" x="48" y="372">Transposition</text>
+  <text class="lbl-sm" x="48" y="390">reorders the phase positions</text>
+  <rect class="barB" x="250" y="356" width="52" height="26" rx="2"/>
+  <text class="fig-o" x="838" y="376">19</text>
+  <line class="rule" x1="48" y1="408" x2="912" y2="408"/>
+
+  <text class="lbl" x="48" y="440">Dead-end / terminal</text>
+  <text class="lbl-sm" x="48" y="458">anchors the conductor tension</text>
+  <rect class="barB" x="250" y="424" width="25" height="26" rx="2"/>
+  <text class="fig-o" x="845" y="444">9</text>
+  <line class="rule-s" x1="48" y1="476" x2="912" y2="476"/>
+
+  <text class="cap" x="48" y="500">Bars are to scale. Copper marks the two designs whose job is electrical or mechanical rather than simply carrying the route.</text>
+</svg>

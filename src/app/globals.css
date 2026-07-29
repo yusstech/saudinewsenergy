@@ -448,6 +448,62 @@ body {
   color: var(--color-strong);
 }
 
+/*
+ * Tables in the body.
+ *
+ * A schedule of quantities is the densest thing a project story carries, and it
+ * was rendering as an unstyled browser default — no rules, serif figures, a
+ * count sitting flush against its label. It reads as a specification now: the
+ * sans for the data so digits align, the serif reserved for prose.
+ *
+ * Wrapped in its own scroll container. A table wide enough to overflow must
+ * take the horizontal scroll itself; letting the page take it is what breaks a
+ * layout on a phone.
+ */
+.prose-article table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--font-sans);
+  font-size: 0.9375rem;
+  line-height: 1.45;
+}
+
+.prose-article thead th {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-faint);
+  text-align: start;
+  padding-block: 0.55rem;
+  border-block-end: 1px solid var(--color-line-strong);
+}
+
+.prose-article tbody td {
+  padding-block: 0.6rem;
+  border-block-end: 1px solid var(--color-line);
+  color: var(--color-body);
+}
+
+.prose-article tbody tr:last-child td {
+  border-block-end: 0;
+}
+
+/* Quantities right-align and use lining figures, so columns of counts read as
+   a column rather than as ragged text. */
+.prose-article thead th:not(:first-child),
+.prose-article tbody td:not(:first-child) {
+  text-align: end;
+  font-variant-numeric: tabular-nums lining-nums;
+  font-weight: 600;
+  color: var(--color-strong);
+}
+
+[dir='rtl'] .prose-article thead th:not(:first-child),
+[dir='rtl'] .prose-article tbody td:not(:first-child) {
+  text-align: end;
+}
+
 /* Reader text-size control, set on <html> by the article toolbar. */
 html[data-reader-size='large'] .prose-article {
   font-size: 1.3125rem;

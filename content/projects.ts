@@ -42,6 +42,34 @@ const raw: Project[] = [
     completedDate: '2023-09-30',
   },
   {
+    slug: 'tabuk-380kv-transmission-line',
+    name: {
+      en: 'Tabuk 380 kV double-circuit overhead transmission line',
+      ar: 'خط تبوك الهوائي مزدوج الدائرة جهد 380 كيلوفولت',
+    },
+    summary: {
+      en: 'An approximately 112.5-kilometre double-circuit overhead transmission line on 309 towers across the Tabuk Region, using six tower designs — suspension, small, medium and heavy angle, transposition and terminal — and a quad-bundle conductor arrangement, delivered as an EPC package including optical ground wire, protection, communications and grid integration.',
+      ar: 'خط نقل هوائي مزدوج الدائرة بطول نحو 112.5 كيلومتراً على 309 أبراج عبر منطقة تبوك، بستة تصاميم للأبراج تشمل أبراج التعليق وأبراج الزوايا الصغيرة والمتوسطة والكبيرة وأبراج تبديل الأطوار وأبراج النهاية، مع ترتيب موصلات رباعي الحزمة، نُفّذ كحزمة هندسة وتوريد وإنشاء شملت سلك الأرضي الضوئي والحماية والاتصالات والربط بالشبكة.',
+    },
+    sector: 'power',
+    region: 'tabuk',
+    location: { en: 'Tabuk Region', ar: 'منطقة تبوك' },
+    status: 'operational',
+    client: 'saudi-electricity-company',
+    contractor: 'samaya-group',
+    length: { value: 112.5, unit: 'km', note: 'approximate route length' },
+    structures: { value: 309, unit: 'towers' },
+    technology: [
+      '380 kV double-circuit overhead line',
+      'Quad-bundle phase conductor',
+      'Six tower designs',
+      'Optical ground wire (OPGW)',
+      'Protection, control and communications',
+    ],
+    announcedDate: '2020-03-01',
+    completedDate: '2022-03-31',
+  },
+  {
     slug: 'sakaka-solar-pv',
     name: { en: 'Sakaka solar PV plant', ar: 'محطة سكاكا للطاقة الشمسية' },
     summary: {
