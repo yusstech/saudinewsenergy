@@ -107,6 +107,12 @@ export function StoryCard({
             <img
               src={story.hero!.src}
               alt={story.hero!.alt}
+              // Intrinsic dimensions on every card image, not just article
+              // figures. The CSS aspect ratio fixes the box once the stylesheet
+              // has applied; these fix it in the HTML, which is what stops the
+              // headline below jumping when the image arrives.
+              width={story.hero!.width}
+              height={story.hero!.height}
               className="aspect-[16/9] w-full object-cover transition-transform duration-700 group-hover:scale-[1.015]"
               loading="eager"
               fetchPriority="high"
@@ -126,6 +132,8 @@ export function StoryCard({
             <img
               src={story.hero!.src}
               alt=""
+              width={76}
+              height={76}
               className="size-[76px] object-cover"
               loading="lazy"
             />
@@ -159,6 +167,8 @@ export function StoryCard({
           <img
             src={story.hero!.src}
             alt={story.hero!.alt}
+            width={story.hero!.width}
+            height={story.hero!.height}
             className="aspect-[16/9] w-full object-cover transition-transform duration-700 group-hover:scale-[1.015]"
             loading="lazy"
           />

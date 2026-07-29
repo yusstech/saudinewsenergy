@@ -26,7 +26,7 @@ export async function SiteFooter({ locale }: { locale: Locale }) {
       */}
       <section className="border-b border-line">
         <div className="page py-[var(--space-block)]">
-          <h2 className="font-display text-subhead text-strong">{t('newsletters')}</h2>
+          <p className="font-display text-subhead text-strong">{t('newsletters')}</p>
           <p className="mt-1 max-w-prose text-meta leading-relaxed text-muted">
             {t('newsletterIntro')}
           </p>
@@ -41,10 +41,20 @@ export async function SiteFooter({ locale }: { locale: Locale }) {
 
       {/* ----------------------------------------------------------- links */}
       <div className="page grid gap-8 py-[var(--space-block)] sm:grid-cols-2 lg:grid-cols-4">
+        {/*
+          Landmark labels, not headings.
+
+          These were <h2>s, and six of them appeared on every page — so an
+          article with eight real section headings shipped fourteen, and a
+          passage extractor reading the outline saw "Newsletters, Sections,
+          Editorial" before it saw the reporting. `aria-labelledby` names a
+          landmark from any element, so the accessible name survives and the
+          document outline goes back to describing the article.
+        */}
         <nav aria-labelledby="footer-sections">
-          <h2 id="footer-sections" className="label text-strong">
+          <p id="footer-sections" className="label text-strong">
             {t('sections')}
-          </h2>
+          </p>
           <ul className="mt-3 space-y-1.5 text-meta">
             {SECTORS.map((s) => (
               <li key={s.slug}>
@@ -57,9 +67,9 @@ export async function SiteFooter({ locale }: { locale: Locale }) {
         </nav>
 
         <nav aria-labelledby="footer-editorial">
-          <h2 id="footer-editorial" className="label text-strong">
+          <p id="footer-editorial" className="label text-strong">
             {t('editorial')}
-          </h2>
+          </p>
           <ul className="mt-3 space-y-1.5 text-meta">
             <li>
               <Link href="/corrections" className="hover:underline underline-offset-4">
@@ -80,9 +90,9 @@ export async function SiteFooter({ locale }: { locale: Locale }) {
         </nav>
 
         <nav aria-labelledby="footer-editions">
-          <h2 id="footer-editions" className="label text-strong">
+          <p id="footer-editions" className="label text-strong">
             {t('editions')}
-          </h2>
+          </p>
           <ul className="mt-3 space-y-1.5 text-meta">
             {EDITIONS.map((e) => (
               <li key={e}>
@@ -93,9 +103,9 @@ export async function SiteFooter({ locale }: { locale: Locale }) {
             ))}
           </ul>
 
-          <h2 className="label mt-5 text-strong">
+          <p className="label mt-5 text-strong">
             {t('languages')}
-          </h2>
+          </p>
           <ul className="mt-3 space-y-1.5 text-meta">
             {LOCALES.map((l) => (
               <li key={l}>
@@ -113,9 +123,9 @@ export async function SiteFooter({ locale }: { locale: Locale }) {
         </nav>
 
         <div>
-          <h2 className="label text-strong">
+          <p className="label text-strong">
             {tn('home')}
-          </h2>
+          </p>
           <p className="mt-3 max-w-[32ch] text-meta leading-relaxed text-muted">
             {SITE.promise[locale]}
           </p>

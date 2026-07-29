@@ -354,6 +354,16 @@ export type Story = StoryFrontmatter & {
 export const projectSchema = z.object({
   slug: slugSchema,
   name: z.object({ en: z.string().min(1), ar: z.string().min(1) }),
+  /**
+   * The other names this project is genuinely known by.
+   *
+   * Not keyword padding — these are emitted as `alternateName` on the project
+   * entity, and their job is entity *resolution*: letting a search or answer
+   * engine recognise that "the Tabuk 380 kV line", "Tabuk double-circuit
+   * transmission line" and the full formal name are one asset rather than
+   * three. Only list names a person would actually use.
+   */
+  alternateNames: z.array(z.string()).default([]),
   summary: z.object({ en: z.string(), ar: z.string() }),
   sector: sectorSchema,
   region: regionSchema,

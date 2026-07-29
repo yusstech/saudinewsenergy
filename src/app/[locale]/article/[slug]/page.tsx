@@ -4,7 +4,13 @@ import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { Link } from '@/i18n/navigation';
 import { LOCALES, type Locale } from '@/i18n/config';
 import { getStory, getStories, getRelated } from '@/lib/content';
-import { storyMetadata, storyJsonLd, jsonLdScript, articleCanonical } from '@/lib/seo';
+import {
+  storyMetadata,
+  storyJsonLd,
+  projectEntity,
+  jsonLdScript,
+  articleCanonical,
+} from '@/lib/seo';
 import { sectorLabel, regionLabel } from '@content/taxonomy';
 import { COMPANY_MAP } from '@content/companies';
 import { PROJECT_MAP } from '@content/projects';
@@ -64,12 +70,18 @@ export default async function ArticlePage({
   const related = getRelated(locale, story, 3);
   const section = sectorLabel(story.sector, locale);
 
-  const about = [
-    ...story.companies
-      .map((s) => COMPANY_MAP.get(s))
-      .filter((c) => c !== undefined)
-      .map((c) => ({ name: c.name.en, url: c.url })),
-  ];
+  const about = story.companies
+    .map((s) => COMPANY_MAP.get(s))
+    .filter((c) => c !== undefined)
+    .map((c) => ({ name: c.name.en, url: c.url }));
+
+  // The assets this story reports on, as resolvable entities. This is what lets
+  // a search for the project itself — by any of the names people use for it —
+  // reach the reporting rather than only the record.
+  const places = story.projects
+    .map((slug) => PROJECT_MAP.get(slug))
+    .filter((p) => p !== undefined)
+    .map((p) => projectEntity(p, locale));
 
   return (
     <>
@@ -77,7 +89,9 @@ export default async function ArticlePage({
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: jsonLdScript(storyJsonLd(story, { about, sectionName: section })),
+          __html: jsonLdScript(
+            storyJsonLd(story, { about, places, sectionName: section }),
+          ),
         }}
       />
 

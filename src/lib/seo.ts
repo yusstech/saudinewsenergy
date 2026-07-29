@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import { LOCALES, LOCALE_TAG, type Locale } from '@/i18n/config';
 import { abs, siteUrl, SITE, siteName } from './site';
 import { hasTranslation } from './content';
+import { regionLabel } from '@content/taxonomy';
 import type { Story, Project } from '@content/schema';
 
 /**
@@ -219,6 +220,60 @@ export interface EntityRef {
 }
 
 /**
+ * The physical asset a story is about, as a resolvable entity.
+ *
+ * This is the piece that decides whether a search for *the project* finds the
+ * reporting on it. A story about the Tabuk line names that line a dozen ways in
+ * prose, but prose is something an engine has to interpret; `about` is
+ * something it can read. `alternateName` carries the forms a person actually
+ * types — "Tabuk 380kV line", the full formal name, the Arabic — so all of them
+ * resolve to one asset instead of looking like several.
+ *
+ * `Place` rather than `CreativeWork`: a transmission line is a located physical
+ * structure, and typing it as a place is what lets `containedInPlace` and the
+ * region do geographic work. The measured facts ride along as
+ * `additionalProperty`, each with its unit, so a figure can be lifted without
+ * losing what it measures.
+ */
+export function projectEntity(project: Project, locale: Locale) {
+  const props: Record<string, unknown>[] = [];
+  const measure = (name: string, m?: { value: number; unit: string }) => {
+    if (m) {
+      props.push({ '@type': 'PropertyValue', name, value: m.value, unitText: m.unit });
+    }
+  };
+  measure('Route length', project.length);
+  measure('Structures', project.structures);
+  measure('Capacity', project.capacity);
+
+  return {
+    '@type': 'Place',
+    '@id': `${siteUrl()}/#project-${project.slug}`,
+    name: project.name[locale],
+    ...(project.alternateNames.length
+      ? { alternateName: project.alternateNames }
+      : {}),
+    description: project.summary[locale],
+    url: abs(`/${locale}/projects#${project.slug}`),
+    address: {
+      '@type': 'PostalAddress',
+      addressRegion: regionLabel(project.region, 'en'),
+      addressCountry: 'SA',
+    },
+    containedInPlace: {
+      '@type': 'AdministrativeArea',
+      name: regionLabel(project.region, locale),
+      address: {
+        '@type': 'PostalAddress',
+        addressRegion: regionLabel(project.region, 'en'),
+        addressCountry: 'SA',
+      },
+    },
+    ...(props.length ? { additionalProperty: props } : {}),
+  };
+}
+
+/**
  * Reads the organisations a story cites out of the story itself.
  *
  * Answer engines lean on `mentions` to decide what a page is *about* rather
@@ -266,7 +321,12 @@ const org = (e: EntityRef) => ({
  */
 export function storyJsonLd(
   story: Story,
-  opts: { about?: EntityRef[]; sectionName?: string } = {},
+  opts: {
+    about?: EntityRef[];
+    sectionName?: string;
+    /** The physical assets this story reports on, from `projectEntity`. */
+    places?: Record<string, unknown>[];
+  } = {},
 ) {
   const base = siteUrl();
   const url = articleCanonical(story);
@@ -303,8 +363,18 @@ export function storyJsonLd(
       ),
       publisher: { '@id': `${base}/#organization` },
       isAccessibleForFree: true,
-      ...(opts.about?.length ? { about: opts.about.map(org) } : {}),
+      // The project leads `about`: the asset is what the story is about, and the
+      // organisations are parties to it. Ordering matters to consumers that
+      // take only the first entity.
+      ...(opts.places?.length || opts.about?.length
+        ? { about: [...(opts.places ?? []), ...(opts.about ?? []).map(org)] }
+        : {}),
       ...(mentions.length ? { mentions: mentions.map(org) } : {}),
+      // Where the reporting is physically located. A geographic query is one of
+      // the commonest ways this coverage gets looked for.
+      ...(opts.places?.length
+        ? { contentLocation: opts.places[0], spatialCoverage: opts.places[0] }
+        : {}),
       ...(story.isLive && story.liveUpdates.length
         ? {
             liveBlogUpdate: story.liveUpdates.map((u) => ({

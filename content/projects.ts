@@ -1,3 +1,4 @@
+import { z } from 'zod';
 import { projectSchema, type Project } from './schema';
 
 /**
@@ -12,13 +13,23 @@ import { projectSchema, type Project } from './schema';
  * optional for exactly that reason.
  */
 
-const raw: Project[] = [
+// The *input* type: fields with schema defaults (alternateNames, technology)
+// stay optional here and are filled in by `parse` below.
+const raw: z.input<typeof projectSchema>[] = [
   {
     slug: 'al-jouf-380kv-transmission-line',
     name: {
       en: 'Al Jouf 380 kV double-circuit overhead transmission line',
       ar: 'خط الجوف الهوائي مزدوج الدائرة جهد 380 كيلوفولت',
     },
+    alternateNames: [
+      'Al Jouf 380 kV transmission line',
+      'Al Jouf 380kV line',
+      'Al Jouf OPGW project',
+      'Tabarjal 380 kV overhead transmission line',
+      'خط الجوف جهد 380 كيلوفولت',
+      'خط نقل الجوف',
+    ],
     summary: {
       en: 'An approximately 107-kilometre double-circuit overhead transmission line on 279 steel towers across the Tabarjal area of the Al Jouf region, delivered as an EPC package including optical ground wire, fibre-optic communications, protection and control systems, and grid integration.',
       ar: 'خط نقل هوائي مزدوج الدائرة بطول نحو 107 كيلومترات على 279 برجاً فولاذياً عبر منطقة طبرجل في الجوف، نُفّذ كحزمة هندسة وتوريد وإنشاء شملت سلك الأرضي الضوئي والاتصالات بالألياف البصرية وأنظمة الحماية والتحكم والربط بالشبكة.',
@@ -47,6 +58,14 @@ const raw: Project[] = [
       en: 'Tabuk 380 kV double-circuit overhead transmission line',
       ar: 'خط تبوك الهوائي مزدوج الدائرة جهد 380 كيلوفولت',
     },
+    alternateNames: [
+      'Tabuk 380 kV transmission line',
+      'Tabuk 380kV line',
+      'Tabuk double-circuit overhead line',
+      'Tabuk Region 380 kV overhead transmission line',
+      'خط تبوك جهد 380 كيلوفولت',
+      'خط نقل تبوك',
+    ],
     summary: {
       en: 'An approximately 112.5-kilometre double-circuit overhead transmission line on 309 towers across the Tabuk Region, using six tower designs — suspension, small, medium and heavy angle, transposition and terminal — and a quad-bundle conductor arrangement, delivered as an EPC package including optical ground wire, protection, communications and grid integration.',
       ar: 'خط نقل هوائي مزدوج الدائرة بطول نحو 112.5 كيلومتراً على 309 أبراج عبر منطقة تبوك، بستة تصاميم للأبراج تشمل أبراج التعليق وأبراج الزوايا الصغيرة والمتوسطة والكبيرة وأبراج تبديل الأطوار وأبراج النهاية، مع ترتيب موصلات رباعي الحزمة، نُفّذ كحزمة هندسة وتوريد وإنشاء شملت سلك الأرضي الضوئي والحماية والاتصالات والربط بالشبكة.',
