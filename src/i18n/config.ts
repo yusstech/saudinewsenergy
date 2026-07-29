@@ -50,6 +50,17 @@ export const DEFAULT_EDITION: Edition = 'saudi';
 
 export const EDITION_COOKIE = 'sen_edition';
 
+/**
+ * The reader's country, stamped by middleware so no page has to read a request
+ * header to find it.
+ *
+ * A two-letter code and nothing more. It exists so the edition suggestion can
+ * be decided on the client, which is what keeps every page under `[locale]`
+ * statically rendered — see the note in `src/middleware.ts` for what reading it
+ * server-side used to cost.
+ */
+export const GEO_COOKIE = 'sen_geo';
+
 export function isEdition(value: string): value is Edition {
   return (EDITIONS as readonly string[]).includes(value);
 }

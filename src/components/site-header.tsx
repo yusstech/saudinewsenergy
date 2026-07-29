@@ -6,7 +6,7 @@ import { Wordmark } from './wordmark';
 import { ThemeToggle } from './theme-toggle';
 import { PRIMARY_SECTORS, MORE_SECTORS } from '@content/taxonomy';
 import { formatDate, formatTime } from '@/lib/format';
-import type { Locale, Edition } from '@/i18n/config';
+import type { Locale } from '@/i18n/config';
 
 /**
  * Two bands, where there used to be five.
@@ -20,13 +20,7 @@ import type { Locale, Edition } from '@/i18n/config';
  * The charcoal is spent here and almost nowhere else — it is what anchors the page and makes it
  * read as a publication rather than an application.
  */
-export async function SiteHeader({
-  locale,
-  edition,
-}: {
-  locale: Locale;
-  edition: Edition;
-}) {
+export async function SiteHeader({ locale }: { locale: Locale }) {
   const t = await getTranslations('nav');
   const tu = await getTranslations('utility');
   const now = new Date().toISOString();
@@ -62,7 +56,7 @@ export async function SiteHeader({
               sheet rather than disappearing. */}
           <div className="ms-auto flex items-center gap-1 lg:ms-0">
             <div className="hidden md:block">
-              <LocaleEditionControls edition={edition} onDark />
+              <LocaleEditionControls onDark />
             </div>
 
             <span

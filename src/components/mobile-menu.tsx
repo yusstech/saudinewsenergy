@@ -5,7 +5,6 @@ import { useTranslations, useLocale } from 'next-intl';
 import { Link, usePathname } from '@/i18n/navigation';
 import { SECTORS } from '@content/taxonomy';
 import { LocaleEditionControls } from './locale-edition-controls';
-import { resolveEditionClient } from '@/lib/edition-client';
 import type { Locale } from '@/i18n/config';
 
 /**
@@ -114,7 +113,7 @@ export function MobileMenu() {
             {/* The masthead hides these below `md`; they live here instead so a phone
                 reader can still change language or edition. */}
             <div className="rule-hair mt-4 pt-4">
-              <LocaleEditionControls edition={resolveEditionClient()} />
+              <LocaleEditionControls />
             </div>
           </nav>
         </div>

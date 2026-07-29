@@ -3,6 +3,7 @@
 import { useState, useTransition } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
 import { usePathname, useRouter } from '@/i18n/navigation';
+import { useEdition } from '@/lib/use-edition';
 import {
   LOCALES,
   LOCALE_LABEL,
@@ -27,13 +28,15 @@ import {
  * switching edition preserves the language.
  */
 export function LocaleEditionControls({
-  edition,
   onDark = false,
 }: {
-  edition: Edition;
   /** Rendered inside the charcoal masthead band, so hover and text invert. */
   onDark?: boolean;
 }) {
+  // Read here rather than drilled from a server parent. Resolving it on the
+  // server meant a `cookies()` call in the root layout, which cost the whole
+  // site its static rendering — see `src/lib/use-edition.ts`.
+  const edition = useEdition();
   const t = useTranslations('utility');
   const te = useTranslations('edition');
   const locale = useLocale() as Locale;

@@ -8,7 +8,6 @@ import { DIRECTION, LOCALE_TAG, type Locale } from '@/i18n/config';
 import { fontVariables } from '../fonts';
 import { SITE, siteName, siteDescriptor } from '@/lib/site';
 import { baseMetadata, siteJsonLd, jsonLdScript } from '@/lib/seo';
-import { resolveEdition } from '@/lib/edition';
 import { SiteHeader } from '@/components/site-header';
 import { SiteFooter } from '@/components/site-footer';
 import { MobileBottomNav } from '@/components/mobile-menu';
@@ -54,7 +53,6 @@ export default async function LocaleLayout({
   setRequestLocale(locale);
 
   const typed = locale as Locale;
-  const edition = await resolveEdition();
   const t = await getTranslations('site');
 
   const alerts = getAlertStories(typed).map((s) => ({
@@ -113,7 +111,7 @@ export default async function LocaleLayout({
             breaking news, so when it appears it reads as an interruption rather than as
             furniture. Two bands, where the first build had six.
           */}
-          <SiteHeader locale={typed} edition={edition} />
+          <SiteHeader locale={typed} />
           <BreakingRibbon items={alerts} locale={typed} />
           <EditionSuggestion />
 

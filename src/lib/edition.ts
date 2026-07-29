@@ -1,55 +1,27 @@
 import 'server-only';
-import { cookies, headers } from 'next/headers';
-import {
-  DEFAULT_EDITION,
-  EDITION_COOKIE,
-  COUNTRY_EDITION,
-  isEdition,
-  type Edition,
-} from '@/i18n/config';
+import { cookies } from 'next/headers';
+import { DEFAULT_EDITION, EDITION_COOKIE, isEdition, type Edition } from '@/i18n/config';
 
 /**
- * Resolving the reader's edition.
+ * The reader's saved edition, on the server.
  *
- * The order is a saved preference first, then a geographic *recommendation*,
- * then Saudi Arabia. Detection deliberately never becomes a redirect: the
- * concept is explicit that location may influence supporting content but must
- * not turn Saudi Energy News into a different country's publication, and a
- * silent geo-redirect does exactly that — it also breaks canonical URLs, since
- * two readers requesting the same address would be served different pages.
+ * **Calling this makes the calling route dynamic.** That is the whole cost, and
+ * it is why exactly one page does it: the front page, whose lead and rails are
+ * genuinely selected by edition. Everything else — articles, projects,
+ * companies, desks — is the same page for every reader and stays static.
  *
- * So geography only ever produces a dismissible suggestion. `suggested` below
- * returns what we would offer; `resolveEdition` returns what we actually serve.
+ * This used to be called in the `[locale]` layout, where it applied that cost to
+ * every page on the site at once. Nothing prerendered, nothing cached at the
+ * edge, and `dynamicParams = false` had no static generation left to guard, so
+ * an unknown article slug rendered the not-found body under a 200. One cookie
+ * read in the wrong file is what a soft 404 across the whole publication looks
+ * like.
+ *
+ * Anything that only needs the value for display reads it on the client
+ * instead — see `useEdition` in `src/lib/use-edition.ts`.
  */
 export async function resolveEdition(): Promise<Edition> {
   const store = await cookies();
   const saved = store.get(EDITION_COOKIE)?.value;
-  if (saved && isEdition(saved)) return saved;
-  return DEFAULT_EDITION;
-}
-
-/**
- * The edition we would suggest based on where the request came from, or null
- * when there is nothing worth suggesting.
- *
- * Returns null when the reader has already chosen, when the country maps to
- * the default anyway, or when we cannot tell — a prompt offering the edition
- * someone is already reading is noise.
- */
-export async function suggestedEdition(): Promise<{
-  edition: Edition;
-  country: string;
-} | null> {
-  const store = await cookies();
-  if (store.get(EDITION_COOKIE)) return null;
-
-  const h = await headers();
-  const country =
-    h.get('x-vercel-ip-country') ?? h.get('cf-ipcountry') ?? null;
-  if (!country) return null;
-
-  const edition = COUNTRY_EDITION[country.toUpperCase()];
-  if (!edition || edition === DEFAULT_EDITION) return null;
-
-  return { edition, country: country.toUpperCase() };
+  return saved && isEdition(saved) ? saved : DEFAULT_EDITION;
 }
