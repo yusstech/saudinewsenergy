@@ -3,26 +3,39 @@ import type { Locale } from '@/i18n/config';
 /**
  * The canonical origin, with no trailing slash.
  *
- * Everything that identifies a page to the outside world — canonicals,
- * hreflang alternates, sitemap entries, JSON-LD `@id`s, OG URLs — is built from
- * this one value, so it is read in exactly one place. On Vercel preview builds
- * the env var is usually unset; falling back to the deployment URL keeps
- * previews self-consistent rather than silently pointing at production.
+ * Everything that identifies a page to the outside world — canonicals, hreflang
+ * alternates, sitemap entries, JSON-LD `@id`s, OG URLs — is built from this one
+ * value, so it is read in exactly one place.
  *
- * The last resort is the production origin, not localhost. These values are
- * baked into a static build and are expensive to correct once indexed, so the
- * failure mode of a forgotten env var has to be "correct URLs" rather than
- * "a sitemap full of localhost". Local development overrides it in `.env.local`
- * when it needs to; nothing about a wrong canonical matters on a dev machine.
+ * **`VERCEL_ENV`, not `VERCEL_URL`, decides.** This is the part that was wrong
+ * and it was wrong in the expensive direction. `VERCEL_URL` is set on *every*
+ * Vercel deployment, production included — it is the immutable per-deployment
+ * hostname, not a preview marker. Branching on its presence therefore published
+ * a production sitemap of 34 `…-dz98cadim-….vercel.app` URLs, every one of them
+ * behind deployment protection and so unfetchable by any crawler. Google's
+ * verdict was "Couldn't fetch", and it was right.
+ *
+ * So a preview build is identified by `VERCEL_ENV === 'preview'`, which is the
+ * only value that actually means it. Everything else — production, a local
+ * build, a CI build with no Vercel env at all — resolves to the real origin.
+ * The failure mode of a missing variable is now correct URLs rather than
+ * unreachable ones.
+ *
+ * `www` is the canonical host: the apex 308-redirects to it, so a canonical on
+ * the apex would point at a URL that immediately moves. Changing this after the
+ * site is indexed means a full re-index, so treat it as fixed.
  */
-export const PRODUCTION_ORIGIN = 'https://saudienergynews.com';
+export const PRODUCTION_ORIGIN = 'https://www.saudienergynews.com';
 
 export function siteUrl(): string {
   const explicit = process.env.NEXT_PUBLIC_SITE_URL;
   if (explicit) return explicit.replace(/\/+$/, '');
 
-  const vercel = process.env.VERCEL_URL;
-  if (vercel) return `https://${vercel}`;
+  // Previews only. A preview that claimed the production origin would hand
+  // crawlers canonicals pointing at pages it does not serve.
+  if (process.env.VERCEL_ENV === 'preview' && process.env.VERCEL_URL) {
+    return `https://${process.env.VERCEL_URL}`;
+  }
 
   return PRODUCTION_ORIGIN;
 }
