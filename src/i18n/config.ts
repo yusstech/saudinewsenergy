@@ -6,12 +6,12 @@
  * text direction, typography and the language a story is served in.
  *
  * **Edition** is a cookie. It decides which secondary rails a reader sees —
- * which GCC, MENA or global stories surface beneath the Saudi lead. It never
- * changes the language, and it never displaces Saudi Arabia as the editorial
+ * which Levant, MENA or global stories surface beneath the Syrian lead. It
+ * never changes the language, and it never displaces Syria as the editorial
  * centre.
  *
- * So a reader in London can read the Saudi edition in Arabic, and a reader in
- * Riyadh can read the Global edition in English. Neither combination is a
+ * So a reader in London can read the Syria edition in Arabic, and a reader in
+ * Damascus can read the Global edition in English. Neither combination is a
  * special case; they fall out of keeping the two axes apart.
  */
 
@@ -34,7 +34,7 @@ export const LOCALE_LABEL: Record<Locale, string> = {
 /** BCP-47 tags for `hreflang`, `<html lang>` and `Intl` formatters. */
 export const LOCALE_TAG: Record<Locale, string> = {
   en: 'en',
-  ar: 'ar-SA',
+  ar: 'ar-SY',
 };
 
 export function isLocale(value: string): value is Locale {
@@ -43,10 +43,10 @@ export function isLocale(value: string): value is Locale {
 
 /* --------------------------------------------------------------- editions -- */
 
-export const EDITIONS = ['saudi', 'gcc', 'mena', 'global'] as const;
+export const EDITIONS = ['syria', 'levant', 'mena', 'global'] as const;
 export type Edition = (typeof EDITIONS)[number];
 
-export const DEFAULT_EDITION: Edition = 'saudi';
+export const DEFAULT_EDITION: Edition = 'syria';
 
 export const EDITION_COOKIE = 'sen_edition';
 
@@ -70,22 +70,21 @@ export function isEdition(value: string): value is Edition {
  *
  * This only ever produces a *recommendation*. Detection never redirects and
  * never silently switches the reader — it surfaces a dismissible prompt, and
- * a saved preference always wins. Saudi Arabia stays the editorial centre in
- * every edition; what changes is the weighting of the secondary rails.
+ * a saved preference always wins. Syria stays the editorial centre in every
+ * edition; what changes is the weighting of the secondary rails.
  */
 export const COUNTRY_EDITION: Record<string, Edition> = {
-  SA: 'saudi',
-  AE: 'gcc',
-  KW: 'gcc',
-  QA: 'gcc',
-  BH: 'gcc',
-  OM: 'gcc',
+  SY: 'syria',
+  LB: 'levant',
+  JO: 'levant',
+  IQ: 'levant',
+  PS: 'levant',
+  TR: 'mena',
   EG: 'mena',
-  JO: 'mena',
-  IQ: 'mena',
+  SA: 'mena',
+  AE: 'mena',
   MA: 'mena',
   DZ: 'mena',
   TN: 'mena',
   LY: 'mena',
-  LB: 'mena',
 };

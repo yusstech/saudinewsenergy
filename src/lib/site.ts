@@ -25,7 +25,7 @@ import type { Locale } from '@/i18n/config';
  * the apex would point at a URL that immediately moves. Changing this after the
  * site is indexed means a full re-index, so treat it as fixed.
  */
-export const PRODUCTION_ORIGIN = 'https://www.saudienergynews.com';
+export const PRODUCTION_ORIGIN = 'https://www.energysyria.online';
 
 export function siteUrl(): string {
   const explicit = process.env.NEXT_PUBLIC_SITE_URL;
@@ -46,19 +46,19 @@ export function abs(path: string): string {
 }
 
 export const SITE = {
-  name: 'Saudi Energy News',
-  nameAr: 'أخبار الطاقة السعودية',
+  name: 'Syrian Energy News',
+  nameAr: 'أخبار الطاقة السورية',
   descriptor: {
-    en: "Saudi Arabia's live energy newsroom.",
-    ar: 'غرفة أخبار الطاقة السعودية المباشرة.',
+    en: "Syria's live energy newsroom.",
+    ar: 'غرفة أخبار الطاقة السورية المباشرة.',
   },
   promise: {
-    en: 'Timely, trusted coverage of Saudi energy, markets, projects, policy, and the transition shaping the Kingdom’s future.',
-    ar: 'تغطية موثوقة وفي وقتها لقطاع الطاقة السعودي والأسواق والمشاريع والسياسات وتحوّل الطاقة الذي يشكّل مستقبل المملكة.',
+    en: 'Timely, trusted coverage of Syrian energy, markets, projects, policy, and the reconstruction shaping the country’s grid.',
+    ar: 'تغطية موثوقة وفي وقتها لقطاع الطاقة السوري والأسواق والمشاريع والسياسات وإعادة الإعمار التي تشكّل شبكة البلاد.',
   },
-  /** Riyadh is the newsroom clock. */
-  timeZone: 'Asia/Riyadh',
-  contact: 'newsroom@saudienergynews.com',
+  /** Damascus is the newsroom clock. */
+  timeZone: 'Asia/Damascus',
+  contact: 'newsroom@energysyria.online',
 } as const;
 
 export function siteName(locale: Locale): string {

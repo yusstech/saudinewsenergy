@@ -1,7 +1,7 @@
 import { z } from 'zod';
 
 /**
- * The content contract for Saudi Energy News.
+ * The content contract for Syrian Energy News.
  *
  * This file exists to answer one question in advance: when a CMS is eventually
  * connected, what must it produce? Specialist publications get flattened by
@@ -28,12 +28,12 @@ import { z } from 'zod';
 export const localeSchema = z.enum(['en', 'ar']);
 export type ContentLocale = z.infer<typeof localeSchema>;
 
-export const editionSchema = z.enum(['saudi', 'gcc', 'mena', 'global']);
+export const editionSchema = z.enum(['syria', 'levant', 'mena', 'global']);
 export type ContentEdition = z.infer<typeof editionSchema>;
 
 /** Editorial desks. These are the spine of the publication, per concept §6. */
 export const sectorSchema = z.enum([
-  'saudi',
+  'syria',
   'oil-gas',
   'power',
   'renewables',
@@ -48,23 +48,24 @@ export const sectorSchema = z.enum([
 ]);
 export type Sector = z.infer<typeof sectorSchema>;
 
-/** Saudi administrative regions, plus supra-national scopes. */
+/** Syrian governorates, plus supra-national scopes. */
 export const regionSchema = z.enum([
-  'riyadh',
-  'makkah',
-  'madinah',
-  'eastern-province',
-  'asir',
-  'tabuk',
-  'hail',
-  'northern-borders',
-  'jazan',
-  'najran',
-  'al-bahah',
-  'al-jouf',
-  'qassim',
-  'kingdom-wide',
-  'gcc',
+  'damascus',
+  'rural-damascus',
+  'aleppo',
+  'homs',
+  'hama',
+  'latakia',
+  'tartus',
+  'idlib',
+  'daraa',
+  'as-suwayda',
+  'quneitra',
+  'deir-ez-zor',
+  'raqqa',
+  'al-hasakah',
+  'nationwide',
+  'levant',
   'mena',
   'global',
 ]);
@@ -306,8 +307,8 @@ export const storyFrontmatterSchema = z.object({
   type: storyTypeSchema.default('news'),
   sector: sectorSchema,
   secondarySectors: z.array(sectorSchema).default([]),
-  region: regionSchema.default('kingdom-wide'),
-  editions: z.array(editionSchema).min(1).default(['saudi']),
+  region: regionSchema.default('nationwide'),
+  editions: z.array(editionSchema).min(1).default(['syria']),
 
   publishedAt: isoDateSchema,
   updatedAt: isoDateSchema.optional(),

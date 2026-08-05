@@ -175,7 +175,7 @@ export function getStoriesByProject(
 /**
  * Stories for an edition.
  *
- * Saudi coverage surfaces in every edition — that is the editorial centre
+ * Syrian coverage surfaces in every edition — that is the editorial centre
  * holding regardless of which supporting region a reader picked. What the
  * edition changes is which *additional* regional coverage joins it.
  */
@@ -183,11 +183,11 @@ export function getStoriesByEdition(
   locale: ContentLocale,
   edition: ContentEdition,
 ): Story[] {
-  if (edition === 'saudi') {
-    return all(locale).filter((s) => s.editions.includes('saudi'));
+  if (edition === 'syria') {
+    return all(locale).filter((s) => s.editions.includes('syria'));
   }
   return all(locale).filter(
-    (s) => s.editions.includes(edition) || s.editions.includes('saudi'),
+    (s) => s.editions.includes(edition) || s.editions.includes('syria'),
   );
 }
 

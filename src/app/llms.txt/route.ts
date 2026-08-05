@@ -29,7 +29,7 @@ export function GET(): Response {
   lines.push(`> ${SITE.promise.en}`);
   lines.push('');
   lines.push(
-    'Saudi Energy News is a Saudi-first specialist energy newsroom publishing in Arabic and English. Coverage spans oil and gas, power and utilities, renewables, hydrogen, carbon management, petrochemicals, markets, projects and policy.',
+    'Syrian Energy News is a Syria-first specialist energy newsroom publishing in Arabic and English. Coverage spans oil and gas, power and utilities, renewables, hydrogen, carbon management, petrochemicals, markets, projects and policy.',
   );
   lines.push('');
 

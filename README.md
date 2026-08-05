@@ -1,8 +1,8 @@
-# Saudi Energy News
+# Syrian Energy News
 
-Saudi Arabia's live energy newsroom — أخبار الطاقة السعودية
+Syria's live energy newsroom — أخبار الطاقة السورية
 
-A Saudi-first, bilingual (Arabic/English) specialist energy newsroom. Front end
+A Syria-first, bilingual (Arabic/English) specialist energy newsroom. Front end
 only: stories are published from files in this repository, with no CMS and no
 database behind it.
 
@@ -171,8 +171,8 @@ Both cost real debugging time and are easy to repeat:
 
 Language and edition are independent axes. **Language** is the URL prefix
 (`/en`, `/ar`) and sets interface language, direction and typography.
-**Edition** is a cookie and re-weights which regional coverage joins the Saudi
-core. A reader in London can follow the Saudi edition in Arabic.
+**Edition** is a cookie and re-weights which regional coverage joins the Syrian
+core. A reader in London can follow the Syria edition in Arabic.
 
 `lang` and `dir` are set on the server from the route. Layout uses logical
 properties throughout — `ms-*`, `ps-*`, `border-s-*`, `start-*`, never `ml-*` or
@@ -181,7 +181,7 @@ never redirects, because a redirect keyed to IP means two readers requesting the
 same URL get different pages.
 
 **Numerals:** Arabic copy uses Latin digits (`1,250`), not Arabic-Indic. This is
-an editorial call — Saudi energy, finance and engineering documentation is
+an editorial call — Syrian energy, finance and engineering documentation is
 written with Latin digits, and this publication's readers read capacities and
 kilovolt ratings that way. See the note at the top of `lib/format.ts`.
 

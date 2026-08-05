@@ -17,11 +17,11 @@ export const SECTORS: Array<{
   primary: boolean;
 }> = [
   {
-    slug: 'saudi',
-    label: { en: 'Saudi', ar: 'السعودية' },
+    slug: 'syria',
+    label: { en: 'Syria', ar: 'سوريا' },
     blurb: {
-      en: 'Policy, projects and companies across the Kingdom.',
-      ar: 'السياسات والمشاريع والشركات في أنحاء المملكة.',
+      en: 'Policy, projects and companies across the country.',
+      ar: 'السياسات والمشاريع والشركات في أنحاء البلاد.',
     },
     primary: true,
   },
@@ -47,8 +47,8 @@ export const SECTORS: Array<{
     slug: 'renewables',
     label: { en: 'Renewables', ar: 'الطاقة المتجددة' },
     blurb: {
-      en: 'Solar, wind and the National Renewable Energy Program.',
-      ar: 'الطاقة الشمسية وطاقة الرياح والبرنامج الوطني للطاقة المتجددة.',
+      en: 'Solar, wind and distributed generation.',
+      ar: 'الطاقة الشمسية وطاقة الرياح والتوليد الموزع.',
     },
     primary: true,
   },
@@ -138,27 +138,22 @@ export const MORE_SECTORS = SECTORS.filter((s) => !s.primary);
 /* --------------------------------------------------------------- regions -- */
 
 export const REGIONS: Array<{ slug: Region; label: Bilingual }> = [
-  { slug: 'riyadh', label: { en: 'Riyadh', ar: 'الرياض' } },
-  { slug: 'makkah', label: { en: 'Makkah', ar: 'مكة المكرمة' } },
-  { slug: 'madinah', label: { en: 'Madinah', ar: 'المدينة المنورة' } },
-  {
-    slug: 'eastern-province',
-    label: { en: 'Eastern Province', ar: 'المنطقة الشرقية' },
-  },
-  { slug: 'asir', label: { en: 'Asir', ar: 'عسير' } },
-  { slug: 'tabuk', label: { en: 'Tabuk', ar: 'تبوك' } },
-  { slug: 'hail', label: { en: "Ha'il", ar: 'حائل' } },
-  {
-    slug: 'northern-borders',
-    label: { en: 'Northern Borders', ar: 'الحدود الشمالية' },
-  },
-  { slug: 'jazan', label: { en: 'Jazan', ar: 'جازان' } },
-  { slug: 'najran', label: { en: 'Najran', ar: 'نجران' } },
-  { slug: 'al-bahah', label: { en: 'Al Bahah', ar: 'الباحة' } },
-  { slug: 'al-jouf', label: { en: 'Al Jouf', ar: 'الجوف' } },
-  { slug: 'qassim', label: { en: 'Qassim', ar: 'القصيم' } },
-  { slug: 'kingdom-wide', label: { en: 'Kingdom-wide', ar: 'على مستوى المملكة' } },
-  { slug: 'gcc', label: { en: 'GCC', ar: 'دول الخليج' } },
+  { slug: 'damascus', label: { en: 'Damascus', ar: 'دمشق' } },
+  { slug: 'rural-damascus', label: { en: 'Rural Damascus', ar: 'ريف دمشق' } },
+  { slug: 'aleppo', label: { en: 'Aleppo', ar: 'حلب' } },
+  { slug: 'homs', label: { en: 'Homs', ar: 'حمص' } },
+  { slug: 'hama', label: { en: 'Hama', ar: 'حماة' } },
+  { slug: 'latakia', label: { en: 'Latakia', ar: 'اللاذقية' } },
+  { slug: 'tartus', label: { en: 'Tartus', ar: 'طرطوس' } },
+  { slug: 'idlib', label: { en: 'Idlib', ar: 'إدلب' } },
+  { slug: 'daraa', label: { en: 'Daraa', ar: 'درعا' } },
+  { slug: 'as-suwayda', label: { en: 'As-Suwayda', ar: 'السويداء' } },
+  { slug: 'quneitra', label: { en: 'Quneitra', ar: 'القنيطرة' } },
+  { slug: 'deir-ez-zor', label: { en: 'Deir ez-Zor', ar: 'دير الزور' } },
+  { slug: 'raqqa', label: { en: 'Raqqa', ar: 'الرقة' } },
+  { slug: 'al-hasakah', label: { en: 'Al-Hasakah', ar: 'الحسكة' } },
+  { slug: 'nationwide', label: { en: 'Nationwide', ar: 'على مستوى سوريا' } },
+  { slug: 'levant', label: { en: 'Levant', ar: 'بلاد الشام' } },
   { slug: 'mena', label: { en: 'MENA', ar: 'الشرق الأوسط وشمال أفريقيا' } },
   { slug: 'global', label: { en: 'Global', ar: 'عالمي' } },
 ];
@@ -169,16 +164,16 @@ export function regionLabel(slug: Region, locale: 'en' | 'ar'): string {
   return REGION_MAP.get(slug)?.label[locale] ?? slug;
 }
 
-/** The Saudi regions offered as project filters — supra-national scopes excluded. */
-export const SAUDI_REGIONS = REGIONS.filter(
-  (r) => !['gcc', 'mena', 'global'].includes(r.slug),
+/** The Syrian regions offered as project filters — supra-national scopes excluded. */
+export const SYRIA_REGIONS = REGIONS.filter(
+  (r) => !['levant', 'mena', 'global'].includes(r.slug),
 );
 
 /* -------------------------------------------------------------- editions -- */
 
 export const EDITION_LABEL: Record<ContentEdition, Bilingual> = {
-  saudi: { en: 'Saudi Arabia', ar: 'السعودية' },
-  gcc: { en: 'GCC', ar: 'دول الخليج' },
+  syria: { en: 'Syria', ar: 'سوريا' },
+  levant: { en: 'Levant', ar: 'بلاد الشام' },
   mena: { en: 'Middle East & North Africa', ar: 'الشرق الأوسط وشمال أفريقيا' },
   global: { en: 'Global Energy', ar: 'الطاقة عالمياً' },
 };

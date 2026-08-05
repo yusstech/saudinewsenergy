@@ -40,10 +40,10 @@ export async function generateMetadata({
 /**
  * An edition view.
  *
- * Saudi coverage appears in every edition. What changes is the regional
+ * Syrian coverage appears in every edition. What changes is the regional
  * coverage joining it, which is why the page separates the two explicitly
  * rather than presenting one merged feed: a reader on the Global edition should
- * be able to see that the Saudi desk is still the spine of what they are
+ * be able to see that the Syria desk is still the spine of what they are
  * reading.
  */
 export default async function EditionPage({
@@ -62,12 +62,12 @@ export default async function EditionPage({
   const th = await getTranslations('home');
 
   const stories = getStoriesByEdition(locale, edition);
-  const saudi = stories.filter((s) => s.editions.includes('saudi'));
+  const syria = stories.filter((s) => s.editions.includes('syria'));
   const regional =
-    edition === 'saudi'
+    edition === 'syria'
       ? []
       : stories.filter(
-          (s) => s.editions.includes(edition) && !s.editions.includes('saudi'),
+          (s) => s.editions.includes(edition) && !s.editions.includes('syria'),
         );
 
   return (
@@ -80,12 +80,12 @@ export default async function EditionPage({
 
       <div className="page space-y-[var(--space-section)] py-[var(--space-block)]">
         <section>
-          <SectionHeading title={t('saudi')} />
-          {saudi.length === 0 ? (
+          <SectionHeading title={t('syria')} />
+          {syria.length === 0 ? (
             <EmptyState title={tc('empty')} />
           ) : (
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {saudi.map((s) => (
+              {syria.map((s) => (
                 <StoryCard key={s.slug} story={s} locale={locale} />
               ))}
             </div>

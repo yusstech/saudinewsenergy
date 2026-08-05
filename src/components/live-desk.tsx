@@ -12,7 +12,7 @@ import type { Locale } from '@/i18n/config';
  * marquees gone from the chrome, the single pulsing dot beside the heading is now the only
  * moving thing on the page, which is exactly how much movement "live" needs.
  *
- * Times are absolute Riyadh clock times rather than relative. A "4 min ago" rendered at build
+ * Times are absolute Damascus clock times rather than relative. A "4 min ago" rendered at build
  * time and then cached is a lie with a short half-life; an absolute stamp stays true however
  * long the page sits.
  */
@@ -72,7 +72,7 @@ export async function LiveDesk({
       )}
 
       <p className="mt-2.5 border-t border-line pt-2 text-micro text-faint">
-        {ta('riyadhTime')}
+        {ta('damascusTime')}
       </p>
     </section>
   );

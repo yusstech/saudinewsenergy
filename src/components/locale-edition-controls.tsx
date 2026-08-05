@@ -17,10 +17,10 @@ import {
  * Language and edition, presented as two separate controls.
  *
  * Every instinct in a bilingual regional product pushes toward merging these
- * into one "Saudi Arabia — العربية" picker, and that merge is precisely what
- * makes such products unusable for the readers they most want. A Saudi
+ * into one "Syria — العربية" picker, and that merge is precisely what
+ * makes such products unusable for the readers they most want. A Syrian
  * professional who prefers to read in English, and a researcher in London
- * following the Kingdom in Arabic, both become impossible the moment the two
+ * following the country in Arabic, both become impossible the moment the two
  * axes share a control.
  *
  * So they are two menus with two explanations, and each explanation says what

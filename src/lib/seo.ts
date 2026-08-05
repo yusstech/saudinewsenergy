@@ -281,7 +281,7 @@ export function projectEntity(project: Project, locale: Locale) {
  * entity field, an editor UI for it, and a writer who remembers to fill it in.
  *
  * The story already contains the answer. When a writer links the words
- * "Saudi Electricity Company" to `se.com.sa`, that anchor text *is* the entity
+ * a utility's name to its own domain, that anchor text *is* the entity
  * name and the href *is* its canonical identifier; that is what an editorial
  * link means. So the markup is derived from the body rather than duplicated
  * beside it, and it cannot drift from what the page actually says.

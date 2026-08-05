@@ -4,9 +4,9 @@ import { useEffect, useState } from 'react';
 import { SITE } from '@/lib/site';
 
 /**
- * The reader's own time, shown only when it differs from Riyadh.
+ * The reader's own time, shown only when it differs from Damascus.
  *
- * Riyadh is the time of record and always renders on the server. This line is
+ * Damascus is the time of record and always renders on the server. This line is
  * an addition for readers elsewhere, and it is computed on the client because
  * the server has no idea what timezone the reader is in — guessing from an IP
  * address would be wrong often enough to be worse than useless.

@@ -60,7 +60,7 @@ export async function ArticleHeader({
             <time dateTime={machineDate(story.publishedAt)} className="numeric">
               {formatDateTime(story.publishedAt, locale)}
             </time>{' '}
-            <span className="label">{t('riyadhTime')}</span>
+            <span className="label">{t('damascusTime')}</span>
           </span>
 
           {story.updatedAt && story.updatedAt !== story.publishedAt && (
@@ -80,7 +80,7 @@ export async function ArticleHeader({
         </div>
 
         {/* Reader-local time renders only when it actually differs from
-            Riyadh — an identical second line is noise. */}
+            Damascus — an identical second line is noise. */}
         <LocalTime
           iso={story.updatedAt ?? story.publishedAt}
           label={t('readerLocalTime')}

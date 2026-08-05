@@ -8,7 +8,7 @@ import type { Locale } from '@/i18n/config';
 /**
  * The Latest rail — what replaced the Energy Pulse tabs.
  *
- * The Pulse was six tabs (Latest / Markets / Projects / Most Read / GCC / Global) sitting in a
+ * The Pulse was six tabs (Latest / Markets / Projects / Most Read / Levant / Global) sitting in a
  * band of their own beneath the nav. Two problems: every tab duplicated a destination already in
  * the nav a few pixels above, and five of the six panels were hidden at any moment, so the
  * module cost a full horizontal band to show one list.

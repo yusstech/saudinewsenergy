@@ -6,7 +6,7 @@ import { SITE } from './site';
  *
  * **The numeral decision.** Arabic copy on this site renders digits as Latin
  * numerals (`1,250`), not Arabic-Indic (`١٬٢٥٠`). That is deliberate and it is
- * an editorial call, not a technical shortcut: Saudi energy, finance and
+ * an editorial call, not a technical shortcut: Syrian energy, finance and
  * engineering documentation — ministry releases, Tadawul filings, EPC bills of
  * quantities, IEC standards — is written with Latin digits, and the
  * professionals this publication is designed for read capacities, prices and
@@ -27,13 +27,13 @@ function numericTag(locale: Locale): string {
 /* ----------------------------------------------------------------- time -- */
 
 /**
- * A date stamp in Riyadh time.
+ * A date stamp in Damascus time.
  *
- * Riyadh is the newsroom clock: a story is published at a Saudi time, and that
+ * Damascus is the newsroom clock: a story is published at a Syrian time, and that
  * is the time of record regardless of where it is read. Reader-local time is
  * shown *alongside* it on article pages where the difference matters, never
  * instead of it — a reader who sees only their own timezone cannot tell
- * whether an announcement landed before or after a Saudi market session.
+ * whether an announcement landed before or after a Syrian market session.
  */
 export function formatDate(iso: string, locale: Locale): string {
   return new Intl.DateTimeFormat(numericTag(locale), {

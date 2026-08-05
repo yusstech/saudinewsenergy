@@ -4,14 +4,14 @@ import { useState, useTransition } from 'react';
 import { useTranslations } from 'next-intl';
 import { useRouter } from '@/i18n/navigation';
 import { useSuggestedEdition } from '@/lib/use-edition';
-import { EDITION_COOKIE, type Edition } from '@/i18n/config';
+import { DEFAULT_EDITION, EDITION_COOKIE, type Edition } from '@/i18n/config';
 
 /**
  * The dismissible edition recommendation.
  *
- * This exists instead of a geo-redirect. A reader arriving from the UAE is
- * offered GCC coverage alongside their Saudi edition; they are never moved
- * there. The distinction matters editorially — Saudi Arabia stays the centre in
+ * This exists instead of a geo-redirect. A reader arriving from Lebanon is
+ * offered Levant coverage alongside their Syria edition; they are never moved
+ * there. The distinction matters editorially — Syria stays the centre in
  * every edition — and technically, because a redirect keyed to IP means two
  * readers requesting the same URL get different pages, which breaks canonical
  * URLs and makes shared links unreliable.
@@ -68,7 +68,7 @@ export function EditionSuggestion() {
             type="button"
             // Dismissing writes the default rather than only hiding the banner,
             // so the answer sticks across visits instead of being asked again.
-            onClick={() => choose('saudi')}
+            onClick={() => choose(DEFAULT_EDITION)}
             className="rounded-sm px-2 py-1.5 text-xs font-medium text-muted hover:text-body"
           >
             {t('suggestionDismiss')}

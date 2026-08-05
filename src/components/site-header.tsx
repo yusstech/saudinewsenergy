@@ -34,12 +34,12 @@ export async function SiteHeader({ locale }: { locale: Locale }) {
             <Wordmark locale={locale} />
           </Link>
 
-          {/* The newsroom clock. Every timestamp on the site is Riyadh time, so showing the
+          {/* The newsroom clock. Every timestamp on the site is Damascus time, so showing the
               newsroom's own clock in the masthead is what makes a story stamped 14:20
               unambiguous to a reader in London without them doing the arithmetic. */}
           <p className="ms-auto hidden text-meta text-masthead-muted lg:block">
             <span className="font-medium text-masthead-fg">
-              {tu('riyadhTime')}
+              {tu('damascusTime')}
             </span>{' '}
             <time className="numeric" dateTime={now}>
               {formatTime(now, locale)}

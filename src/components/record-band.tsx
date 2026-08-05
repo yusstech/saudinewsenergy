@@ -8,7 +8,7 @@ import type { Story } from '@content/schema';
 /**
  * The record behind the lead story.
  *
- * This band replaced the Saudi Energy Dashboard, and the reason is worth stating. The dashboard
+ * This band replaced the energy dashboard, and the reason is worth stating. The dashboard
  * tiled a benchmark price beside two unrelated headlines — it was a summary of a newsroom that
  * did not exist yet, and once the invented market data and the prototype stories were removed
  * there was nothing left in it that was true.

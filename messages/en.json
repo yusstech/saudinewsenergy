@@ -1,13 +1,13 @@
 {
   "site": {
-    "name": "Saudi Energy News",
-    "descriptor": "Saudi Arabia's live energy newsroom.",
+    "name": "Syrian Energy News",
+    "descriptor": "Syria's live energy newsroom.",
     "skipToContent": "Skip to main content"
   },
   "nav": {
     "home": "Home",
     "latest": "Latest",
-    "saudi": "Saudi",
+    "syria": "Syria",
     "oilGas": "Oil & Gas",
     "power": "Power",
     "renewables": "Renewables",
@@ -18,7 +18,7 @@
     "petrochemicals": "Petrochemicals",
     "technology": "Technology",
     "companies": "Companies",
-    "gcc": "GCC",
+    "levant": "Levant",
     "global": "Global",
     "analysis": "Analysis",
     "opinion": "Opinion",
@@ -35,26 +35,26 @@
     "backToTop": "Back to top"
   },
   "utility": {
-    "riyadhTime": "Riyadh",
+    "damascusTime": "Damascus",
     "edition": "Edition",
     "language": "Language",
     "signIn": "Sign in",
     "changeEdition": "Change edition",
     "changeLanguage": "Change language",
-    "editionExplainer": "Edition sets which regional coverage appears alongside Saudi reporting. It does not change the language.",
+    "editionExplainer": "Edition sets which regional coverage appears alongside Syrian reporting. It does not change the language.",
     "languageExplainer": "Language sets the interface and story language. It does not change your edition.",
     "themeDark": "Switch to dark",
     "themeLight": "Switch to light"
   },
   "edition": {
-    "saudi": "Saudi Arabia",
-    "gcc": "GCC",
+    "syria": "Syria",
+    "levant": "Levant",
     "mena": "Middle East & North Africa",
     "global": "Global Energy",
-    "saudiShort": "Saudi",
+    "syriaShort": "Syria",
     "current": "Current edition",
     "suggestionTitle": "Add regional coverage?",
-    "suggestionBody": "You appear to be visiting from {country}. Add {edition} coverage alongside your Saudi edition?",
+    "suggestionBody": "You appear to be visiting from {country}. Add {edition} coverage alongside your Syria edition?",
     "suggestionAccept": "Add {edition}",
     "suggestionDismiss": "No thanks",
     "languageSuggestionBody": "Your browser language is Arabic. Would you like the Arabic edition?",
@@ -83,7 +83,7 @@
     "markets": "Markets",
     "projects": "Projects",
     "mostRead": "Most Read",
-    "gcc": "GCC",
+    "levant": "Levant",
     "global": "Global"
   },
   "home": {
@@ -91,15 +91,15 @@
     "liveDeskTitle": "Live Energy Desk",
     "liveDeskEmpty": "No live coverage running right now.",
     "sectorsTitle": "Sectors",
-    "projectsTitle": "Projects across the Kingdom",
+    "projectsTitle": "Projects across Syria",
     "companiesTitle": "Companies & institutions",
     "transitionTitle": "Vision & transition",
-    "globalTitle": "GCC & global context",
+    "globalTitle": "Regional & global context",
     "analysisTitle": "Analysis & explainers",
     "mediaTitle": "Watch, listen & data",
     "recommendedTitle": "Recommended for you",
     "viewAll": "View all",
-    "whyItMatters": "Why this matters to Saudi energy",
+    "whyItMatters": "Why this matters to Syrian energy",
     "recordTitle": "The record behind this story",
     "picksTitle": "Editor's picks"
   },
@@ -107,7 +107,7 @@
     "publishedAt": "Published",
     "updatedAt": "Last updated",
     "readerLocalTime": "Your time",
-    "riyadhTime": "Riyadh time",
+    "damascusTime": "Damascus time",
     "byline": "By {author}",
     "readingTime": "{minutes} min read",
     "takeaways": "Key energy takeaways",
@@ -137,7 +137,7 @@
     "readingProgress": "Reading progress",
     "liveUpdates": "Live updates",
     "newestFirst": "Newest first",
-    "diagram": "Saudi Energy News diagram"
+    "diagram": "Syrian Energy News diagram"
   },
   "sector": {
     "title": "{sector}",
@@ -155,7 +155,7 @@
   },
   "projects": {
     "title": "Projects",
-    "intro": "Energy projects across Saudi Arabia — announced, tendered, under construction and operational.",
+    "intro": "Energy projects across Syria — announced, tendered, under construction and operational.",
     "filterRegion": "Region",
     "filterSector": "Sector",
     "filterStatus": "Status",
@@ -209,8 +209,8 @@
   },
   "search": {
     "title": "Search",
-    "intro": "Search Saudi Energy News coverage by keyword.",
-    "placeholder": "Search Saudi energy coverage",
+    "intro": "Search Syrian Energy News coverage by keyword.",
+    "placeholder": "Search Syrian energy coverage",
     "submit": "Search",
     "keywordTitle": "Matching stories",
     "resultCount": "{count, plural, =0 {No results} one {1 result} other {# results}}",
@@ -236,12 +236,12 @@
   },
   "footer": {
     "newsletters": "Newsletters",
-    "newsletterIntro": "Email briefings from the Saudi energy desk are not open yet — there is no list to join, so we are not asking for your address. Until then, the newsroom reads everything sent to it.",
+    "newsletterIntro": "Email briefings from the Syrian energy desk are not open yet — there is no list to join, so we are not asking for your address. Until then, the newsroom reads everything sent to it.",
     "sections": "Sections",
     "editorial": "Editorial",
     "editions": "Editions",
     "languages": "Languages",
-    "rights": "© {year} Saudi Energy News. All rights reserved."
+    "rights": "© {year} Syrian Energy News. All rights reserved."
   },
   "common": {
     "loading": "Loading…",

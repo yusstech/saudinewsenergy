@@ -52,7 +52,7 @@ export default function RootNotFound() {
               color: '#9d968a',
             }}
           >
-            Saudi Energy News
+            Syrian Energy News
           </p>
 
           <h1 style={{ margin: '0.85rem 0 0', fontSize: '1.75rem', fontWeight: 600 }}>

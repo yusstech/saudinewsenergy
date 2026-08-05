@@ -59,7 +59,7 @@ export default async function Image() {
               textTransform: 'uppercase',
             }}
           >
-            Riyadh
+            Damascus
           </div>
         </div>
 

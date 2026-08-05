@@ -25,7 +25,7 @@ export async function generateMetadata({
  * The projects feed.
  *
  * A card feed with region, sector and status filters — not a map. The concept
- * puts the interactive Saudi map in phase two, and that ordering is right:
+ * puts the interactive Syria map in phase two, and that ordering is right:
  * a map is only better than a list once the underlying project data is
  * structured and consistently maintained, and until then it is a slower way to
  * find five records while implying a completeness the dataset does not have.

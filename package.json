@@ -1,8 +1,8 @@
 {
-  "name": "saudienergynews",
+  "name": "energysyria",
   "version": "0.1.0",
   "private": true,
-  "description": "Saudi Energy News — Saudi Arabia's live energy newsroom (Arabic/English)",
+  "description": "Syrian Energy News — Syria's live energy newsroom (Arabic/English)",
   "engines": {
     "node": "22.x"
   },
