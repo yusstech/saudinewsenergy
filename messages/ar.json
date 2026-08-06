@@ -119,6 +119,7 @@
     "translation": "الترجمة",
     "translatedFrom": "مترجم عن {language}",
     "readOriginal": "قراءة النص الأصلي",
+    "machineAssisted": "ترجمة آلية لم يراجعها محرر بعد",
     "originalReporting": "تغطية أصلية",
     "relatedProjects": "المشروع ذو الصلة",
     "relatedCompanies": "الجهات الواردة في التقرير",

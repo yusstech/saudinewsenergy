@@ -221,12 +221,18 @@ export type Author = z.infer<typeof authorSchema>;
  *
  * `original` is the honest default and the one this newsroom prefers. Anything
  * else must name the language it came from, so the reader is never left
- * guessing whether a quotation survived a round trip. There is no third state:
- * nothing publishes in either language until an editor has read it, so the
- * label describes the pairing rather than a pending review.
+ * guessing whether a quotation survived a round trip.
+ *
+ * `machine-assisted` exists because the alternative was worse. A translation no
+ * editor has read is not `human-translated`, and labelling it so would be a
+ * false claim of review printed on the page — the one kind of error this
+ * publication cannot correct after the fact. The state was already described in
+ * `llms.txt` before it existed here; this closes that gap rather than opening a
+ * new one. It is a holding label, not a destination: an editor reading the
+ * story against its original is what turns it into `human-translated`.
  */
 export const translationSchema = z.object({
-  status: z.enum(['original', 'human-translated']),
+  status: z.enum(['original', 'human-translated', 'machine-assisted']),
   originalLocale: localeSchema.optional(),
   /** Slug of the source-language story, when one is published. */
   originalSlug: z.string().optional(),

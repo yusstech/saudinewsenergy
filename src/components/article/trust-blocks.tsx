@@ -218,9 +218,9 @@ export async function Corrections({
  * every Arabic story was written in Arabic, which is exactly the assumption
  * that makes a quotation unreliable after a round trip.
  *
- * There is no "pending review" state to render: a story goes live in either
- * language only once an editor has read it, so what the reader sees is the
- * language pairing, not a caveat.
+ * A story translated but not yet read against its original by an editor is
+ * labelled as such, because the reader needs to know which wording carries the
+ * reporting. Everything else shows the language pairing without a caveat.
  */
 export async function TranslationStatus({
   translation,
@@ -243,6 +243,12 @@ export async function TranslationStatus({
       {t('translatedFrom', {
         language: from === 'ar' ? 'العربية' : 'English',
       })}
+      {/* A machine-assisted translation says so on the page. The reader is
+          being told which wording to trust, so this cannot be inferred from
+          the absence of a label. */}
+      {translation.status === 'machine-assisted' && (
+        <> · {t('machineAssisted')}</>
+      )}
       {from && translation.originalSlug && (
         <>
           {' · '}

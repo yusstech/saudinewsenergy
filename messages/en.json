@@ -119,6 +119,7 @@
     "translation": "Translation",
     "translatedFrom": "Translated from {language}",
     "readOriginal": "Read the original",
+    "machineAssisted": "machine-assisted, not yet checked by an editor",
     "originalReporting": "Original reporting",
     "relatedProjects": "Related project",
     "relatedCompanies": "Organisations in this story",
